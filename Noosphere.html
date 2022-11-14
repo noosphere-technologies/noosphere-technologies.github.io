@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        .MainTitle {
+            color: #1c1c1d;
+            text-align: center;
+            font-size: min(8rem,20vw);
+        }
+        .SectionTitle {
+            color: #1c1c1d;
+            text-align: center;
+            font-size: min(4rem,16vw);
+        }
+        .introduction_box{
+            width: 100%;
+            max-width: 668px;
+            margin: 0 auto;
+            padding: 48px 24px 5rem;
+        }
+        .intro_content{
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-top: 24px;
+            font-family: -apple-system,BlinkMacSystemFont,helvetica neue,helvetica,sans-serif;;
+        }
+        /* Style the header with a grey background and some padding */
+        .header {
+        overflow: hidden;
+        background-color: #f4f4f4;
+        padding: 20px 10px;
+        }
+
+        /* Style the header links */
+        .header a {
+        float: left;
+        color: black;
+        text-align: center;
+        padding: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        line-height: 25px;
+        border-radius: 4px;
+        }
+
+        /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+        .header a.logo {
+        font-size: 25px;
+        font-weight: bold;
+        }
+
+        /* Change the background color on mouse-over */
+        .header a:hover {
+        background-color: #f4f4f4;
+        color: black;
+        }
+
+        /* Style the active/current link*/
+        .header a.active {
+        background-color: dodgerblue;
+        color: white;
+        }
+
+        /* Float the link section to the right */
+        .header-right {
+        float: right;
+        }
+
+        /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+        @media screen and (max-width: 500px) {
+        .header a {
+            float: none;
+            display: block;
+            text-align: left;
+        }
+        .header-right {
+            float: none;
+        }
+        }
+    </style>
+
+<body style="background-color: #f4f4f4;">
+    <div class="header">
+        <a href="#default" class="logo">NoosphereLogo</a>
+        <div class="header-right">
+          <a class="active" href="#introduction_box">Home</a>
+          <a href="#About">About</a>
+          <a href="#contact">Contact Us</a>
+        </div>
+    <header class="bb b--silver mb3">
+        <title>Noosphere</title>
+        <h1 class="MainTitle">Noosphere</h1>
+    </header>
+      </div>
+    <div class = "introduction_box">
+        <p class = "intro_content">Noosphere is inventing an extensible system and method for cryptographically assuring that, the information comes from the stated source, and the information has not been tampered with since publication. This system will allow users to develop trust in their news sources.</p>
+    </div>
+    <div class = "sections">
+        <h2 class = "SectionTitle" , "About">About</h2>
+        <div class = "introduction_box">
+            <p class = "intro_content">This part is under construction</p>
+        </div>
+    </div>
+    <div class = "sections">
+        <h2 class = "SectionTitle">Contact Us</h2>
+        <div class = "introduction_box">
+            <p class = "intro_content">This part is under construction</p>
+        </div>
+    </div>
+</body>
+
+</html>
