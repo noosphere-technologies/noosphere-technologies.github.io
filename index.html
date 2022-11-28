@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    </head>
     <style>
-        .MainTitle {
+        #MainTitle {
             color: #1c1c1d;
             text-align: center;
             font-size: min(8rem,20vw);
@@ -36,6 +39,21 @@
         padding: 20px 10px;
         }
 
+        footer {
+        text-align: center;
+        padding: 3px;
+        background-color: #f4f4f4;
+        }
+
+        .navbar{
+        position: fixed;
+        overflow: hidden;
+        background-color: #f4f4f4;
+        width: 95%;
+        padding: 0px 0px;
+        top: 0;
+        }
+
         /* Style the header links */
         .header a {
         float: left;
@@ -43,14 +61,15 @@
         text-align: center;
         padding: 12px;
         text-decoration: none;
-        font-size: 18px;
+        font-size: 20px;
         line-height: 25px;
         border-radius: 4px;
+        font-weight: bold;
         }
 
         /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
         .header a.logo {
-        font-size: 25px;
+        font-size: 10px;
         font-weight: bold;
         }
 
@@ -71,6 +90,10 @@
         float: right;
         }
 
+        .footer-right {
+        float: right;
+        }
+
         /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
         @media screen and (max-width: 500px) {
         .header a {
@@ -86,37 +109,51 @@
 
 <body style="background-color: #f4f4f4;">
     <div class="header">
-        <a href="#default" class="logo">NoosphereLogo</a>
-        <div class="header-right">
-          <a class="active" href="#introduction_box">Home</a>
-          <a href="#About">About</a>
-          <a href="#contact">Contact Us</a>
+        <div class = "navbar">
+            <a href="#default" class="logo"><img src="Artboard1.png" height="40px" width="40px"/></a>
+            <div class="header-right">
+            <a href="#">What</a>
+            <a href="#Why">Why</a>
+            <a href="#How">How</a>
+            <a href="#ContactUs">Contact Us</a>
+            </div>
         </div>
-    <header class="bb b--silver mb3">
+    <header id="Home">
         <title>Noosphere</title>
-        <h1 class="MainTitle">Noosphere</h1>
+        <h1 id="MainTitle">Noosphere</h1>
     </header>
       </div>
     <div class = "introduction_box">
         <p class = "intro_content">Noosphere is inventing an extensible system and method for cryptographically assuring that, the information comes from the stated source, and the information has not been tampered with since publication. This system will allow users to develop trust in their news sources.</p>
     </div>
-    <div class = "sections">
-        <h2 class = "SectionTitle" , "About">Motivation</h2>
+    <div class = "sections" , id = "Why">
+        <h2 class = "SectionTitle">Motivation</h2>
         <div class = "motivation_box">
             <p class = "intro_content">A defining challenge of our time is the problem of misinformation. A wide variety of journalistic stakeholders are attempting to establish digital designs that combat ‘Fake News’. Most are attempting to Fact Check claims to reduce misinformation. These attempts are misguided and have not reflected on the fundamental desirability question: “do people trust news because it is factual?” Rational fact is not compelling enough to demand our attention. Americans no longer share objective standards for truth, but they do share an objective standard for trust: the source. Americans tend to trust information that comes from a trustworthy source, regardless of the truthiness of the facts. Noosphere is inventing an extensible system and method for cryptographically assuring that the information comes from the stated source, and the information has not been tampered with since publication. This system will allow Americans to develop trust in their news sources. </p>
         </div>
     </div>
-    <div class = "sections">
-        <h2 class = "SectionTitle">Proposed Solution</h2>
+    <div class = "sections" , id = "How">
+        <h2 class = "SectionTitle", >Proposed Solution</h2>
         <center><img src="image.jpeg" 
             height="400px" 
             width="700px" /></center>
+            <div class = "motivation_box">
+        <p class = "intro_content">Noosphere aims to provide credible news to the consumers from different news sources available on the internet that consumers trust. An extended functionality of the system is to determine if a provided news artifact is trustworthy or not. It aims to provide a cryptographic assurance to the news organizations i.e. the news organizations can identify themselves and assert ownership over the content published by them. It will also provide a decentralized trust mechanism, i.e. moving the trust away from centralizing authority into the hands of the users so that they can determine who and what they can trust. At a high level, Noosphere serves as an intermediary between the organizations and consumer, allowing publishers to push content to the Noosphere and allowing consumers to get content that they have deemed as trustworthy.</p>
+                </div>
     </div>
-    <div class = "sections">
+    <div class = "sections", id = "ContactUs">
         <h2 class = "SectionTitle">Contact Us</h2>
         <div class = "introduction_box">
             <p class = "intro_content">This part is under construction</p>
         </div>
+        <footer>
+            <hr>
+            ©2022 Noosphere
+        <div class = "footer-right">
+        <a href="https://twitter.com/xpostfact"><i class="fa-brands fa-twitter" style="font-size:48px;color:lightskyblue;"></i></a>
+        <a href="https://%40noosphere@techhub.social/explore"><i class="fa-brands fa-mastodon" style="font-size:48px;color:rgb(143, 135, 250);"></i></a>
+        </div>
+    </footer>
     </div>
 </body>
 
