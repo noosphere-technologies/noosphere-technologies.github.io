@@ -35,23 +35,24 @@
         /* Style the header with a grey background and some padding */
         .header {
         overflow: hidden;
-        background-color: #f4f4f4;
-        padding: 20px 10px;
+	//vertical-align: middle;
+        //background-color: #f4f4f4;
+        //padding: 20px 10px;
         }
 
         footer {
         text-align: center;
         padding: 3px;
-        background-color: #f4f4f4;
+        //background-color: #f4f4f4;
         }
 
         .navbar{
-        position: fixed;
-        overflow: hidden;
-        background-color: #f4f4f4;
-        width: 95%;
-        padding: 0px 0px;
-        top: 0;
+        //position: fixed;
+        //overflow: hidden;
+        background-color: dodgerblue;
+//        width: 95%; //hack
+        //padding: l0px 10px;
+        //top: 0;
         }
 
         /* Style the header links */
@@ -64,18 +65,18 @@
         font-size: 20px;
         line-height: 25px;
         border-radius: 4px;
-        font-weight: bold;
+        font-wgight: bold;
         }
 
         /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-        .header a.logo {
-        font-size: 10px;
-        font-weight: bold;
+        .header .logo {
+        //line-height: 40px;
+	margin: 10px;
         }
 
         /* Change the background color on mouse-over */
         .header a:hover {
-        background-color: #f4f4f4;
+        background-color: rgba(255,255,255,.1);
         color: black;
         }
 
@@ -110,7 +111,7 @@
 <body style="background-color: #f4f4f4;">
     <div class="header">
         <div class = "navbar">
-            <a href="#default" class="logo"><img src="Artboard1.png" height="40px" width="40px"/></a>
+           <span class="logo"><img src="Artboard1.png" height="40px" width="40px"/></span>
             <div class="header-right">
             <a href="#">What</a>
             <a href="#Why">Why</a>
