@@ -1,4 +1,4 @@
-# JournalList trust.txt file added with plugin created by rtCamp.com
+# NoosphereTech trust.txt 
 #
 # For more information on trust.txt see:
 # 1. https://journallist.net - Home of the trust.txt specification
@@ -1335,14 +1335,10 @@ member=https://ydr.com
 member=https://yorkdispatch.com
 member=https://yoursun.com
 member=https://yumasun.com
-# Vendor members:
-member=https://etypeservices.com/
-member=https://etypeservices.net/
 # Social channels here:
-social=https://www.youtube.com/channel/UC3iWOGG0L0bX4S1wFrdQU-Q
-social=https://twitter.com/journal_list
+social=https://twitter.com/noospheretech
 # Memberships:
 belongto=https://iptc.org/
 belongto=https://www.rebuildlocalnews.org/
 # Contact information here:
-contact=https://journallist.net/about
+contact=https://www.noosphere.tech
