@@ -126,6 +126,37 @@
 		        <p align="center"> <img src="img/earth.gif" alt="Noosphere"></p>
     </div>
 	
+	<div class = "sections" , id = "hero">
+	<h2>The Foundation for Trustworthy Media</h2>
+	<h3>Ensuring people can trust what they see on the Internet.</h3>
+	<p align="center"><img src="img/noosphere-pillars.jpg"/></p>
+    </div>
+	<div class = "sections" , id = "Intro">
+	<h2>Protecting Human Trust in the AI Age</h2>
+	<p>Organizations across industries are struggling to combat synthetic media and disinformation. Algorithms, platform moderation and even some journalistic practices have contributed to the spread of untrustworthy information.</p>
+	<p>Shifting media consumption habits are eroding trust. As people move away from traditional media sources, synthetic media, propaganda and deepfakes exploit the lack of trust infrastructure and protocols.  Similarly, trust relationships that do exist are constrained to the ‘walled gardens’ of social media platforms.</p>
+	</div>
+	<div class = "sections" , id = "agility">
+	<h2>Trust Agility: Putting Trust Back in Human Hands</h2>
+	<p>Today, web interactions are secured by dozens of invisible, unchangeable, easily compromised root certificates. People using web browsers literally have no control over who they trust. </p>
+
+	<p>Noosphere makes trust relationships transparent and manageable, even after application trust stores have been bootstrapped.</p> 
+    </div>
+    <div class = "sections" , id = "integrity">
+	<h2>Preserving Digital Media Integrity</h2>
+	<p>Bit rot. Hacking and state-sponsored attacks. Corporate centralization. Alternative AI history. All threaten the integrity of digital media catalogs, hence, the historical record for future historians.</p> 
+
+	<p>Noosphere’s federated persistence layer preserves integrity, while enabling global availability and resilience. All while providing organizations with complete control over their catalogs of digital media. The agile authenticity layer ensures that readers have access to trust signals.</p>
+	</div>
+	
+	<div class = "sections" , id = "brand">
+	<h2>Protecting Brand Safety</h2>
+	<p>Companies have</p> 
+	</div>
+	<div class = "sections" , id = "developer">	
+	Developer-friendly
+	<p>An API-first approach, CLI, SDKs,and toolkits make it easy for application developers to tap trust signals generated and aggregated by the Noosphere platform. Trust signals can be integrated into applications as diverse as newsfeeds, instant messaging, advertising, gaming, insurance, and fintech.</p>
+	</div>
 
 	<div class = "sections" , id = "cases">
 	<h2>Use Cases</h2>
