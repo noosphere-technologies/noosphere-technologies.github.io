@@ -1,161 +1,393 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    </head>
-    <style>
-        #MainTitle {
-            color: #1c1c1d;
-            text-align: center;
-            font-size: min(8rem,20vw);
-        }
-        .SectionTitle {
-            color: #1c1c1d;
-            text-align: center;
-            font-size: min(4rem,16vw);
-        }
-        .introduction_box{
-            width: 100%;
-            max-width: 668px;
-            margin: 0 auto;
-            padding: 24px 12px 5rem;
-        }
-        .motivation_box{
-            width: 100%;
-            max-width: 668px;
-            margin: 0 auto;
-            padding: 1px 5px 2rem;
-        }
-        .intro_content{
-            font-size: 1rem;
-            line-height: 1.5;
-            margin-top: 12px;
-            font-family: -apple-system,BlinkMacSystemFont,"Times New Roman", Times, serif;;
-        }
-        /* Style the header with a grey background and some padding */
-        .header {
-        overflow: hidden;
-	//vertical-align: middle;
-        //background-color: #f4f4f4;
-        //padding: 10px 10px;
-        }
+<head lang="en">
+    <meta charset="UTF-8">
 
-        footer {
-        text-align: center;
-        padding: 3px;
-        //background-color: #f4f4f4;
-        }
+    <!--Page Title-->
+    <title>Noosphere Technologies</title>
 
-        .navbar{
-        //position: fixed;
-        //overflow: hidden;
-        background-color: dodgerblue;
-//        width: 95%; //hack
-        //padding: l0px 10px;
-        //top: 0;
-        }
+    <!--Meta Keywords and Description-->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 
-        /* Style the header links */
-        .header a {
-        float: left;
-        color: black;
-        text-align: center;
-        padding: 12px;
-        text-decoration: none;
-        font-size: 12px;
-        line-height: 12px;
-        border-radius: 4px;
-        font-wgight: bold;
-        }
+    <!--Favicon-->
+    <link rel="shortcut icon" href="images/favicon.ico" title="Favicon"/>
 
-        /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-        .header .logo {
-        //line-height: 20px;
-	margin: 10px;
-        }
+    <!-- Main CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
 
-        /* Change the background color on mouse-over */
-        .header a:hover {
-        background-color: rgba(255,255,255,.1);
-        color: black;
-        }
+    <!-- Namari Color CSS -->
+    <link rel="stylesheet" href="css/namari-color.css">
 
-        /* Style the active/current link*/
-        .header a.active {
-        background-color: dodgerblue;
-        color: white;
-        }
+    <!--Icon Fonts - Font Awesome Icons-->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 
-        /* Float the link section to the right */
-        .header-right {
-        float: right;
-        }
+    <!-- Animate CSS-->
+    <link href="css/animate.css" rel="stylesheet" type="text/css">
 
-        .footer-right {
-        float: right;
-        }
+    <!--Google Webfonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+</head>
+<body>
 
-        /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
-        @media screen and (max-width: 500px) {
-        .header a {
-            float: none;
-            display: block;
-            text-align: left;
-        }
-        .header-right {
-            float: none;
-        }
-        }
-    </style>
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status" class="la-ball-triangle-path">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!--End of Preloader-->
 
-<body style="background-color: #FFFFFF;">
-    <div class="header">
-        <div class = "navbar">
-           <span class="logo"><img src="img/Netscapeimage.gif" height="40px" /></span>
-            <div class="header-right">
-            <a href="mailto:andrew@noosphere.tech?subject=Please%20keep%20me%20informed"> <img src="img/email.gif" alt="Noosphere"></a>
+<div class="page-border" data-wow-duration="0.7s" data-wow-delay="0.2s">
+    <div class="top-border wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"></div>
+    <div class="right-border wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;"></div>
+    <div class="bottom-border wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"></div>
+    <div class="left-border wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
+</div>
+
+<div id="wrapper">
+
+    <header id="banner" class="scrollto clearfix" data-enllax-ratio=".5">
+        <div id="header" class="nav-collapse">
+            <div class="row clearfix">
+                <div class="col-1">
+
+                    <!--Logo-->
+                    <div id="logo">
+
+                        <!--Logo that is shown on the banner-->
+                        <img src="images/logo.png" id="banner-logo" alt="Landing Page"/>
+                        <!--End of Banner Logo-->
+
+                        <!--The Logo that is shown on the sticky Navigation Bar-->
+                        <img src="images/logo-2.png" id="navigation-logo" alt="Landing Page"/>
+                        <!--End of Navigation Logo-->
+
+                    </div>
+                    <!--End of Logo-->
+
+                    <aside>
+
+                        <!--Social Icons in Header-->
+                        <ul class="social-icons">
+                            <li>
+                                <a target="_blank" title="Twitter" href="http://www.twitter.com/NoosphereTech">
+                                    <i class="fa fa-twitter fa-1x"></i><span>Twitter</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <!--End of Social Icons in Header-->
+
+                    </aside>
+
+                    <!--Main Navigation-->
+                    <nav id="nav-main">
+                        <ul>
+                            <li>
+                                <a href="#banner">Home</a>
+                            </li>
+                            <li>
+                                <a href="#about">About</a>
+                            </li>
+                            <li>
+                                <a href="#technology">Technology</a>
+                            </li>
+                            <li>
+                                <a href="#company">Company</a>
+                            </li>
+                            <li>
+                                <a href="#team">Team</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!--End of Main Navigation-->
+
+                    <div id="nav-trigger"><span></span></div>
+                    <nav id="nav-mobile"></nav>
+
+                </div>
             </div>
-        </div>
-    <header id="Home">
-        <p class = "intro_content"></p>
+        </div><!--End of Header-->
+
+        <!--Banner Content-->
+        <div id="banner-content" class="row clearfix">
+
+            <div class="col-38">
+
+                <div class="section-heading">
+                    <h1>The Modern Trust Layer for Digital Media</h1>
+                    <h2>Building for trust in the post-truth era.</h2>
+                </div>
+
+                <!--Call to Action-->
+                <a href="#" class="button">Protecting Human Trust in the AI Age
+</a>
+                <!--End Call to Action-->
+
+            </div>
+
+        </div><!--End of Row-->
     </header>
-     </div>
-    <div class = "introduction_box">
 
-        <p class = "intro_content">Noosphere Technologies builds AI-powered, API-first trust infrastructure, trust protocols, and trust services enabling the agile authenticity layer of the Internet.</p>
-		        <p align="center"> <img src="img/earth.gif" alt="Noosphere"></p>
-    </div>
-	
+    <!--Main Content Area-->
+    <main id="content">
 
-	<div class = "sections" , id = "cases">
-	<h2>Use Cases</h2>
-	<h3>Journalism and Media</h3>
-	<h3>Programmatic Advertising</h3>
-	<h3>Instant Messaging</h3>
-	<h3>Gaming</h3>
-	<h3>Insurance</h3>
-	<h3>Fintech</h3>
-	<h3>Enterprise Security</h3>
-    </div>
+        <!--Introduction-->
+        <section id="about" class="introduction scrollto">
 
-    
-    <div class = "sections" , id = "How">
-        <p align="center"> <img src="img/macspin.gif" alt="Made on a Mac"></p>
+            <div class="row clearfix">
+
+                <div class="col-3">
+                    <div class="section-heading">
+                        <h2 class="section-title">Trust Agility: Putting Trust Back in Human Hands
+</h2>
+                        <p class="section-subtitle">Noosphere Technologies builds API-first trust infrastructure, trust protocols, and trust services that enable the agile authenticity layer of the Internet.
+</p>
+                    </div>
+
+                </div>
+
+                <div class="col-2-3">
+
+                    <!--Icon Block-->
+                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.1s">
+                        <!--Icon-->
+                        <div class="icon">
+                            <i class="fa fa-bullseye fa-2x"></i>
+                        </div>
+                        <!--Icon Block Description-->
+                        <div class="icon-block-description">
+                            <h4>Targeted</h4>
+                            <p>Provides fine-grained, content-specific trust indicators, secured with the power of PKI. </p>
+                        </div>
+                    </div>
+                    <!--End of Icon Block-->
+
+                    <!--Icon Block-->
+                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.3s">
+                        <!--Icon-->
+                        <div class="icon">
+                            <i class="fa fa-bolt fa-2x"></i>
+                        </div>
+                        <!--Icon Block Description-->
+                        <div class="icon-block-description">
+                            <h4>Easy to Use</h4>
+                            <p>Noosphere makes trust relationships transparent and manageable, even after application trust stores have been bootstrapped. </p>
+                        </div>
+                    </div>
+                    <!--End of Icon Block-->
+
+                    <!--Icon Block-->
+                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.5s">
+                        <!--Icon-->
+                        <div class="icon">
+                            <i class="fa fa-database fa-2x"></i>
+                        </div>
+                        <!--Icon Block Description-->
+                        <div class="icon-block-description">
+                            <h4>Federated</h4>
+                            <p>No single entity makes moderation or censorship decisions. Publishers own their content.</p>
+                        </div>
+                    </div>
+                    <!--End of Icon Block-->
+
+                    <!--Icon Block-->
+                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.5s">
+                        <!--Icon-->
+                        <div class="icon">
+                            <i class="fa fa-rocket fa-2x"></i>
+                        </div>
+                        <!--Icon Block Description-->
+                        <div class="icon-block-description">
+                            <h4>Modern</h4>
+                            <p>An API-first approach, CLI, SDKs,and toolkits make it easy for application developers to tap trust signals generated and aggregated by the Noosphere platform. </p>
+                        </div>
+                    </div>
+                    <!--End of Icon Block-->
+
+                </div>
+
+            </div>
 
 
-    </div>
-    </div>
+        </section>
+        <!--End of Introduction-->
+		
+        <!--Content Section-->
+        <div id="technology" class="scrollto clearfix">
 
-    <div align='center'><a href='https://www.free-website-hit-counter.com'><img src='https://www.free-website-hit-counter.com/c.php?d=9&id=143537&s=36' border='0' alt='Free Website Hit Counter'></a><br / ></div>
+            <div class="row no-padding-bottom clearfix">
 
-        <footer>
-            <hr>
-            ©2023 Noosphere
-        <div class = "footer-right">
-        <a href="https://twitter.com/xpostfact"><i class="fa-brands fa-twitter" style="font-size:30px;color:black;"></i></a>
-        <a href="https://%40noosphere@techhub.social/explore"><i class="fa-brands fa-mastodon" style="font-size:30px;color:black;"></i></a>
+
+                <!--Content Left Side-->
+                <div class="col-3">
+                    <!--Company-->
+                    <blockquote class="testimonial text-right bigtest">
+                        <q>Our mission is to provide meaningful, secure trust indicators that are meaningful to everybody, across newsfeeds, messaging, social, search, advertising, and gaming. </q>
+                        <footer>— Jonathan Brown, Co-founder</footer>
+                    </blockquote>
+                    <!-- End of Testimonial-->
+
+                </div>
+                <!--End Content Left Side-->
+
+                <!--Content of the Right Side-->
+                <div class="col-3">
+                    <div class="section-heading">
+                        <h3>Modernizing the Web's Trust Layer</h3>
+                        <h2 class="section-title">User experience is the key to trust</h2>
+                        <p class="section-subtitle">Organizations across industries are struggling to combat synthetic media and disinformation. Algorithms, platform moderation and even some journalistic practices have contributed to the spread of untrustworthy information.</p>
+                    </div>
+                    <p>Shifting media consumption habits are eroding trust. As people move away from traditional media sources, synthetic media, propaganda and deepfakes exploit the lack of trust infrastructure and protocols.  Similarly, trust relationships that do exist are constrained to the ‘walled gardens’ of social media platforms.
+                    </p>
+                    <p>
+						Noosphere makes trust relationships transparent and manageable, even after application trust stores have been bootstrapped. 
+                    </p>
+                </div>
+                <!--End Content Right Side-->
+
+                <div class="col-3">
+                    <img src="images/dancer.jpg" alt="Dancer"/>
+                </div>
+
+            </div>
+
+
+        </div>
+        <!--End of Content Section-->
+		
+		
+        <!--Content Section-->
+        <div id="company" class="scrollto clearfix">
+
+            <div class="row no-padding-bottom clearfix">
+
+
+                <!--Content Left Side-->
+                <div class="col-3">
+                    <!--User Testimonial-->
+                    <blockquote class="testimonial text-right bigtest">
+                        <q>Professional journalism has become virtually indistinguishable from synthetic news. The incoming flood of AI-generated content is only making the situation worse. We’re here to build technology and services that level the playing field.”</q>
+                        <footer>— Andrew Brown, Co-founder</footer>
+                    </blockquote>
+                    <!-- End of Testimonial-->
+
+                </div>
+                <!--End Content Left Side-->
+
+                <!--Content of the Right Side-->
+                <div class="col-3">
+                    <div class="section-heading">
+                        <h3>Preserving Digital Media Integrity</h3>
+                        <h2 class="section-title">Rebuilding the Trust Layer of the Web</h2>
+                        <p class="section-subtitle">Organizations across industries are struggling to combat synthetic media and disinformation. Algorithms, platform moderation and even some journalistic practices have contributed to the spread of untrustworthy information.</p>
+                    </div>
+                    <p>Shifting media consumption habits are eroding trust. As people move away from traditional media sources, synthetic media, propaganda and deepfakes exploit the lack of trust infrastructure and protocols.  Similarly, trust relationships that do exist are constrained to the ‘walled gardens’ of social media platforms.
+                    </p>
+                    <p>
+						Noosphere makes trust relationships transparent and manageable, even after application trust stores have been bootstrapped. 
+                        
+                    </p>
+                    <!-- Just replace the Video ID "UYJ5IjBRlW8" with the ID of your video on YouTube (Found within the URL) -->
+                    <a href="#" data-videoid="511172319" data-videosite="vimeo" class="button video link-lightbox">
+                        WATCH VIDEO <i class="fa fa-play" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <!--End Content Right Side-->
+
+                <div class="col-3">
+                    <img src="images/dancer.jpg" alt="Dancer"/>
+                </div>
+
+            </div>
+
+
+        </div>
+        <!--End of Content Section-->
+
+
+
+
+        <!--Team-->
+        <aside id="team" class="scrollto text-center" data-enllax-ratio=".2">
+
+            <div class="row clearfix">
+
+                <div class="section-heading">
+                    <h3>Team</h3>
+                    <h2 class="section-title">Deep startup and tech experience</h2>
+                </div>
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/user-1.jpg" alt="User"/>
+                    <q>10 startups, successful exits, including acquisitions (Version, Oracle, Google) and IPO (Apigee). 
+Broad experience fund-raising, scaling, hiring, managing.</q>
+                    <footer>Andrew Brown - Co-Founder</footer>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/user-2.jpg" alt="User"/>
+                    <q>Innovative product designer for Startups, Fortune 50 companies and the US Government.
+Invented new products and services that improve the lives of employees and customers.</q>
+                    <footer>Jonathan Brown - Co-Founder</footer>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+            </div>
+
+        </aside>
+        <!--End of Team-->
+		    <div align='center'><a href='https://www.free-website-hit-counter.com'><img src='https://www.free-website-hit-counter.com/c.php?d=9&id=143537&s=36' border='0' alt='Free Website Hit Counter'></a><br / ></div>
+
+ 
+
+
+    </main>
+    <!--End Main Content Area-->
+
+
+    <!--Footer-->
+    <footer id="landing-footer" class="clearfix">
+        <div class="row clearfix">
+
+            <p id="copyright" class="col-2">©2023, Noosphere Technologies, Inc.</p>
+
+            <!--Social Icons in Footer-->
+            <ul class="col-2 social-icons">
+                <li>
+                    <a target="_blank" title="Twitter" href="http://www.twitter.com/NoosphereTech">
+                        <i class="fa fa-twitter fa-1x"></i><span>Twitter</span>
+                    </a>
+                </li>
+
+            </ul>
+            <!--End of Social Icons in Footer-->
         </div>
     </footer>
-</body>
+    <!--End of Footer-->
 
+</div>
+
+<!-- Include JavaScript resources -->
+<script src="js/jquery.1.8.3.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/featherlight.min.js"></script>
+<script src="js/featherlight.gallery.min.js"></script>
+<script src="js/jquery.enllax.min.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/jquery.stickyNavbar.min.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/images-loaded.min.js"></script>
+<script src="js/lightbox.min.js"></script>
+<script src="js/site.js"></script>
+
+
+</body>
 </html>
