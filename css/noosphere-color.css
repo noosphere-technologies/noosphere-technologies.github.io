@@ -22,7 +22,7 @@ body {
 /* Default Link Color */
 
 a, .la-ball-triangle-path {
-    color:#78038C;
+    color:#D2B356;
 }
 
 a:hover, #header.nav-solid nav a:hover {
@@ -32,7 +32,7 @@ a:hover, #header.nav-solid nav a:hover {
 /* Default Icon Color */
 
 .icon i {
-    color:#78038C;
+    color:#D2B356;
 }
 
 /* Border Color */
@@ -90,7 +90,7 @@ a:hover, #header.nav-solid nav a:hover {
 }
 
 .section-heading h2:after {
-    background:#78038C;
+    background:#D2B356;
     content:"";
     display:block;
     width:30px;
