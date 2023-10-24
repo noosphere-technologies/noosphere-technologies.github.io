@@ -123,10 +123,11 @@ a:hover, #header.nav-solid nav a:hover {
 
 /* Banner Background and Text Colors */
 
-#banner {
-    background: url("../images/banner-images/banner-image-1.png") no-repeat center top;
-    background-size:cover;
-}
+/* #banner {
+    background: url("../images/banner-images/banner-image-1.png") right no-repeat;
+    background-size: 30%;
+    background-position: right;
+} */
 
 
 /*------------------------------------------------------------------------------------------*/

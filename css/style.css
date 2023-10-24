@@ -937,6 +937,9 @@ blockquote {
 .testimonial img {
     max-height: 120px;
     border-radius: 250em;
+    display: block;
+    margin: 0 auto;
+    
 }
 
 .testimonial footer {
@@ -948,6 +951,8 @@ blockquote {
 .testimonial.classic img {
     display: inline-block;
     margin-bottom: 25px;
+    display: block;
+    margin: 0 auto;
 }
 
 .testimonial.classic q {
@@ -2113,6 +2118,11 @@ blockquote {
         display:none;
     }
 
+    .hide-when-small {
+        display:none;
+        visibility: hidden;
+    }
+
     .row {
         padding: 15px !important;
     }
@@ -2206,16 +2216,20 @@ blockquote {
         display:none;
     }
 
+    .hide-when-small {
+        display:none;
+        visibility: hidden;
+    }
 
     .row {
         padding: 15px 0 !important;
     }
 
-    .col-1, .col-2, .col-5, .col-7, .col-9, .col-11, .col-2-3, .col-3-4, .col-61, .col-38, .row {
+    .col-1, .col-2, .col-3, .col-5, .col-7, .col-9, .col-11, .col-2-3, .col-3-4, .col-61, .col-38, .row {
         width: 100%;
     }
 
-    .col-3, .col-4, .col-6, .col-8, .col-10, .col-12 {
+     .col-4, .col-6, .col-8, .col-10, .col-12 {
         width: 50%;
     }
 
