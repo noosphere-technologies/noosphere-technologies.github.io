@@ -19,6 +19,7 @@
 6. Landing Page Sections
 - 6.1 Features
 - 6.2 Testimonials
+- 6.25 Blog
 - 6.3 Gallery
 - 6.4 Video
 - 6.5 Clients
@@ -128,8 +129,9 @@ figure {
 }
 
 #wrapper {
-    margin:0 15px;
-    padding: 15px 0;
+    margin: 20px;
+    /* margin: 0 15px;
+    padding: 15px 0; */
     position: relative;
 }
 
@@ -975,6 +977,32 @@ blockquote {
 
 .testimonial.bigtest q {
     font-size: 22px;
+}
+
+/* ---------- Blog ------------------ */
+#blogpost #avatar {
+    width: 16.66667%;
+    margin-left: 16.66667%;
+    float: left;
+}
+
+#blogpost #avatar img {
+    display: block;
+    margin: 0 auto;
+    max-height: 120px;
+    border-radius: 250em;
+}
+
+#blogpost #avatar p {
+    font-size: small;
+    font-weight: 800;
+    text-align: center;
+}
+
+#blogpost #content #date {
+    font-size: x-small;
+    font-style: italic;
+    font-weight: 800;
 }
 
 /* --------- 6.4 Gallery ---------- */
