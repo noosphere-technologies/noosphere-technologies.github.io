@@ -806,6 +806,27 @@ h6 {
 /*------------------------------------------------------------------------------------------*/
 /* 5. Content Elements */
 /*------------------------------------------------------------------------------------------*/
+/* ------- 5.0 User Block ------------- */
+.user-block {
+    position: relative;
+    align-items: center;
+}
+
+.user-block h4 {
+    font-weight: bold;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.user-block h4 .subhead {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.user-block h3 {
+    padding-top: 0;
+    padding-bottom: 0;
+}
 
 /* --------- 5.1 Icons ---------- */
 
