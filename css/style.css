@@ -1583,10 +1583,10 @@ blockquote {
     text-align: center;
     text-decoration: none;
     color: #fff;
-    -webkit-transition: margin-bottom 150ms linear;
-    -moz-transition: margin-bottom 150ms linear;
-    -o-transition: margin-bottom 150ms linear;
-    transition: margin-bottom 150ms linear;
+    -webkit-transition: margin-bottom 80ms linear;
+    -moz-transition: margin-bottom 80ms linear;
+    -o-transition: margin-bottom 80ms linear;
+    transition: margin-bottom 80ms linear;
 }
 
 #scrollUp:hover {
