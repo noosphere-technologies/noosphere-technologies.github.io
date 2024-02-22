@@ -955,6 +955,9 @@ h6 {
 
 blockquote {
     position: relative;
+	line-height: 1.6 ;
+    font-size: large;
+	font-style: italic;
 }
 
 .testimonial img {
@@ -984,7 +987,7 @@ blockquote {
 
 .testimonial.classic footer:before {
     display: block;
-    content: "";
+    content: "";Ftestim
     width: 30px;
     height: 4px;
     margin: 10px auto 15px auto;
@@ -1001,6 +1004,24 @@ blockquote {
 }
 
 /* ---------- Blog ------------------ */
+.libre-caslon text-regular {
+  font-family: "Libre Caslon Text", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.libre-caslon text-bold {
+  font-family: "Libre Caslon Text", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.libre-caslon text-regular-italic {
+  font-family: "Libre Caslon Text", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
 #blogpost #avatar {
     width: 16.66667%;
     margin-left: 16.66667%;
@@ -1021,9 +1042,16 @@ blockquote {
 }
 
 #blogpost #content #date {
-    font-size: x-small;
+    font-size: large;
     font-style: italic;
     font-weight: 800;
+}
+
+#blogpost #content p {
+
+	font: "Libre Caslon Text", serif;
+	font-size: large;
+	line-height: 1.6;
 }
 
 /* --------- 6.4 Gallery ---------- */
