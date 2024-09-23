@@ -138,7 +138,7 @@ a:hover, #header.nav-solid nav a:hover {
 
 
 body {
-    font-family: 'Libre Caslon Display', serif, Arial, Helvetica;
+    font-family: 'Inter', serif, Arial, Helvetica;
     font-size:20px;
     font-weight:normal;
     color:#111;
@@ -166,7 +166,7 @@ body {
 /* Banner Typography */
 
 #banner h1 {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: Inter', sans-serif, Arial, Helvetica;
     font-size:62px;
     line-height:60px;
     font-weight:800;
@@ -174,7 +174,7 @@ body {
 }
 
 #banner h2 {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: 'Inter', sans-serif, Arial, Helvetica;
     font-size:18px;
     font-weight:300;
     color:#111;
@@ -184,14 +184,14 @@ body {
 /* Section Title and Subtitle */
 
 .section-title {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: 'Inter', sans-serif, Arial, Helvetica;
     font-size: 34px; 
     font-weight:700;
     color:#111;
 }
 
 .section-subtitle {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: 'Inter', sans-serif, Arial, Helvetica;
     font-size: 16px;
     font-weight:300;
     color:#9c9c9c;
@@ -200,7 +200,7 @@ body {
 /* Testimonial */
 
 .testimonial q {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: 'Inter', sans-serif, Arial, Helvetica;
     font-size: 17px; 
     font-weight:300;
 }
@@ -213,42 +213,42 @@ body {
 /* Standard Headings h1-h6 */
 
 h1 {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: 'INter', sans-serif, Arial, Helvetica;
     font-size: 40px; 
     font-weight:300;
     color:#111;
 }
 
 h2 {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: 'Inter', sans-serif, Arial, Helvetica;
     font-size: 34px; 
     font-weight:300;
     color:#111;
 }
 
 h3 {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: 'Inter', sans-serif, Arial, Helvetica;
     font-size: 30px; 
     font-weight:700;
     color:#111;
 }
 
 h4 {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: 'Inter', sans-serif, Arial, Helvetica;
     font-size: 18px; 
     font-weight:400;
     color:#111;
 }
 
 h5 {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: 'Inter', sans-serif, Arial, Helvetica;
     font-size: 16px; 
     font-weight:400;
     color:#111;
 }
 
 h6 {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: 'Inter', sans-serif, Arial, Helvetica;
     font-size: 14px; 
     font-weight:400;
     color:#111;
@@ -265,7 +265,7 @@ h6 {
 /* Button Text */
 
 .button, input[type="submit"]  {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: 'INter', sans-serif, Arial, Helvetica;
     font-size:14px;
     font-weight:bold;
     color:#111;
@@ -293,7 +293,7 @@ h6 {
 /* Button Text */
 
 #banner .button {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: 'Inter', sans-serif, Arial, Helvetica;
     font-size:16px;
     color:#111;
 }
@@ -319,7 +319,7 @@ h6 {
 /*------------------------------------------------------------------------------------------*/
 
 #landing-footer, #landing-footer p, #landing-footer a {
-    font-family: 'Libre Caslon Display', sans-serif, Arial, Helvetica;
+    font-family: 'Inter', sans-serif, Arial, Helvetica;
     font-size:12px;
     font-weight:normal;
     color:#999;
