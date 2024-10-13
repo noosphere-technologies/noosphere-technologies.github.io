@@ -843,7 +843,7 @@ h6 {
 }
 
 .icon-block h4 {
-    font-weight: bold;
+    font-weight: 300;
     padding-top: 0;
 }
 
@@ -853,6 +853,7 @@ h6 {
 
 .icon-block p {
     margin-top: 0;
+	font-weight: 200;
 }
 
 /* Icon Left*/
@@ -888,6 +889,7 @@ h6 {
 
 .icon-top .icon-block-description {
     padding-top: 25px;
+	font-weight: 200;
 }
 
 /* --------- 5.2 Parallax Elements ---------- */
