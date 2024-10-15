@@ -10,7 +10,10 @@
 # Publication members
 
 # Resources
-controls=https://github.com/u2000/TrustGateway2003
+controls=github.com/noosphere-technologies/*
+controls=github.com/noosphere-technologies/trust-engine
+controls=github.com/noosphere-technologies/trust-client
+controls=github.com/noosphere-technologies/api-spec
 
 # Social channels here:
 social=https://twitter.com/noospheretech
@@ -19,4 +22,4 @@ social=https://twitter.com/noospheretech
 belongto=https://c2pa.org/
 
 # Contact information here:
-contact=https://www.noosphere.tech
+contact=info@noosphere.tech
