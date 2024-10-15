@@ -19,7 +19,7 @@ controls=github.com/noosphere-technologies/api-spec
 social=https://twitter.com/noospheretech
 
 # Memberships:
-belongto=https://c2pa.org/
+belongto=c2pa.org
 
 # Contact information here:
 contact=info@noosphere.tech
