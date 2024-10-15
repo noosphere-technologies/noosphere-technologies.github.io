@@ -874,6 +874,7 @@ h6 {
 
 .icon-right .icon-block-description {
     padding-right: 53px;
+    font-weight: 160;
 }
 
 /* Icon Above */
@@ -889,7 +890,7 @@ h6 {
 
 .icon-top .icon-block-description {
     padding-top: 25px;
-	font-weight: 200;
+	font-weight: 160;
 }
 
 /* --------- 5.2 Parallax Elements ---------- */
