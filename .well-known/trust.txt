@@ -10,10 +10,10 @@
 # Publication members
 
 # Resources
-controls=github.com/noosphere-technologies/*
-controls=github.com/noosphere-technologies/trust-engine
-controls=github.com/noosphere-technologies/trust-client
-controls=github.com/noosphere-technologies/api-spec
+control=github.com/noosphere-technologies/*
+control=github.com/noosphere-technologies/trust-engine
+control=github.com/noosphere-technologies/trust-client
+control=github.com/noosphere-technologies/api-spec
 
 # Social channels here:
 social=https://twitter.com/noospheretech
