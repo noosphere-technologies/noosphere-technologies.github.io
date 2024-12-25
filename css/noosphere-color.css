@@ -22,7 +22,7 @@ body {
 /* Default Link Color */
 
 a, .la-ball-triangle-path {
-    color:#C00000;
+    color:#78038C;
 }
 
 a:hover, #header.nav-solid nav a:hover {
@@ -169,15 +169,22 @@ body {
     font-family: 'Cousine', sans-serif, Arial, Helvetica;
     font-size:40px;
     line-height:60px;
-    font-weight:800;
-    color:#C000000;
+    font-weight:300;
+    color:#C00000;
 }
 
 #banner h2 {
-    font-family: 'Cousine', sans-serif, Arial, Helvetica;
+    font-family: 'Open-sans', sans-serif, Arial, Helvetica;
     font-size:18px;
     font-weight:300;
-    color:#c8e0f6;
+    color:#ffffff;
+}
+
+#banner h3 {
+    font-family: 'Open-sans', sans-serif, Arial, Helvetica;
+    font-size:12px;
+    font-weight:300;
+    color:#ffffff;
 }
 
 
