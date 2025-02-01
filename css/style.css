@@ -2260,6 +2260,7 @@ blockquote {
     #landing-footer #copyright {
         float: left;
         width: 50%;
+		font-family: 'Cousine';
     }
 
     #landing-footer .social-icons {

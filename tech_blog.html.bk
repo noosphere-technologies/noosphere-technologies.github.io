@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!--Page Title-->
+    <title>Noosphere Blog</title>
+
+    <!--Meta Keywords and Description-->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="images/favicon.ico" title="Favicon"/>
+
+    <!-- Main CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Namari Color CSS -->
+    <link rel="stylesheet" href="css/noosphere-color.css">
+
+    <!--Icon Fonts - Font Awesome Icons-->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- Animate CSS-->
+    <link href="css/animate.css" rel="stylesheet" type="text/css">
+
+    <!--Google Webfonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status" class="la-ball-triangle-path">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!--End of Preloader-->
+
+<div class="page-border" data-wow-duration="0.7s" data-wow-delay="0.2s">
+    <div class="top-border wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"></div>
+    <div class="right-border wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;"></div>
+    <div class="bottom-border wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"></div>
+    <div class="left-border wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
+</div>
+
+<div id="wrapper">
+
+    <header id="banner" class="scrollto clearfix" data-enllax-ratio=".5">
+        <div id="header" class="nav-collapse">
+            <div class="row clearfix">
+                <div class="col-1">
+
+                    <!--Logo-->
+                    <div id="logo">
+
+                        <!--Logo that is shown on the banner-->
+                        <img src="images/logo.png" id="banner-logo" alt="Landing Page"/>
+                        <!--End of Banner Logo-->
+
+                        <!--The Logo that is shown on the sticky Navigation Bar-->
+                        <img src="images/logo-2.png" id="navigation-logo" alt="Landing Page"/>
+                        <!--End of Navigation Logo-->
+
+                    </div>
+                    <!--End of Logo-->
+
+                    <aside>
+
+                        <!--Social Icons in Header-->
+                        <ul class="social-icons">
+                            <li>
+                                <a target="_blank" title="Twitter" href="http://www.twitter.com/NoosphereTech">
+                                    <i class="fa fa-twitter fa-1x"></i><span>Twitter</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <!--End of Social Icons in Header-->
+
+                    </aside>
+
+                    <!--Main Navigation-->
+                    <nav id="nav-main">
+                        <ul>
+                            <li>
+                                <a href="index.html#banner">Home</a>
+                            </li>
+                            <li>
+                                <a href="index.html#about">About</a>
+                            </li>
+                            <li>
+                                <a href="index.html#solution">Solution</a>
+                            </li>
+                            <li>
+                                <a href="index.html#team">People</a>
+                            </li>
+                            <li>
+                                <p>Blog</p>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!--End of Main Navigation-->
+                    <!--End of Main Navigation-->
+
+                    <div id="nav-trigger"><span></span></div>
+                    <nav id="nav-mobile"></nav>
+
+                </div>
+            </div>
+        </div><!--End of Header-->
+
+    </header>
+
+    <!--Main Content Area-->
+    <main id="content">
+         <!--Blog-->
+            <div id="banner" class="row clearfix text-left">
+                <div class="col-1">
+                    <div class="section-heading">
+                        <h3>Noosphere Tech Blog</h3>
+                        <h1 class="section-title">Architecting the Modern Trust Layer for Digital Media</h1>
+                    </div>
+                </div>
+            </div>
+            <!--Post-->
+            <div class="clearfix" id="blogpost">
+                <div id="avatar">
+                    <img src="images/people/daniel.jpg" alt="Author"/>
+                    <p id="author">Daniel Zellmer<br>Full Stack Engineer</p>
+                </div>
+                <div class="col-2" id="content">
+                    <h2 id="headline">Noosphere Decentralized Identifier Method Implementation
+</h2>
+                    <p id="date">March 20, 2024</p>
+							  <p><i>This design is the product of collaboration between Noosphere Technologies and the Department of Computer Science at Carnegie Mellon University. The research was conducted as a capstone project, sponsored by Noosphere Technologies, within the graduate program at CMU. The proof-of-concept resulting from this project forms the basis of Noosphere Technology's digital trust services.</i></p>
+			
+				  <h3>Motivation</h3>
+				  
+				  <p>Among the first action items in the Noosphere’s construction was to create a means through which all entities within the Noosphere may be uniquely and universally identified. A key principle behind Noosphere is freedom from any form of centralized moderation or censorship. Thus, entities within the Noosphere must be identifiable without recourse to a centralized source of truth. These factors strengthened the motivation to architect the system based on Decentralized IDentifiers (DID). </p>
+
+				  <p>Before creating a new DID method, we reviewed several existing methods for issuing DIDs through various Distributed Ledger Technologies (DLT) including both the Bitcoin and Ethereum blockchains. We found that existing DID methods could generally be divided into two categories: those which issue an identifier for a single type of entity (e.g. a file in IPFS), and those which issue an identifier to any entity within a given DLT. Thus, given the Noosphere’s purpose within the realm of digital media, we found it appropriate to implement a new DID method to issue identifiers to those entities specifically existing within this domain. </p>
+
+				  <p>We aimed to develop the Noosphere’s DID method with a few key considerations. First, we wanted to ensure that DIDs issued within the Noosphere reflected fundamental entities within the domain of internet media. Second, we wanted the new method to build on the constructs set forth by <a href="https://journallist.net/">JournalList</a>’s <a href="https://journallist.net/reference-document-for-trust-txt-specifications">trust.txt</a> specification to emphasize the relationship between the two. Finally, we wanted to develop a method that plays into the idea that readers can curate their personal network of trusted entities, which is a fundamental principle of the Noosphere.</p>
+
+				  <h3>DID Entities</h3>
+				  <p>Putting these considerations together yielded what we believe to be an effective means to identify all entities within the Noosphere using a unique DID which, due to the requirement of a DID being globally unique, means that a Noosphere DID would serve as a universal identifier for the corresponding entity. Our considerations of both the domain of internet media and the existing constructs of trust.txt led us to establish the set of entities, shown below, to which a Noosphere DID would be assigned.</p>
+				  
+				  <p><img src="images/did-architecture.jpg" alt="Noosphere DID Architecture"/></p>
+
+				  <p>At the Noosphere’s core are Artifacts, a generic entity type that represents all pieces of internet media that have been published to the Noosphere. An Artifact is controlled by one or more Creators (think “content creators”--journalists, editors, publishers, “citizen journalists”, researchers, moderators, etc.), and any Creator that has control of an Artifact may amend the Artifact by publishing a new version. These versions of an Artifact are linearly linked through fields within the Artifact’s DID document. Specifically, the previousVersionId and originalVersionId fields can be set to point to the previous and original versions of an Artifact when an amendment is created.</p>
+
+				  <p>Artifacts and Creators certainly are the core entities of the Noosphere. However, due both to the existing constructs included in trust.txt specification and to the notion of democratized moderation within the Noosphere, we found it necessary to expand the core set of entities to fit. As a result, we include a further three entities: Organization, Intermediary, and Mediation to represent higher-level entities within the Noosphere as well as those entities responsible for mediating Noosphere Artifacts. In our definition, an Organization is a controlling entity for which any number of Creators publish Artifacts. </p>
+					  
+				 <p>The use of Organizations is based on the entity’s inclusion in the trust.txt specification, in which Organizations (Publishing Organizations, to be specific) can create and maintain a trust.txt document to communicate the entities to which an Organization belongs (Association) and the entities which belong to an Organization (member Organizations). Intermediaries and their corresponding Mediations will serve the critical role of annotating Noosphere Artifacts. For instance, an Intermediary may seek to fact-check a published Artifact or to notarize an Artifact given its digital signature and Creator’s signing key, which the Intermediary can achieve by publishing a new Mediation for the Artifact in question to further inform readers about the Artifact’s contents or general status.</p>
+
+				  <p>One of the concerns we had while establishing this set of entities was that any person may claim themselves as an organization, creator, or intermediary. While any entity may claim itself to be an Organization, Creator, or Intermediary, the Noosphere leaves the choice up to the reader when determining which entities will form the reader’s network of trust. </p>
+
+				  <h3>DID Syntax and DID Document Structure</h3>
+				  <p>Once we had established this set of Noosphere entities, our next task was to determine the syntax that Noosphere DIDs would follow.</p> 
+				  <table>
+					  <tr>
+						  <td>did</td>
+						  <td>=</td>
+						  <td>“did:noosphere:” noosphere-id</td>
+					  </tr>
+					  <tr>
+						  <td>noosphere-id</td>
+						  <td>=</td>
+						  <td>entity-type “:” id</td>
+					  </tr>
+					  <tr>
+						  <td>entity-type</td>
+						  <td>=</td>
+						  <td>“org” | “c“ | “a“ | “int” | “med“</td>
+					  </tr>
+					  <tr>
+						  <td>id</td>
+						  <td>=</td>
+						  <td>[-a-zA-Z0-9]+</td>
+					  </tr>
+				</table>
+				
+				<p>The critical piece of this DID syntax is the use of namespaces, indicated by the “entity-type” attribute, to distinguish between Noosphere entities. Although the use of namespaces does not extend the functionality of a DID, since the purpose of a Noosphere DID is still to act as a unique identifier for a corresponding entity, we found that we could use namespaces to help the Noosphere both enforce relationships between entities (see the previous DID entities diagram) and be better suited to accommodate readers’ Trust Configurations. </p>
+				<p>As is documented in the W3C DID specification, each Noosphere DID will resolve to a corresponding DID document. This document will contain some metadata to describe the corresponding entity, including both the entities DID and controller DID, as well as the methods (including public keys) used to verify the DID and any services related to the identified entity (e.g. an IPFS link for an Artifact). This DID document structure, as well as a few examples for the previously discussed entities, can be found in this repository created by the Noosphere team.</p>
+				<h3>Conclusion</h3>
+				<p>While our work on the Noosphere continues, we continue to build and refine the Noosphere’s DID method. However, we believe that the set of entities we have defined, as well as the syntax of Noosphere DIDs, will act as the foundation for the creation, consumption, and management of Artifacts within the Noosphere. Thus, we are excited to have the opportunity to share this work to the community, and our excitement only grows as we continue to architect and implement the core components and infrastructure to make the revolution of the Noosphere a reality.</p>
+				  
+                </div>
+            </div>
+
+         <!-- End of Blog-->
+
+         <div align='center'><a href='https://www.free-website-hit-counter.com'><img src='https://www.free-website-hit-counter.com/c.php?d=9&id=143537&s=36' border='0' alt='Free Website Hit Counter'></a><br / ></div>
+    </main>
+    <!--End Main Content Area-->
+
+
+    <!--Footer-->
+    <footer id="landing-footer" class="clearfix">
+        <div class="row clearfix">
+
+            <p id="copyright" class="col-2">© 2024, Noosphere Technologies, Inc.</p>
+
+            <!--Social Icons in Footer-->
+            <ul class="col-2 social-icons">
+                <li>
+                    <a target="_blank" title="Twitter" href="http://www.twitter.com/NoosphereTech">
+                        <i class="fa fa-twitter fa-1x"></i><span>Twitter</span>
+                    </a>
+                </li>
+
+            </ul>
+            <!--End of Social Icons in Footer-->
+        </div>
+    </footer>
+    <!--End of Footer-->
+
+</div>
+
+<!-- Include JavaScript resources -->
+<script src="js/jquery.1.8.3.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/featherlight.min.js"></script>
+<script src="js/featherlight.gallery.min.js"></script>
+<script src="js/jquery.enllax.min.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/jquery.stickyNavbar.min.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/images-loaded.min.js"></script>
+<script src="js/lightbox.min.js"></script>
+<script src="js/site.js"></script>
+
+
+</body>
+</html>

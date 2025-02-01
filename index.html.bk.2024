@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!--Page Title-->
+    <title>Noosphere Technologies</title>
+
+    <!--Meta Keywords and Description-->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="images/favicon.ico" title="Favicon"/>
+
+    <!-- Main CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Namari Color CSS -->
+    <link rel="stylesheet" href="css/noosphere-color.css">
+
+    <!--Icon Fonts - Font Awesome Icons-->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- Animate CSS-->
+    <link href="css/animate.css" rel="stylesheet" type="text/css">
+
+    <!--Google Webfonts-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	
+	
+    <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'> -->
+    <style>
+      img {
+        -webkit-filter: grayscale(1);
+        filter: grayscale(1);
+      }
+      img:hover {
+        -webkit-filter: grayscale(0);
+        filter: none;
+      }
+    </style>
+
+<script> (function(ss,ex){ window.ldfdr=window.ldfdr||function(){(ldfdr._q=ldfdr._q||[]).push([].slice.call(arguments));}; (function(d,s){ fs=d.getElementsByTagName(s)[0]; function ce(src){ var cs=d.createElement(s); cs.src=src; cs.async=1; fs.parentNode.insertBefore(cs,fs); }; ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js'); })(document,'script'); })('YEgkB8ll0M28ep3Z'); </script> 
+	
+	
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status" class="la-ball-triangle-path">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!--End of Preloader-->
+
+<div class="page-border" data-wow-duration="0.7s" data-wow-delay="0.2s">
+    <div class="top-border wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"></div>
+    <div class="right-border wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;"></div>
+    <div class="bottom-border wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"></div>
+    <div class="left-border wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
+</div>
+
+<div id="wrapper">
+
+    <header id="banner" class="scrollto clearfix" data-enllax-ratio=".5">
+        <div id="header" class="nav-collapse">
+            <div class="row clearfix">
+                <div class="col-1">
+
+                    <!--Logo-->
+                    <div id="logo">
+
+                        <!--Logo that is shown on the banner
+                        <img src="images/logo-1.png" id="banner-logo" alt="Landing Page"/>
+                        End of Banner Logo-->
+
+                        <!--The Logo that is shown on the sticky Navigation Bar-->
+                        <img src="images/logo-1.png" id="navigation-logo" alt="Landing Page"/>
+                        <!--End of Navigation Logo-->
+
+                    </div>
+                    <!--End of Logo-->
+
+                    <aside>
+
+                        <!--Social Icons in Header-->
+                        <ul class="social-icons">
+                            <li>
+                                <a target="_blank" title="Twitter" href="http://www.twitter.com/NoosphereTech">
+                                    <i class="fa fa-twitter fa-1x"></i><span>Twitter</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <!--End of Social Icons in Header-->
+
+                    </aside>
+
+                    <!--Main Navigation-->
+                    <nav id="nav-main">
+                        <ul>
+                            <li>
+                                <a href="#banner">Home</a>
+                            </li>
+                            <li>
+                                <a href="#about">About</a>
+                            </li>
+                            <li>
+                                <a href="#solution">Solution</a>
+                            </li>
+							
+                            <li>
+                                <a href="#team">People</a>
+                            </li>
+                            <li>
+                                <a href="blog.html">Blog</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!--End of Main Navigation-->
+
+                    <div id="nav-trigger"><span></span></div>
+                    <nav id="nav-mobile"></nav>
+
+                </div>
+            </div>
+        </div><!--End of Header-->
+    </header>
+
+    <!--Main Content Area-->
+    <main id="about">
+  <!--Banner Content-->
+  <div class="row clearfix" id="banner">
+
+    <div class="col-2-3">
+        <div class="section-heading">
+            <h1> Trustworthy media and data are the currency of the authentic Internet. . .</h1>
+            <h2><b>We are building API-first services for digital trust in the age of LLMs and RAG</h2>			
+		    <p>Contributing Member</p>
+			<p><img src="images/c2pa-logo.png" style="object-fit: fill"></p>
+			
+
+        </div>
+    </div>
+    <div class="col-3 hide-when-small">
+            <img src="images/sphere.png" style="object-fit: fill">
+    </div>
+    <div>	
+    <!--Call to Action-->
+    <a href="https://calendly.com/noosphere/noosphere-brief" class="button">Talk to a Founder</a>
+    <!--End Call to Action-->
+    </div>	
+</div><!--End of Row-->
+
+
+
+        <!--Introduction-->
+        <section id="about" class="introduction scrollto">
+            <div class="row clearfix">
+                <div class="col-3">
+                    <div class="section-heading">
+                        <h2 class="section-title">Trust Agility
+</h2>
+                        <p class="section-subtitle">API-first trust services that enable integrity and authenticity at every layer of the stack
+</p>
+                    </div>
+
+                </div>
+
+                <div class="col-2-3">
+
+                    <!--Icon Block-->
+                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.1s">
+                        <!--Icon-->
+                        <div class="icon">
+                            <i class="fa fa-bullseye fa-2x"></i>
+                        </div>
+                        <!--Icon Block Description-->
+                        <div class="icon-block-description">
+                            <h4>Targeted</h4>
+                            <p>Delivers environment, application, and content-specific trust context, secured with the power of PKI. </p>
+                        </div>
+                    </div>
+                    <!--End of Icon Block-->
+
+                    <!--Icon Block-->
+                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.3s">
+                        <!--Icon-->
+                        <div class="icon">
+                            <i class="fa fa-id-card-o  fa-2x"></i>
+                        </div>
+                        <!--Icon Block Description-->
+                        <div class="icon-block-description">
+                            <h4>Flexible</h4>
+                            <p>Trust relationships are transparent and can be curated, even after application trust stores have been bootstrapped. </p>
+                        </div>
+                    </div>
+                    <!--End of Icon Block-->
+
+                    <!--Icon Block-->
+                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.5s">
+                        <!--Icon-->
+                        <div class="icon">
+                            <i class="fa fa-database fa-2x"></i>
+                        </div>
+                        <!--Icon Block Description-->
+                        <div class="icon-block-description">
+                            <h4>Federated</h4>
+                            <p>No single entity makes trust, moderation, or censorship decisions. Organizations provably own their artifacts and content.</p>
+                        </div>
+                    </div>
+                    <!--End of Icon Block-->
+
+                    <!--Icon Block-->
+                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.5s">
+                        <!--Icon-->
+                        <div class="icon">
+                            <i class="fa fa-rocket fa-2x"></i>
+                        </div>
+                        <!--Icon Block Description-->
+                        <div class="icon-block-description">
+                            <h4>Modern</h4>
+                            <p>An API-first approach, CLI, SDKs, and toolkits make it easy for app developers and IT teams to build systems with integrity and trust.</p>
+                        </div>
+                    </div>
+                    <!--End of Icon Block-->
+
+                </div>
+
+            </div>
+
+
+        </section>
+        <!--End of Introduction-->
+       
+					
+					        <section id="solution" class="introduction scrollto">
+
+					            <div class="row clearfix">
+
+								  <div class="col-3">
+								  <blockquote class="testimonial text-right bigtest big-padding-top">
+<q>Noosphere is uniquely positioned to develop API-first trust services that help organizations comply with emerging content authenticity standards, such as C2PA and CAI.</q>
+								                          <footer>— Andrew Brown, Founder</footer>
+								                      </blockquote>
+								     </div>
+
+					                <div class="col-2-3">
+
+                    <!--Icon Block-->
+                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.1s">
+                        <!--Icon-->
+                        <div class="icon">
+                            <i class="fa fa-bullseye fa-2x"></i>
+                        </div>
+                        <!--Icon Block Description-->
+                        <div class="icon-block-description">
+                            <h4>Distributed and Scalable</h4>
+                            <p>Integrates real-time integrity and validation checks with trust stores for any user agent.</p>
+                        </div>
+                    </div>
+                    <!--End of Icon Block-->
+
+                    <!--Icon Block-->
+                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.3s">
+                        <!--Icon-->
+                        <div class="icon">
+                            <i class="fa fa-key fa-2x"></i>
+                        </div>
+                        <!--Icon Block Description-->
+                        <div class="icon-block-description">
+                            <h4>Secure</h4>
+                            <p>Extends Web Public Key Infrastructure (PKI) to enable non-hierarchical, but still ungameable and unhackable, trust relationships.</p>
+                        </div>
+                    </div>
+                    <!--End of Icon Block-->
+
+                    <!--Icon Block-->
+                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.5s">
+                        <!--Icon-->
+                        <div class="icon">
+                            <i class="fa fa-database fa-2x"></i>
+                        </div>
+						
+                        <!--Icon Block Description-->
+                        <div class="icon-block-description">
+                            <h4>Easily integrated and extensible</h4>
+                            <p>API-first approach enables app, platform and infra developers easily integrate and innovate on trust services.</p>
+                        </div>
+                    </div>
+					
+                    <!--End of Icon Block-->
+
+                </div>
+				
+				
+				
+               <!-- <div class="col-3">
+                    <img src="images/user-images/Reader.png">
+                     style="object-fit: fill">
+                </div> -->
+
+
+            </div>
+
+
+        </section>
+        <!--End of Content Section-->
+		
+
+    <!--End of Introduction-->	
+		
+		
+        <!--Team-->
+		
+        <aside id="team" class="scrollto text-center" data-enllax-ratio=".2">
+
+            <div class="row clearfix">
+					
+					
+                <div class="section-heading">
+                    <h3>Team</h3>
+                    <h2 class="section-title">Deep startup and tech experience</h2>
+                </div>
+                
+                <blockquote class="col-3 testimonial">
+                    <img src="images/user-images/user-1.jpg" alt="Andrew Brown"/>
+                    <h4 class="text-center"><a href="http://www.linkedin.com/in/andrew-brown-478a68/">Andrew Brown</a></h4>
+                    <h5 class="text-center">Founder, CEO</h5>
+                </blockquote>
+				
+    <blockquote class="col-3 testimonial">
+        <img src="images/people/hans.jpg" alt="Hans Granqvist"/>
+        <h4 class="text-center"><a href="https://www.linkedin.com/in/hansgranqvist/">Hans Granqvist</a></h4>
+        <h5 class="text-center">Interim CTO</h5>
+    </blockquote>
+	
+
+                <blockquote class="col-3 testimonial">
+                    <img src="images/people/daniel.jpg" alt="Daniel Zellmer"/>
+                    <h4 class="text-center"><a href="http://www.linkedin.com/in/daniel-zellmer-4a7b27162/">Daniel Zellmer</a></h4>
+                        <h5 class="text-center">VP, Engineering</h5>
+                    </footer>
+                </blockquote>
+
+                <blockquote class="col-3 testimonial">
+                    <img src="images/people/hantin.jpg" alt="Jeff hantin"/>
+                    <h4 class="text-center"><a href="http://www.linkedin.com/in/jeff-h-ba0122/">Jeff Hantin</a></h4>
+                    <h5 class="text-center">Trust Protocols Lead</h5>
+                    </footer>
+                </blockquote>
+
+                <blockquote class="col-3 testimonial">
+                    <img src="images/people/lancelle.jpg" alt="Jeff Lancelle"/>
+                    <h4 class="text-center"><a href="http://www.linkedin.com/in/jefflancelle/">Jeff Lancelle</a></h4>
+                    <h5 class="text-center">Distributed Systems Lead</h5>
+                </blockquote>
+
+                <blockquote class="col-3 testimonial">
+                    <img src="images/people/loren.jpg" alt="Loren Hart"/>
+                    <h4 class="text-center"><a href="http://www.linkedin.com/in/llhart/">Loren Hart</a></h4>
+                    <h5 class="text-center">PKI Lead</h5>
+                </blockquote>
+               
+            </div>
+
+        </aside>
+
+
+        <!--Advisors -->
+        <aside id="testimonials" class="scrollto text-center" data-enllax-ratio=".2">
+
+            <div class="row clearfix">
+
+                <div class="section-heading">
+                    <h2 class="section-title">Angels & Advisors</h2>
+                </div>
+
+                <!--User Testimonial-->
+                <blockquote class="col-2 testimonial classic">
+                    <img src="images/people/seiwald.jpg" alt="Christopher Seiwald"/>
+                    <h4 class="text-center"><a href="https://www.linkedin.com/in/christopher-seiwald-284a8442/">Christopher Seiwald</a></h4>
+                    <h5 class="text-center">Founder: Perforce Software</h5>
+                </blockquote>
+                <!-- End of Testimonial-->
+				
+                <!--User Testimonial-->
+                <blockquote class="col-2 testimonial classic">
+                    <img src="images/people/ming.jpg" alt="Mingliang Pei"/>
+                    <h4 class="text-center"><a href="https://www.linkedin.com/in/mlpei/">Mingliang Pei</a></h4>
+                    <h5 class="text-center">Chief Architect & Distinguished Engineer: Symantec/Broadcom</h5>
+                </blockquote> 
+                <!-- End of Testimonial-->
+				
+				
+
+                <!--User Testimonial-->
+                <blockquote class="col-2 testimonial classic">
+                    <img src="images/people/ed.jpg" alt="Ed Horst"/>
+                    <h4 class="text-center"><a href="https://www.linkedin.com/in/edhorst/">Ed Horst</a></h4>
+                    <h5>Marketing & Business Development: Amberpoint, Oracle, Perforce</h5>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+                <!--User Testimonial-->
+                <blockquote class="col-2 testimonial classic">
+                    <img src="images/people/cynthia.jpg" alt="Cynthia Dunlop"/>
+                    <h4 class="text-center"><a href="https://www.linkedin.com/in/cynthiadunlop/">Cynthia Dunlop</a></h4>
+                    <h5>Author & Content Strategist: Tricentis, ScyllaDB</h5>
+					<h5>Co-author: <a href="https://www.amazon.com/Database-Performance-Scale-Practical-Guide/dp/1484297105">Database Performance at Scale</a></h5>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+            </div>
+
+        </aside>
+        <!--End of Advisors -->
+
+						
+						
+		            </div>
+		            </div>
+		        </section>
+		
+		        <!--End of Team-->
+		
+		
+            <section id="final" class="scrollto ">
+ 
+				
+				
+                <div class="row no-padding-bottom clearfix">
+                    <div align='center' class="col-1">
+                        <a href='https://www.free-website-hit-counter.com'><img src='https://www.free-website-hit-counter.com/c.php?d=9&id=143537&s=36' border='0' alt='Free Website Hit Counter'></a>
+
+                    </div>
+
+                </section>
+    </main>
+	
+	
+	
+    <!--End Main Content Area-->
+
+
+    <!--Footer-->
+    <footer id="landing-footer" class="clearfix">
+        <div class="row clearfix">
+
+            <p id="copyright" class="col-2">Noosphere Technologies, Inc.</a></p>
+
+            <!--Social Icons in Footer-->
+            <ul class="col-2 social-icons">
+                <li>
+                    <a target="_blank" title="Twitter" href="http://www.twitter.com/NoosphereTech">
+                        <i class="fa fa-twitter fa-1x"></i><span>Twitter</span>
+                    </a>
+                </li>
+            </ul>
+            <!--End of Social Icons in Footer-->
+        </div>
+    </footer>
+    <!--End of Footer-->
+
+
+</div>
+
+<!-- Include JavaScript resources -->
+<script src="js/jquery.1.8.3.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/featherlight.min.js"></script>
+<script src="js/featherlight.gallery.min.js"></script>
+<script src="js/jquery.enllax.min.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/jquery.stickyNavbar.min.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/images-loaded.min.js"></script>
+<script src="js/lightbox.min.js"></script>
+<script src="js/site.js"></script>
+
+
+
+</body>
+</html>
