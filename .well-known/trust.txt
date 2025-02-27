@@ -1,0 +1,25 @@
+# NoosphereTech trust.txt 
+#
+# For more information on trust.txt see:
+# 1. https://journallist.net - Home of the trust.txt specification
+# 2. https://datatracker.ietf.org/doc/html/rfc8615 - IETF RFC 8615 - Well-Known Uniform Resource Identifiers (URIs)
+# 3. https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml - IANA&#039;s list of registered Well-Known URIs
+#
+# Association members
+
+# Publication members
+
+# Resources
+control=github.com/noosphere-technologies/*
+control=github.com/noosphere-technologies/trust-engine
+control=github.com/noosphere-technologies/trust-client
+control=github.com/noosphere-technologies/api-spec
+
+# Social channels here:
+social=https://twitter.com/noospheretech
+
+# Memberships:
+belongto=c2pa.org
+
+# Contact information here:
+contact=info@noosphere.tech
