@@ -3,75 +3,75 @@
     "https://www.w3.org/ns/did/v1",
     "https://w3id.org/security/suites/ed25519-2020/v1"
   ],
-  "id": "did:web:noosphere-technologies.github.io",
+  "id": "did:web:noosphere.tech",
   "created": "2025-03-20T16:10:15Z",
   "updated": "2025-03-20T16:10:15Z",
   "verificationMethod": [
     {
-      "id": "did:web:noosphere-technologies.github.io#key-1",
+      "id": "did:web:noosphere.tech#key-1",
       "type": "Ed25519VerificationKey2020",
-      "controller": "did:web:noosphere-technologies.github.io",
+      "controller": "did:web:noosphere.tech",
       "publicKeyMultibase": "z6MkhNyoLY9vSbydZJLQ3X6BNJcmMVyyrNLkXq8fANVNicEg"
     }
   ],
   "authentication": [
-    "did:web:noosphere-technologies.github.io#key-1"
+    "did:web:noosphere.tech#key-1"
   ],
   "assertionMethod": [
-    "did:web:noosphere-technologies.github.io#key-1"
+    "did:web:noosphere.tech#key-1"
   ],
   "service": [
     {
-      "id": "did:web:noosphere-technologies.github.io#LinkedDomains",
+      "id": "did:web:noosphere.tech#LinkedDomains",
       "type": "LinkedDomains",
       "serviceEndpoint": {
-        "origins": ["https://noosphere-technologies.github.io"]
+        "origins": ["https://noosphere.tech"]
       }
     },
     {
-      "id": "did:web:noosphere-technologies.github.io#MessagingService",
+      "id": "did:web:noosphere.tech#MessagingService",
       "type": "MessagingService",
-      "serviceEndpoint": "https://noosphere-technologies.github.io/contact"
+      "serviceEndpoint": "https://noosphere.tech/contact"
     },
     {
-      "id": "did:web:noosphere-technologies.github.io#VerifiableCredentialService",
+      "id": "did:web:noosphere.tech#VerifiableCredentialService",
       "type": "VerifiableCredentialService",
-      "serviceEndpoint": "https://noosphere-technologies.github.io/credentials"
+      "serviceEndpoint": "https://noosphere.tech/credentials"
     },
     {
-      "id": "did:web:noosphere-technologies.github.io#SecureDataStore",
+      "id": "did:web:noosphere.tech#SecureDataStore",
       "type": "SecureDataStore",
-      "serviceEndpoint": "https://noosphere-technologies.github.io/storage"
+      "serviceEndpoint": "https://noosphere.tech/storage"
     },
     {
-      "id": "did:web:noosphere-technologies.github.io#HubService",
+      "id": "did:web:noosphere.tech#HubService",
       "type": "HubService",
-      "serviceEndpoint": "https://noosphere-technologies.github.io/hub"
+      "serviceEndpoint": "https://noosphere.tech/hub"
     },
     {
-      "id": "did:web:noosphere-technologies.github.io#ProfileService",
+      "id": "did:web:noosphere.tech#ProfileService",
       "type": "ProfileService",
-      "serviceEndpoint": "https://noosphere-technologies.github.io/profile"
+      "serviceEndpoint": "https://noosphere.tech/profile"
     },
     {
-      "id": "did:web:noosphere-technologies.github.io#SocialWebInboxService",
+      "id": "did:web:noosphere.tech#SocialWebInboxService",
       "type": "SocialWebInboxService",
-      "serviceEndpoint": "https://noosphere-technologies.github.io/inbox"
+      "serviceEndpoint": "https://noosphere.tech/inbox"
     },
     {
-      "id": "did:web:noosphere-technologies.github.io#RegistryService",
+      "id": "did:web:noosphere.tech#RegistryService",
       "type": "RegistryService",
-      "serviceEndpoint": "https://noosphere-technologies.github.io/registry"
+      "serviceEndpoint": "https://noosphere.tech/registry"
     },
     {
-      "id": "did:web:noosphere-technologies.github.io#DIDCommMessaging",
+      "id": "did:web:noosphere.tech#DIDCommMessaging",
       "type": "DIDCommMessaging",
-      "serviceEndpoint": "https://noosphere-technologies.github.io/didcomm"
+      "serviceEndpoint": "https://noosphere.tech/didcomm"
     },
     {
-      "id": "did:web:noosphere-technologies.github.io#Identity",
+      "id": "did:web:noosphere.tech#Identity",
       "type": "Identity",
-      "serviceEndpoint": "https://noosphere-technologies.github.io/identity"
+      "serviceEndpoint": "https://noosphere.tech/identity"
     }
   ]
 }
