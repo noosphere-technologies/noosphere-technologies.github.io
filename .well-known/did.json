@@ -36,7 +36,7 @@
     {
       "id": "did:web:noosphere.tech#VerifiableCredentialService",
       "type": "VerifiableCredentialService",
-      "serviceEndpoint": "https://noosphere.tech/credentials"
+      "serviceEndpoint": "https://vc.noosphere.tech"
     },
     {
       "id": "did:web:noosphere.tech#SecureDataStore",
