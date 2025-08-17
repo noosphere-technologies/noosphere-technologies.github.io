@@ -109,7 +109,6 @@ import BaseHead from '../components/BaseHead.astro';
 			/* Hero Section */
 			.hero-section {
 				padding: 120px 0 60px;
-				text-align: center;
 				position: relative;
 				overflow: hidden;
 			}
@@ -128,6 +127,31 @@ import BaseHead from '../components/BaseHead.astro';
 			@keyframes pulse {
 				0%, 100% { transform: scale(1); opacity: 0.5; }
 				50% { transform: scale(1.1); opacity: 0.8; }
+			}
+
+			.hero-content {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 4rem;
+				align-items: center;
+				max-width: 1400px;
+				margin: 0 auto;
+			}
+
+			.hero-text {
+				text-align: left;
+			}
+
+			.hero-image {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.hero-image img {
+				width: 100%;
+				max-width: 600px;
+				height: auto;
 			}
 
 			.hero-title {
@@ -175,7 +199,7 @@ import BaseHead from '../components/BaseHead.astro';
 			.hero-buttons {
 				display: flex;
 				gap: 1.5rem;
-				justify-content: center;
+				justify-content: flex-start;
 				position: relative;
 				z-index: 10;
 			}
@@ -327,6 +351,15 @@ import BaseHead from '../components/BaseHead.astro';
 					padding: 0 20px;
 				}
 				
+				.hero-content {
+					grid-template-columns: 1fr;
+					gap: 2rem;
+				}
+				
+				.hero-text {
+					text-align: center;
+				}
+				
 				.hero-title {
 					font-size: 3rem;
 				}
@@ -347,6 +380,10 @@ import BaseHead from '../components/BaseHead.astro';
 					height: 50px;
 				}
 				
+				.hero-buttons {
+					justify-content: center;
+				}
+				
 				.hero-buttons,
 				.cta-buttons {
 					flex-direction: column;
@@ -357,6 +394,10 @@ import BaseHead from '../components/BaseHead.astro';
 					width: 100%;
 					max-width: 300px;
 					justify-content: center;
+				}
+				
+				.hero-image {
+					order: -1; /* Put image first on mobile */
 				}
 			}
 		</style>
@@ -378,10 +419,17 @@ import BaseHead from '../components/BaseHead.astro';
 
 			<header class="hero-section">
 				<div class="container">
-					<h1 class="hero-title">Digital Integrity Platform</h1>
-					<p class="hero-tagline">Building for trust in the post-truth era</p>
-					<div class="hero-buttons">
-						<a href="/blog" class="btn btn-secondary">Read Blog</a>
+					<div class="hero-content">
+						<div class="hero-text">
+							<h1 class="hero-title">Digital Integrity Platform</h1>
+							<p class="hero-tagline">Building for trust in the post-truth era</p>
+							<div class="hero-buttons">
+								<a href="/blog" class="btn btn-secondary">Read Blog</a>
+							</div>
+						</div>
+						<div class="hero-image">
+							<img src="/images/noosphere.png" alt="Noosphere" />
+						</div>
 					</div>
 				</div>
 			</header>
