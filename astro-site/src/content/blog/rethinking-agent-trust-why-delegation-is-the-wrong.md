@@ -5,57 +5,66 @@ pubDate: "Apr 05 2025"
 author: "Andrew Brown"
 ---
 
-The way we think about AI agents is fundamentally broken. We keep using the language of delegation—as if agents are just fancy tools we control. But agents don't follow orders; they make decisions. They're not extensions of our will; they're autonomous entities with their own logic, credentials, and failure modes. Until we accept this reality, we'll keep building the wrong security models.
+Delegation has long been the default metaphor for how we hand authority to machines. In its simplest form, the model is one-to-one: a human empowers a system to act on their behalf. Think of OAuth: I grant Google or GitHub a token that lets them fetch data tied directly to my account. Or JWTs: a signed blob that encodes the human identity, the roles, and the rights being delegated. In both cases, the assumption is the same—authority is rooted in a person, and the protocol exists to extend that person's identity into a system.
 
-The truth is: agents are autonomous. They are not simple extensions of human authority. They act on their own, with their own decision-making logic, their own credentials, and their own histories. To design safe, productive multi-agent ecosystems, we need to accept this autonomy and model trust accordingly.
+The canonical AI example follows the same logic: an agent that can book an airline ticket for you. The workflow is bounded, transactional, and tightly tethered to the human who initiated it. It's delegation as proxy, nothing more.
+
+But autonomous agents blow this assumption to smithereens. Instead of a single bounded act, we're moving into swarms: tens or hundreds of agents, spawned on demand, coordinating with each other to solve problems without direct human oversight. The delegation model—identity rooted in a single human—falls apart here. You don't "delegate" to a swarm. You don't hand over your OAuth token. Instead, you have to think about agent-to-agent (A2A) protocols, where authority and trust emerge from contracts, not inherited human identity.
+
+Here's the problem with the delegation metaphor in a way humans can feel: it's like giving your kid your driver's license and credit card and sending them to the corner store to buy beer. The task may get done, but only by misusing your identity — and the risks multiply with every interaction.
 
 ## From Delegation to Hiring
 
-Instead of delegating, think of working with agents the way you hire someone. You don't delegate your identity to them; you evaluate their skills, experience, and reputation, and then hire them to act on your behalf. The hiring model acknowledges:
+A more realistic model is hiring. You don't hand someone your license and bank card; you evaluate their skills, verify their background, and establish a contractual arrangement that defines the scope of their authority.
+
+The hiring model acknowledges:
 
 - Every agent is an instance of an implementation.
-- Agent behavior is non-deterministic: two instances of the same implementation may not act in exactly the same way.
-- Autonomy is irreducible: once launched, an agent acts independently.
+- Agent behavior is non-deterministic — two instances of the same implementation may not act the same way.
+- Autonomy is irreducible — once launched, an agent acts independently.
 
-This is a more accurate metaphor than delegation, and it has critical design consequences.
+This shift is not just semantic. It realigns trust around what agents are — autonomous digital entities — instead of what they borrow from humans.
 
 ## From Security to Trust
 
-Current models focus on security in the context of delegation — verifying whether an agent is allowed to act with certain permissions. But if we accept autonomy, the emphasis shifts:
+Current security models, bound up with delegation, ask: is this agent allowed to act with these permissions?
 
-- It's not only about what the agent is allowed to do.
-- It's about whether the agent is trustworthy enough to do it at all.
+But in an autonomous world, the better question is: is this agent trustworthy enough to act at all?
 
-This means designing systems where each agent has:
+That requires a richer trust fabric, where every agent carries:
 
-- Its own credentials (e.g., verifiable attestations).
-- Its own reputation (documented performance, reliability, compliance).
-- Its own history (track record across contexts).
+- Its own credentials (e.g., cryptographically verifiable attestations).
+- Its own reputation (performance, compliance, reliability over time).
+- Its own history (a track record portable across contexts).
 
-In other words, we need the equivalent of LinkedIn for agents: a system of trust profiles that let humans (and other agents) decide who to work with.
+Think of it as LinkedIn for agents — trust profiles that allow humans and other agents to decide who to engage with.
 
 ## Trust Handshakes: Agent-to-Agent Collaboration
 
-At runtime, agents will often need to collaborate in multi-agent workflows. Here, too, delegation breaks down. Agents don't simply inherit human authority. Instead, they must engage in trust handshakes with other agents:
+Most agent workflows will not look like "a single agent acting for a single human." That's already too narrow. Instead, we are entering a world of agent-to-agent (A2A) ecosystems, where tens, hundreds, or even thousands of agents — often orchestrated by frameworks like LangChain or LangGraph — interact to accomplish complex goals.
+
+In these environments, delegation makes no sense. There is no single human identity being passed around. Instead, trust emerges through handshakes between agents:
 
 - Establishing mutual recognition of credentials.
 - Evaluating trust signals in real time.
 - Deciding whether collaboration is acceptable in the moment.
 
-This is more like B2B trust networks than like a single hierarchy of delegated access.
+This looks less like OAuth delegation and JWT impersonation, and more like B2B trust networks, where contracts, attestations, and negotiated agreements govern interactions.
 
 ## Implications: Designing for Trust in Agentic Systems
 
-If we pivot from delegation to autonomy, the design of agent ecosystems changes in profound ways. A few key implications:
+If we pivot from delegation to autonomy, the design of agent ecosystems changes in profound ways:
 
 - **Identity** → Every agent needs its own strong, verifiable identity, distinct from its human sponsor.
-- **Hiring Model** → Human users select agents based on credentials, reputation, and history — not just by delegating authority.
-- **Reputation Systems** → We need robust reputation layers, where agents accrue trust signals over time.
-- **Runtime Trust Handshakes** → Agent-to-agent interactions must be based on dynamic trust establishment, not static permission grants.
-- **Policy Shifts** → Policies should govern who an agent can hire or collaborate with, not just what actions they can perform.
-- **Auditability** → Histories of agent decisions need to be logged, verifiable, and portable across ecosystems.
-- **Resilience** → Because agent behavior is non-deterministic, trust frameworks must tolerate variability and ensure graceful degradation.
+- **Hiring Model** → Humans select agents based on credentials, reputation, and history — not by delegating authority.
+- **Reputation Systems** → Agents must accrue trust signals over time in robust, portable ways.
+- **Runtime Trust Handshakes** → Multi-agent interactions require dynamic trust establishment, not static permissions.
+- **Policy Shifts** → Policies should govern who an agent can hire or collaborate with, not just what actions they can take.
+- **Auditability** → Agent decisions must be logged, verifiable, and portable across ecosystems.
+- **Resilience** → Because behavior is non-deterministic, trust frameworks must tolerate variability and ensure graceful degradation.
 
 ## Conclusion
 
-Delegation is a convenient metaphor, but it's the wrong one. Treating agents as autonomous — as hires rather than proxies — allows us to build more realistic, resilient, and trustworthy systems. Just as human organizations evolved HR, reputation, and trust networks, agent ecosystems will need their own. The sooner we adopt the right model, the sooner we can design agentic systems that are safe, scalable, and effective.
+Delegation is a convenient metaphor, but it's the wrong one. OAuth and JWT, built around impersonation and borrowed identity, cannot scale into the world of agent swarms. Agents are autonomous; they require contractual trust, not delegated authority.
+
+Treating agents as hires — entities with their own credentials, histories, and reputations — lets us design ecosystems that are realistic, resilient, and trustworthy. Just as human organizations evolved contracts, HR, and reputation networks, agent ecosystems will need their own. The sooner we abandon delegation and embrace autonomy, the sooner we can build agentic systems that are safe, scalable, and effective.
