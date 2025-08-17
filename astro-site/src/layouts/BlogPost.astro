@@ -1,0 +1,99 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import { authors } from '../data/authors';
+import '../styles/blog-post.css';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate } = Astro.props;
+
+// Temporary author mapping until we fix the frontmatter issue
+const postAuthors: Record<string, string> = {
+	'thoughts-on-digital-trust-in-the-age-of-ai': 'Andrew Brown',
+	'agentic-trust-designing-for-integrity-in-autonomou': 'Andrew Brown',
+	'from-content-authenticity-to-context-authenticity-': 'Andrew Brown',
+	'anthropic-s-latest-releases-innovation-meets-quota': 'Jeff Hantin',
+	'building-trust-infrastructure-for-the-decentralize': 'Daniel Zellmer',
+	'rethinking-agent-trust-why-delegation-is-the-wrong': 'Andrew Brown',
+	'beyond-seo-how-json-ld-can-prove-authenticity': 'Daniel Zellmer',
+	'why-content-authenticity-helps-agents-even-more-than-humans': 'Andrew Brown',
+	'what-i-learned-about-protocol-design-while-waiting-for-luggage': 'Jeff Hantin',
+	'content-authenticity-vitamin-aspirin-or-something-else': 'Andrew Brown',
+};
+
+// Get the current page's slug from the URL
+const currentSlug = Astro.url.pathname.split('/').filter(Boolean).pop() || '';
+const author = postAuthors[currentSlug] || 'Unknown';
+
+// Format date
+function formatDate(date: Date) {
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                   'July', 'August', 'September', 'October', 'November', 'December'];
+    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+}
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="page-wrapper">
+			<nav class="blog-nav">
+				<div class="container">
+					<div class="nav-wrapper">
+						<a href="/" class="nav-brand">Noosphere Technologies</a>
+						<div class="nav-links">
+							<a href="/">Home</a>
+							<a href="/blog">Blog</a>
+							<a href="/contact">Contact</a>
+						</div>
+					</div>
+				</div>
+			</nav>
+
+			<article class="article-container">
+				<header class="article-header">
+					<h1 class="article-title">{title}</h1>
+					<div class="article-meta">
+						{author && authors[author] ? (
+							<div class="article-author">
+								<img 
+									src={authors[author].image} 
+									alt={author}
+									class="article-author-image"
+								/>
+								<div class="article-author-info">
+									<div class="article-author-name">{author}</div>
+									<div class="article-author-title">{authors[author].title}</div>
+								</div>
+							</div>
+						) : (
+							<span>By <strong>{author}</strong></span>
+						)}
+						<span>•</span>
+						<span>{formatDate(pubDate)}</span>
+						{updatedDate && (
+							<>
+								<span>•</span>
+								<span>Updated {formatDate(updatedDate)}</span>
+							</>
+						)}
+					</div>
+				</header>
+
+
+				<div class="article-content">
+					<slot />
+				</div>
+
+				<footer class="article-footer">
+					<a href="/blog" class="back-to-blog">Back to Blog</a>
+				</footer>
+			</article>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+
+> astro-site@0.0.1 dev
+> astro dev 2
+
+11:01:52 [types] Generated 2ms
+11:01:52 [content] Syncing content
+11:01:52 [content] Synced content
+
+ astro  v5.13.2 ready in 1230 ms
+
+┃ Local    http://localhost:4321/
+┃ Network  use --host to expose
+
+11:01:52 watching for file changes...
+11:01:54 [200] /blog 60ms
+Number of posts: 5
+First post: {
+  "title": "Anthropic's Latest Releases: Innovation Meets Quota Confusion",
+  "description": "Anthropic just dropped Opus 4.1, and alongside it, the new Claude Code agents feature — and honestly, the whole thing feels like a case study in mixed signals....",
+  "pubDate": "2025-01-14T05:00:00.000Z"
+}
+11:02:06 [200] /test-simple 11ms
+11:02:08 [200] /blog/agentic-trust-designing-for-integrity-in-autonomou/ 32ms
+11:02:11 [200] /blog/agentic-trust-designing-for-integrity-in-autonomou/ 10ms
+11:02:14 [glob-loader] Reloaded data from test-post.md
+11:02:14 [glob-loader] Reloaded data from test-post.md
+11:02:15 [200] /blog 16ms
+11:02:15 [200] /blog/agentic-trust-designing-for-integrity-in-autonomou/ 6ms
+Number of posts: 6
+First post: {
+  "title": "Anthropic's Latest Releases: Innovation Meets Quota Confusion",
+  "description": "Anthropic just dropped Opus 4.1, and alongside it, the new Claude Code agents feature — and honestly, the whole thing feels like a case study in mixed signals....",
+  "pubDate": "2025-01-14T05:00:00.000Z"
+}
+11:02:24 [200] /test-simple 22ms
