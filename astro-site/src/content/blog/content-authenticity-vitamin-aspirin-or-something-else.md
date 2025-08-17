@@ -5,24 +5,28 @@ pubDate: "Aug 16 2025"
 author: "Andrew Brown"
 ---
 
-Everyone agrees—at least in principle—that content authenticity is a Good Thing™. No one's out there making the case for more deepfakes, more bot-churned spam, or more counterfeit news articles. Yet the path from principle to practice remains surprisingly murky.
+Everyone agrees—at least in principle—that content authenticity is a Good Thing™. I have yet to meet anyone dying for more deepfakes, bot-churned spam, or "synthetic" news. Still, the path from principles to wide-spread adoption is fraught. When was the last time (or even the first time), you saw the content credentials mark? Has content credentials helped you to distinguish an authentic image or video from a deep fake? 
 
-The obvious comparison is to software supply chain security. In December 2020, the world learned that Russian hackers had compromised SolarWinds' Orion platform, infiltrating thousands of organizations including Fortune 500 companies and multiple US government agencies. The attackers had inserted malicious code into software updates, which were then distributed to roughly 18,000 customers. For months, adversaries had unfettered access to some of the most sensitive networks in the world.
+We might say, content authenticity is here–it's just not evenly distributed.
 
-The breach didn't just make headlines—it galvanized an entire industry category. And the consequences continued to unfold: in 2023, the SEC charged SolarWinds and its Chief Information Security Officer with fraud and internal control failures, alleging the company misled investors about its cybersecurity practices and known risks. Today, billions in venture capital and enterprise spend are pouring into securing the digital pipelines of code and infrastructure. Companies know the ROI because the costs of failure are tangible, immediate, and devastating.
+But then we have to ask, what might spur widespread adoption. Regulations? Perhaps. A galvanizing event? More likely.
 
-We have to wonder what a SolarWinds-style attack on the media supply chain would entail. One has to imagine that it might be connected with an election cycle—malicious actors systematically compromising content distribution systems, injecting false narratives at scale, all while appearing to come from trusted sources.
+Recall the SolarWinds Sunburst attack. In 2018, Russian hackers compromised SolarWinds' Orion platform, infiltrating thousands of organizations—including Fortune 500 companies and multiple U.S. government agencies. Malicious code was inserted into software updates and distributed to roughly 18,000 customers. For months, the hackers had access to some of the most sensitive networks in the world.
 
-By contrast, content authenticity hasn't had its SolarWinds moment. There's no breach that has, overnight, made every CMO, newsroom, or regulator drop everything and demand immediate safeguards. Instead, it floats in a zone of "everyone agrees it matters" but "no one knows what the business case is."
+The aftermath was severe. In 2023, the SEC charged SolarWinds and its Chief Information Security Officer with fraud and internal control failures, alleging the company misled investors about cybersecurity practices and known risks. The breach galvanized an entire industry: billions of dollars in venture capital and enterprise spend now flow into securing code and continuous integration/continuous deployment (CI/CD) pipelines. The ROI is clear because the costs of failure are immediate, tangible, existential.
 
-Ask yourself: what would the ROI spreadsheet look like for content authenticity? What would get a CFO excited? The benefits are mostly defensive: preventing brand erosion, safeguarding trust, preserving democratic discourse. All important—but none as quantifiable as "lost $500M in contracts because hackers slipped into our supply chain."
+It's hard to imagine a SolarWinds-style attack on the media supply chain. An election perhaps? Half the internet goes down, and the rest loops deepfakes of one candidate in "compromising situations"? Malicious actors systematically compromising content distribution systems, injecting false narratives at scale, masquerading as trusted sources.
 
-That gap leads to an odd dynamic: much of the industry's progress is driven not by raw economic incentive, but by a kind of noblesse oblige. Adobe, Microsoft, and the C2PA consortium are pushing adoption because they should, not because their shareholders demand it. It feels less like aspirin for a pain and more like vitamins—good for you, easy to ignore, until maybe one day you wish you hadn't.
+Luckily, content authenticity has yet to have its SolarWinds moment. There's been no single breach that made every CMO, newsroom, or regulator drop everything to demand immediate safeguards. Instead, authenticity exists in a liminal space: "everyone agrees it matters," but "no one knows the business case."
 
-And yet, authenticity carries a paradox. Information wants to be free—it multiplies, replicates, and diffuses into a Baudrillardian simulation of every possible reality at once. Authenticity, by contrast, wants to be scarce. Scarcity is what creates its value. If everything is stamped, signed, and certified, then "authenticity" becomes baseline, not differentiator. If only some content carries proof-of-origin, then scarcity itself becomes the signal.
+What would the ROI look like for content authenticity? What would excite a CFO? The benefits are mostly defensive: preserving brand trust, protecting reputation, and safeguarding public discourse.. All important—but none as immediately quantifiable as "$500M lost because hackers infiltrated our supply chain."
 
-So maybe content authenticity isn't a vitamin or an aspirin at all. Maybe it's a kind of gold standard: not universally required, but deeply valuable when scarce. A marker not of necessity, but of trust and prestige.
+This gap creates an odd dynamic: progress is driven less by economic incentive and more by noblesse oblige. Adobe, Microsoft, and the C2PA consortium are advancing adoption because they should, not because shareholders demand it. Content authenticity feels less like aspirin for an urgent pain and more like vitamins—good for you, easy to ignore, until one day you wish you hadn't.
 
-The question for the industry isn't whether authenticity matters. It's what kind of value system will crystallize around it: compliance-driven necessity, reputational differentiator, or a quiet background utility that only a few ever notice until it's missing.
+Information wants to be free—it multiplies, replicates, and diffuses into a Baudrillardian simulation of every possible reality at once. Authenticity, by contrast, has to be scarce. Scarcity is what gives it value. If all content is stamped, signed, and certified, authenticity becomes baseline, not a differentiator. If only some content carries proof of origin, scarcity becomes the signal.
 
-Until then, authenticity will remain what it is today: obviously important, strangely elusive, and waiting for its SolarWinds moment.
+Perhaps content authenticity isn't a vitamin or an aspirin at all. Maybe it's some kind of gold standard: not universally required, but deeply valuable when rare. A marker not of necessity, but of trust, prestige, and credibility. As we move to a taste economy, perhaps markers of authenticity will become more valuable.
+
+The question for the industry isn't whether authenticity matters—it clearly does. The real question is what value system will crystallize around it: regulatory compliance, reputational differentiator, or a quiet background utility noticed only when it's missing.
+
+Until then, content authenticity will remain what it is today: obviously important, strangely elusive, and waiting for its SolarWinds moment.
