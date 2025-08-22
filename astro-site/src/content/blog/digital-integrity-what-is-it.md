@@ -6,9 +6,13 @@ author: 'Andrew Brown'
 slug: 'digital-integrity-what-is-it'
 ---
 
-At its core, digital integrity is about trust in the digital world. The idea is simple: every artifact—whether it's a piece of software, a video, a dataset, or even an AI-generated output—should carry with it verifiable proof of who made it, how it was made, and whether it has been altered along the way. Just as a signed contract in the physical world binds parties to an agreement, digital signatures bind digital artifacts to their origins.
 
-This begins with cryptography. A digital signature is more than a watermark or a logo—it's a mathematical proof. It can't be faked without the private key that created it, and it can be validated by anyone holding the corresponding public key. In other words, digital signatures give us an incorruptible link between an artifact and its author.
+
+It's an ageold problem in the digital world. When everything is more a less a pile of bits, it can be difficult to know what to trust. And there millions of interactions that rely on some level of trust. Sometimes humans need to trust things. Sometimes apps and infrastructure need to establish trust.
+
+The idea behind digital integrity is relatively simple: every artifact, be it an image, a stsructured document, software package, a video, a dataset, should carry with it verifiable proof of who made it, how it was made, and whether it has been altered along the way. Just as a signed contract in the physical world binds parties to an agreement, digital signatures can bind digital artifacts to their origins.
+
+Digital integrity is built on cryptography. A digital signature is a mathematical proof. It can't be faked. It can be validated by anyone holding the corresponding public key.  digital signatures give us an incorruptible link between an artifact and its author.
 
 But authenticity is more than the mark of the maker—it can also contain proof of how the artifact was made. A piece of software isn't trustworthy just because a known developer wrote it. The real question is: what process produced it? Was it compiled from source code in a secure environment? Were dependencies verified? Were steps in the workflow tampered with? That's where attestations come in. Attestations are like digital ingredient labels or endorsements. They describe the steps, checks, and intermediaries involved in creation. Together, signatures and attestations make it possible to evaluate the integrity of both the artifact and the process that generated it.
 
