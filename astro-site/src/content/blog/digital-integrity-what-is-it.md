@@ -8,7 +8,7 @@ slug: 'digital-integrity-what-is-it'
 
 
 
-It's an ageold problem in the digital world. When everything is more a less a pile of bits, it can be difficult to know what to trust. And there millions of interactions that rely on some level of trust. Sometimes humans need to trust things. Sometimes apps and infrastructure need to establish trust.
+It's an age-old problem in the digital world. When everything is more a less a pile of bits, it can be difficult to know what to trust. And there millions of interactions that rely on some level of trust. Sometimes humans need to trust things. Sometimes apps and infrastructure need to establish trust.
 
 The idea behind digital integrity is relatively simple: every artifact, be it an image, a stsructured document, software package, a video, a dataset, should carry with it verifiable proof of who made it, how it was made, and whether it has been altered along the way. Just as a signed contract in the physical world binds parties to an agreement, digital signatures can bind digital artifacts to their origins.
 
