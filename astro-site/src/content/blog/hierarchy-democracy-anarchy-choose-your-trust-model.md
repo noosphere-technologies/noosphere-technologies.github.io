@@ -8,7 +8,7 @@ slug: 'hierarchy-democracy-anarchy-choose-your-trust-model'
 
 When we talk about digital trust, we're really talking about graphs. Each connection represents one entity vouching for another. But the way we organize those connections—hierarchically, democratically, or anarchically—makes all the difference.
 
-![Trust Models](/images/trust-models.png)
+![Trust Models](/images/blog-images/trust-models.png)
 
 The image above shows three dominant models of trust:
 
