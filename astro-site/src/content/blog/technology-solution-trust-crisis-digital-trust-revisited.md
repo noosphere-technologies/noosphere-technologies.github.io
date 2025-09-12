@@ -6,7 +6,7 @@ author: 'Andrew Brown'
 slug: 'technology-solution-trust-crisis-digital-trust-revisited'
 ---
 
-I originally wrote about this topic in 2023, but recent developments—particularly the insights shared in [AI Is Coming for Culture](https://www.newyorker.com/magazine/2025/09/01/ai-is-coming-for-culture)—have made me want to revisit these ideas. The acceleration of AI's impact on our cultural and information ecosystems has only reinforced the urgency of building robust trust infrastructure for the digital world.
+I originally wrote about this topic in 2023, but recent developments have made me want to revisit the topic. To wit, this article: [AI Is Coming for Culture](https://www.newyorker.com/magazine/2025/09/01/ai-is-coming-for-culture). AI's impact on our information ecosystem is accelerating. We urgently need robust trust infrastructure for the digital world.
 
 ## A Technology Solution for the Trust Crisis of Digital Trust
 
