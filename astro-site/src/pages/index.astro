@@ -5,7 +5,7 @@ import BaseHead from '../components/BaseHead.astro';
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title="Noosphere - Digital Trust Platform" description="Digital integrity, provenance, and API-first trust services" />
+		<BaseHead title="Noosphere - Digital Integrity Platform for Agentic Trust" description="Building trust infrastructure for autonomous systems with cryptographic proofs and deterministic verification" />
 		<script> (function(ss,ex){ window.ldfdr=window.ldfdr||function(){(ldfdr._q=ldfdr._q||[]).push([].slice.call(arguments));}; (function(d,s){ fs=d.getElementsByTagName(s)[0]; function ce(src){ var cs=d.createElement(s); cs.src=src; cs.async=1; fs.parentNode.insertBefore(cs,fs); }; ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js'); })(document,'script'); })('YEgkB8ll0M28ep3Z'); </script>
 		
 		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -160,9 +160,9 @@ import BaseHead from '../components/BaseHead.astro';
 			}
 
 			.hero-title {
-				font-size: 4rem;
+				font-size: 3.5rem;
 				font-weight: 700;
-				margin: 0 0 1.5rem 0;
+				margin: 0 0 1rem 0;
 				font-family: 'Space Grotesk', sans-serif;
 				letter-spacing: -0.03em;
 				background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
@@ -171,29 +171,25 @@ import BaseHead from '../components/BaseHead.astro';
 				background-clip: text;
 				position: relative;
 				z-index: 10;
+				line-height: 1.1;
+			}
+
+			.hero-subtitle {
+				font-size: 1.5rem;
+				color: rgba(255, 255, 255, 0.9);
+				margin: 0 0 1.5rem 0;
+				font-weight: 500;
+				line-height: 1.4;
 			}
 
 			.hero-tagline {
-				font-size: 1.25rem;
+				font-size: 1.1rem;
 				color: rgba(255, 255, 255, 0.7);
 				margin: 0 0 3rem 0;
 				font-family: 'JetBrains Mono', 'Courier New', monospace;
 				font-weight: 300;
-				letter-spacing: 0.05em;
-				text-transform: uppercase;
-				background: linear-gradient(90deg, 
-					rgba(255, 255, 255, 0.8) 0%, 
-					rgba(120, 80, 255, 0.8) 25%, 
-					rgba(80, 120, 255, 0.8) 50%,
-					rgba(255, 80, 120, 0.8) 75%,
-					rgba(255, 255, 255, 0.8) 100%);
-				background-size: 200% auto;
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-				background-clip: text;
-				animation: shimmer 8s linear infinite;
-				position: relative;
-				z-index: 10;
+				letter-spacing: 0.02em;
+				line-height: 1.6;
 			}
 
 			@keyframes shimmer {
@@ -268,6 +264,274 @@ import BaseHead from '../components/BaseHead.astro';
 
 			.main-content {
 				width: 100%;
+			}
+
+			/* Problem Section */
+			.problem-section {
+				padding: 100px 0;
+				background: linear-gradient(180deg, rgba(120, 50, 255, 0.03) 0%, transparent 100%);
+				border-top: 1px solid rgba(255, 255, 255, 0.05);
+			}
+
+			.section-header {
+				text-align: center;
+				margin-bottom: 4rem;
+			}
+
+			.section-title {
+				font-size: 2.5rem;
+				font-weight: 600;
+				margin: 0 0 1rem 0;
+				font-family: 'Space Grotesk', sans-serif;
+				letter-spacing: -0.02em;
+				color: rgba(255, 255, 255, 0.9);
+			}
+
+			.section-subtitle {
+				font-size: 1.2rem;
+				color: rgba(255, 255, 255, 0.6);
+				max-width: 800px;
+				margin: 0 auto;
+			}
+
+			.problem-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 3rem;
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			.problem-card {
+				background: rgba(255, 255, 255, 0.03);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: 16px;
+				padding: 2rem;
+				transition: all 0.3s;
+			}
+
+			.problem-card:hover {
+				background: rgba(255, 255, 255, 0.05);
+				border-color: rgba(120, 80, 255, 0.3);
+				transform: translateY(-4px);
+			}
+
+			.problem-icon {
+				font-size: 2rem;
+				margin-bottom: 1rem;
+				opacity: 0.8;
+			}
+
+			.problem-title {
+				font-size: 1.25rem;
+				font-weight: 600;
+				margin: 0 0 1rem 0;
+				color: rgba(255, 255, 255, 0.9);
+			}
+
+			.problem-text {
+				font-size: 0.95rem;
+				color: rgba(255, 255, 255, 0.6);
+				line-height: 1.6;
+			}
+
+			/* Solution Section */
+			.solution-section {
+				padding: 100px 0;
+			}
+
+			.solution-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 6rem;
+				align-items: center;
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			.solution-visual {
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
+			}
+
+			.solution-step {
+				display: flex;
+				align-items: flex-start;
+				gap: 1.5rem;
+				padding: 1.5rem;
+				background: rgba(255, 255, 255, 0.02);
+				border: 1px solid rgba(255, 255, 255, 0.05);
+				border-radius: 12px;
+				transition: all 0.3s;
+			}
+
+			.solution-step:hover {
+				background: rgba(120, 80, 255, 0.05);
+				border-color: rgba(120, 80, 255, 0.2);
+			}
+
+			.step-number {
+				min-width: 40px;
+				height: 40px;
+				background: linear-gradient(135deg, #7850ff 0%, #5040ff 100%);
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-weight: 600;
+				font-size: 1.1rem;
+			}
+
+			.step-content h4 {
+				margin: 0 0 0.5rem 0;
+				font-size: 1.1rem;
+				color: rgba(255, 255, 255, 0.9);
+			}
+
+			.step-content p {
+				margin: 0;
+				font-size: 0.9rem;
+				color: rgba(255, 255, 255, 0.6);
+			}
+
+			.solution-text h3 {
+				font-size: 2rem;
+				font-weight: 600;
+				margin: 0 0 2rem 0;
+				font-family: 'Space Grotesk', sans-serif;
+				color: rgba(255, 255, 255, 0.9);
+			}
+
+			.solution-text p {
+				font-size: 1.1rem;
+				color: rgba(255, 255, 255, 0.7);
+				line-height: 1.8;
+				margin-bottom: 1.5rem;
+			}
+
+			/* Use Cases Section */
+			.usecases-section {
+				padding: 100px 0;
+				background: rgba(50, 120, 255, 0.02);
+				border-top: 1px solid rgba(255, 255, 255, 0.05);
+				border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+			}
+
+			.usecases-grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 3rem;
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			.usecase-card {
+				background: rgba(0, 0, 0, 0.3);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: 16px;
+				padding: 2.5rem;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.usecase-card::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 4px;
+				background: linear-gradient(90deg, #7850ff 0%, #5040ff 50%, #ff5078 100%);
+			}
+
+			.usecase-icon {
+				width: 48px;
+				height: 48px;
+				background: rgba(120, 80, 255, 0.1);
+				border: 1px solid rgba(120, 80, 255, 0.3);
+				border-radius: 12px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.5rem;
+				margin-bottom: 1.5rem;
+			}
+
+			.usecase-title {
+				font-size: 1.4rem;
+				font-weight: 600;
+				margin: 0 0 1rem 0;
+				color: rgba(255, 255, 255, 0.9);
+			}
+
+			.usecase-description {
+				font-size: 1rem;
+				color: rgba(255, 255, 255, 0.6);
+				line-height: 1.6;
+				margin-bottom: 1.5rem;
+			}
+
+			.usecase-examples {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.usecase-examples li {
+				padding: 0.5rem 0;
+				padding-left: 1.5rem;
+				position: relative;
+				color: rgba(255, 255, 255, 0.7);
+				font-size: 0.95rem;
+			}
+
+			.usecase-examples li::before {
+				content: '→';
+				position: absolute;
+				left: 0;
+				color: rgba(120, 80, 255, 0.6);
+			}
+
+			/* Tech Stack Section */
+			.tech-section {
+				padding: 80px 0;
+			}
+
+			.tech-grid {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 2rem;
+				max-width: 1000px;
+				margin: 3rem auto 0;
+			}
+
+			.tech-item {
+				text-align: center;
+				padding: 1.5rem;
+				background: rgba(255, 255, 255, 0.02);
+				border: 1px solid rgba(255, 255, 255, 0.05);
+				border-radius: 12px;
+				transition: all 0.3s;
+			}
+
+			.tech-item:hover {
+				background: rgba(255, 255, 255, 0.04);
+				transform: translateY(-2px);
+				border-color: rgba(120, 80, 255, 0.2);
+			}
+
+			.tech-name {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 0.9rem;
+				color: rgba(255, 255, 255, 0.8);
+				margin: 0.5rem 0 0;
+			}
+
+			.tech-type {
+				font-size: 0.8rem;
+				color: rgba(255, 255, 255, 0.4);
+				margin-top: 0.25rem;
 			}
 
 			/* Partners Section */
@@ -350,7 +614,6 @@ import BaseHead from '../components/BaseHead.astro';
 			}
 
 			/* Responsive */
-
 			@media (max-width: 768px) {
 				.container {
 					padding: 0 20px;
@@ -366,7 +629,11 @@ import BaseHead from '../components/BaseHead.astro';
 				}
 				
 				.hero-title {
-					font-size: 3rem;
+					font-size: 2.5rem;
+				}
+				
+				.hero-subtitle {
+					font-size: 1.25rem;
 				}
 				
 				.hero-section {
@@ -375,6 +642,20 @@ import BaseHead from '../components/BaseHead.astro';
 				
 				.nav-links {
 					gap: 1.5rem;
+				}
+				
+				.problem-grid,
+				.usecases-grid {
+					grid-template-columns: 1fr;
+				}
+				
+				.solution-grid {
+					grid-template-columns: 1fr;
+					gap: 3rem;
+				}
+				
+				.tech-grid {
+					grid-template-columns: repeat(2, 1fr);
 				}
 				
 				.partners-grid {
@@ -402,7 +683,7 @@ import BaseHead from '../components/BaseHead.astro';
 				}
 				
 				.hero-image {
-					order: -1; /* Put image first on mobile */
+					order: -1;
 				}
 			}
 		</style>
@@ -416,6 +697,7 @@ import BaseHead from '../components/BaseHead.astro';
 						<div class="nav-links">
 							<a href="/">Home</a>
 							<a href="/blog">Blog</a>
+							<a href="https://docs.noosphere.tech">Docs</a>
 							<a href="/contact">Contact</a>
 						</div>
 					</div>
@@ -426,11 +708,9 @@ import BaseHead from '../components/BaseHead.astro';
 				<div class="container">
 					<div class="hero-content">
 						<div class="hero-text">
-							<h1 class="hero-title">Digital Integrity Platform</h1>
-							<p class="hero-tagline">Building for trust in the post-truth era</p>
-							<div class="hero-buttons">
-								<a href="/blog" class="btn btn-secondary">Read Blog</a>
-							</div>
+							<h1 class="hero-title">Digital Integrity Platform for Agentic Trust</h1>
+							<p class="hero-subtitle">Building trust infrastructure for autonomous systems</p>
+							<p class="hero-tagline">When agents act on your behalf, they need deterministic trust. We provide the cryptographic foundation that makes every artifact verifiable, every decision auditable, and every interaction trustworthy.</p>
 						</div>
 						<div class="hero-image">
 							<img src="/images/noosphere-trans.png" alt="Noosphere" />
@@ -440,9 +720,181 @@ import BaseHead from '../components/BaseHead.astro';
 			</header>
 
 			<main class="main-content">
+				<!-- Problem Section -->
+				<section class="problem-section">
+					<div class="container">
+						<div class="section-header">
+							<h2 class="section-title">The Trust Problem in an Autonomous World</h2>
+							<p class="section-subtitle">Agents are becoming autonomous, but trust remains probabilistic and human-centric</p>
+						</div>
+						<div class="problem-grid">
+							<div class="problem-card">
+								<div class="problem-icon">🤖</div>
+								<h3 class="problem-title">Agents Can't Verify</h3>
+								<p class="problem-text">AI systems process vast amounts of data but lack mechanisms to verify authenticity. They operate on assumptions, not cryptographic proof.</p>
+							</div>
+							<div class="problem-card">
+								<div class="problem-icon">🔄</div>
+								<h3 class="problem-title">Trust Doesn't Scale</h3>
+								<p class="problem-text">Current trust systems require human intervention. As agent-to-agent interactions explode, manual verification becomes impossible.</p>
+							</div>
+							<div class="problem-card">
+								<div class="problem-icon">⚠️</div>
+								<h3 class="problem-title">Decisions Lack Auditability</h3>
+								<p class="problem-text">When agents make critical decisions, we need to know why. Without deterministic trust, decisions remain opaque black boxes.</p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Solution Section -->
+				<section class="solution-section">
+					<div class="container">
+						<div class="section-header">
+							<h2 class="section-title">How Digital Integrity Enables Agentic Trust</h2>
+							<p class="section-subtitle">Cryptographic proofs that machines can verify and policies can enforce</p>
+						</div>
+						<div class="solution-grid">
+							<div class="solution-visual">
+								<div class="solution-step">
+									<div class="step-number">1</div>
+									<div class="step-content">
+										<h4>Sign & Attest</h4>
+										<p>Every artifact gets cryptographic proof of origin and attestations documenting its creation process</p>
+									</div>
+								</div>
+								<div class="solution-step">
+									<div class="step-number">2</div>
+									<div class="step-content">
+										<h4>Verify Anywhere</h4>
+										<p>Agents independently validate signatures and attestations using portable, machine-readable proofs</p>
+									</div>
+								</div>
+								<div class="solution-step">
+									<div class="step-number">3</div>
+									<div class="step-content">
+										<h4>Decide Deterministically</h4>
+										<p>Policy engines like Cedar make repeatable trust decisions based on verified metadata</p>
+									</div>
+								</div>
+								<div class="solution-step">
+									<div class="step-number">4</div>
+									<div class="step-content">
+										<h4>Act Autonomously</h4>
+										<p>Agents operate with confidence, knowing every decision is backed by cryptographic proof</p>
+									</div>
+								</div>
+							</div>
+							<div class="solution-text">
+								<h3>Trust That Travels</h3>
+								<p>Our infrastructure makes trust portable. Signatures, attestations, and credentials travel with artifacts, enabling verification at any point in the chain.</p>
+								<p>No more centralized gatekeepers. No more probabilistic guessing. Just mathematical certainty that agents can act on.</p>
+								<p>This is the foundation for an autonomous future where agents negotiate, transact, and collaborate with verified trust.</p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Use Cases Section -->
+				<section class="usecases-section">
+					<div class="container">
+						<div class="section-header">
+							<h2 class="section-title">Enabling Trust Across Domains</h2>
+							<p class="section-subtitle">Digital integrity creates value wherever autonomous systems operate</p>
+						</div>
+						<div class="usecases-grid">
+							<div class="usecase-card">
+								<div class="usecase-icon">📰</div>
+								<h3 class="usecase-title">Publishing & Media</h3>
+								<p class="usecase-description">Combat AI-generated spam and preserve credibility with verifiable content authenticity</p>
+								<ul class="usecase-examples">
+									<li>Cryptographic proof of authorship</li>
+									<li>Immutable audit trails for edits</li>
+									<li>Brand-safe content verification</li>
+								</ul>
+							</div>
+							<div class="usecase-card">
+								<div class="usecase-icon">🔬</div>
+								<h3 class="usecase-title">AI & Machine Learning</h3>
+								<p class="usecase-description">Ensure training data integrity and model provenance for trustworthy AI</p>
+								<ul class="usecase-examples">
+									<li>Verified datasets and prompts</li>
+									<li>Traceable model lineage</li>
+									<li>Agent-to-agent trust negotiation</li>
+								</ul>
+							</div>
+							<div class="usecase-card">
+								<div class="usecase-icon">🔧</div>
+								<h3 class="usecase-title">Software Supply Chain</h3>
+								<p class="usecase-description">Secure build pipelines with attestations and policy-driven deployment</p>
+								<ul class="usecase-examples">
+									<li>Build process attestations</li>
+									<li>SLSA compliance automation</li>
+									<li>Zero-trust deployment policies</li>
+								</ul>
+							</div>
+							<div class="usecase-card">
+								<div class="usecase-icon">🏛️</div>
+								<h3 class="usecase-title">Archives & Records</h3>
+								<p class="usecase-description">Create immutable historical records that resist manipulation</p>
+								<ul class="usecase-examples">
+									<li>Tamper-proof document archives</li>
+									<li>Verifiable timestamp proofs</li>
+									<li>Cryptographic chain of custody</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Tech Stack Section -->
+				<section class="tech-section">
+					<div class="container">
+						<div class="section-header">
+							<h2 class="section-title">Built on Industry Standards</h2>
+							<p class="section-subtitle">Integrating proven protocols for production-ready trust infrastructure</p>
+						</div>
+						<div class="tech-grid">
+							<div class="tech-item">
+								<div class="tech-name">C2PA</div>
+								<div class="tech-type">Content Authenticity</div>
+							</div>
+							<div class="tech-item">
+								<div class="tech-name">SPIFFE</div>
+								<div class="tech-type">Workload Identity</div>
+							</div>
+							<div class="tech-item">
+								<div class="tech-name">in-toto</div>
+								<div class="tech-type">Supply Chain</div>
+							</div>
+							<div class="tech-item">
+								<div class="tech-name">SLSA</div>
+								<div class="tech-type">Build Security</div>
+							</div>
+							<div class="tech-item">
+								<div class="tech-name">DIDs</div>
+								<div class="tech-type">Decentralized ID</div>
+							</div>
+							<div class="tech-item">
+								<div class="tech-name">Cedar</div>
+								<div class="tech-type">Policy Engine</div>
+							</div>
+							<div class="tech-item">
+								<div class="tech-name">DSSE</div>
+								<div class="tech-type">Envelope Format</div>
+							</div>
+							<div class="tech-item">
+								<div class="tech-name">VCs</div>
+								<div class="tech-type">Credentials</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Partners Section -->
 				<section class="partners-section" id="partners">
 					<div class="container">
-						<h2 class="partners-title">Working with industry-leading organizations</h2>
+						<h2 class="partners-title">Working with Industry Leaders</h2>
 						<div class="partners-grid">
 							<div class="partner-logo">
 								<img src="/images/logos/c2pa-logo.png" alt="C2PA" />
@@ -457,12 +909,14 @@ import BaseHead from '../components/BaseHead.astro';
 					</div>
 				</section>
 
+				<!-- CTA Section -->
 				<section class="cta-section" id="contact">
 					<div class="container">
-						<h2>Ready to Build Trust?</h2>
-						<p>Join the future of digital integrity</p>
+						<h2>Ready to Build Autonomous Trust?</h2>
+						<p>Join the future of deterministic, verifiable digital integrity</p>
 						<div class="cta-buttons">
-							<a href="https://noosphere.news" class="btn btn-primary">Trust tools for Publishers. Join the Pilot.</a>
+							<a href="https://noosphere.news" class="btn btn-primary">Publishers: Join Our Pilot</a>
+							<a href="https://docs.noosphere.tech" class="btn btn-secondary">Developers: View API Docs</a>
 						</div>
 					</div>
 				</section>
@@ -470,7 +924,7 @@ import BaseHead from '../components/BaseHead.astro';
 
 			<footer class="main-footer">
 				<div class="container">
-					<p>&copy; 2025 Noosphere Technologies. Building trust in the digital age.</p>
+					<p>&copy; 2025 Noosphere Technologies. Building trust infrastructure for autonomous systems.</p>
 				</div>
 			</footer>
 		</div>
