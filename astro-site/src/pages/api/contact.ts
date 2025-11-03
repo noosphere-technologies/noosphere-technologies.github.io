@@ -24,11 +24,14 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Send email notification via Resend
     if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY not found in environment variables');
       return new Response(
         JSON.stringify({ error: 'Email service not configured' }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
+    
+    console.log('RESEND_API_KEY found, length:', process.env.RESEND_API_KEY.length);
 
     try {
       const emailResponse = await fetch('https://api.resend.com/emails', {
@@ -56,10 +59,17 @@ export const POST: APIRoute = async ({ request }) => {
         });
 
       if (!emailResponse.ok) {
-        const error = await emailResponse.text();
-        console.error('Resend API error:', emailResponse.status, error);
+        const errorText = await emailResponse.text();
+        let errorMessage;
+        try {
+          const errorJson = JSON.parse(errorText);
+          errorMessage = errorJson.message || errorJson.error || errorText;
+        } catch {
+          errorMessage = errorText;
+        }
+        console.error('Resend API error:', emailResponse.status, errorMessage);
         return new Response(
-          JSON.stringify({ error: `Email service error: ${emailResponse.status}` }),
+          JSON.stringify({ error: `Email failed: ${errorMessage}` }),
           { status: 500, headers: { 'Content-Type': 'application/json' } }
         );
       }
