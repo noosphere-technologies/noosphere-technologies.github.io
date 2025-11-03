@@ -99,12 +99,15 @@ export const POST: APIRoute = async ({ request }) => {
                 },
                 {
                   role: 'user',
-                  content: `Contact form submission:
+                  content: `Generate a personalized response for this contact form submission:
+                  
                   Name: ${name}
                   Email: ${email}
                   Email domain: ${email.split('@')[1]}
                   Subject: ${subject}
-                  Message: ${message}`
+                  Message: ${message}
+                  
+                  Please analyze their domain type, identify their key interests from the message, and craft a response that shows we understand their specific needs.`
                 }
               ],
               temperature: 0.7,
