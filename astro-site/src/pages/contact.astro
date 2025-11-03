@@ -285,6 +285,140 @@ import BaseHead from '../components/BaseHead.astro';
 					font-size: 2.5rem;
 				}
 			}
+			/* Modal styles */
+			.modal {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.8);
+				backdrop-filter: blur(10px);
+				z-index: 1000;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.modal.active {
+				display: flex;
+			}
+
+			.modal-content {
+				background: rgba(20, 20, 20, 0.95);
+				backdrop-filter: blur(20px);
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				border-radius: 20px;
+				padding: 3rem;
+				max-width: 600px;
+				width: 90%;
+				max-height: 80vh;
+				overflow-y: auto;
+				position: relative;
+				animation: modalFadeIn 0.3s ease-out;
+			}
+
+			@keyframes modalFadeIn {
+				from {
+					opacity: 0;
+					transform: scale(0.9);
+				}
+				to {
+					opacity: 1;
+					transform: scale(1);
+				}
+			}
+
+			.modal-close {
+				position: absolute;
+				top: 1.5rem;
+				right: 1.5rem;
+				background: rgba(255, 255, 255, 0.1);
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				border-radius: 50%;
+				width: 40px;
+				height: 40px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				transition: all 0.3s;
+				font-size: 1.5rem;
+				color: rgba(255, 255, 255, 0.7);
+			}
+
+			.modal-close:hover {
+				background: rgba(255, 255, 255, 0.2);
+				color: #ffffff;
+			}
+
+			.ai-response {
+				margin-top: 2rem;
+				padding: 2rem;
+				background: linear-gradient(135deg, rgba(120, 80, 255, 0.1) 0%, rgba(80, 64, 255, 0.1) 100%);
+				border: 1px solid rgba(120, 80, 255, 0.3);
+				border-radius: 15px;
+			}
+
+			.ai-response h3 {
+				font-size: 1.25rem;
+				font-weight: 600;
+				margin: 0 0 1rem 0;
+				font-family: 'Space Grotesk', sans-serif;
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+			}
+
+			.ai-icon {
+				width: 32px;
+				height: 32px;
+				background: linear-gradient(135deg, #7850ff 0%, #5040ff 100%);
+				border-radius: 8px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.25rem;
+			}
+
+			.ai-response p {
+				font-size: 1.1rem;
+				line-height: 1.8;
+				margin: 0;
+			}
+
+			.loading-dots {
+				display: inline-block;
+			}
+
+			.loading-dots span {
+				display: inline-block;
+				width: 8px;
+				height: 8px;
+				border-radius: 50%;
+				background: #7850ff;
+				margin: 0 3px;
+				animation: bounce 1.4s infinite ease-in-out;
+			}
+
+			.loading-dots span:nth-child(1) {
+				animation-delay: -0.32s;
+			}
+
+			.loading-dots span:nth-child(2) {
+				animation-delay: -0.16s;
+			}
+
+			@keyframes bounce {
+				0%, 80%, 100% {
+					transform: scale(0);
+					opacity: 0.5;
+				}
+				40% {
+					transform: scale(1);
+					opacity: 1;
+				}
+			}
 		</style>
 	</head>
 	<body>
@@ -372,6 +506,32 @@ import BaseHead from '../components/BaseHead.astro';
 			</footer>
 		</div>
 		
+		<!-- Success Modal -->
+		<div id="successModal" class="modal">
+			<div class="modal-content">
+				<button class="modal-close" onclick="closeModal()">×</button>
+				<h2 style="font-size: 2rem; font-weight: 600; margin: 0 0 1rem 0; font-family: 'Space Grotesk', sans-serif;">
+					Message Sent Successfully! 🚀
+				</h2>
+				<p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;">
+					We've received your message and will get back to you soon.
+				</p>
+				<div id="aiResponseContainer" class="ai-response" style="display: none;">
+					<h3>
+						<span class="ai-icon">🤖</span>
+						AI Assistant Response
+					</h3>
+					<p id="aiResponseText">
+						<span class="loading-dots">
+							<span></span>
+							<span></span>
+							<span></span>
+						</span>
+					</p>
+				</div>
+			</div>
+		</div>
+		
 		<script>
 			document.getElementById('contact-form').addEventListener('submit', async function(e) {
 				e.preventDefault();
@@ -404,17 +564,37 @@ import BaseHead from '../components/BaseHead.astro';
 					const result = await response.json();
 					
 					if (response.ok) {
-						formStatus.style.display = 'block';
-						formStatus.style.color = '#7850ff';
-						formStatus.textContent = 'Thank you for your message. We will get back to you soon.';
+						// Show modal
+						const modal = document.getElementById('successModal');
+						modal.classList.add('active');
 						
 						// Reset form
 						e.target.reset();
 						
-						// Hide message after 5 seconds
-						setTimeout(() => {
-							formStatus.style.display = 'none';
-						}, 5000);
+						// Show AI response if available
+						if (result.aiResponse) {
+							const aiContainer = document.getElementById('aiResponseContainer');
+							const aiText = document.getElementById('aiResponseText');
+							
+							aiContainer.style.display = 'block';
+							
+							// Simulate typing effect
+							setTimeout(() => {
+								aiText.innerHTML = '';
+								let index = 0;
+								const text = result.aiResponse;
+								
+								function typeWriter() {
+									if (index < text.length) {
+										aiText.innerHTML += text.charAt(index);
+										index++;
+										setTimeout(typeWriter, 20);
+									}
+								}
+								
+								typeWriter();
+							}, 500);
+						}
 					} else {
 						throw new Error(result.error || 'Failed to submit');
 					}
@@ -426,6 +606,26 @@ import BaseHead from '../components/BaseHead.astro';
 				} finally {
 					submitButton.disabled = false;
 					submitButton.textContent = 'Send Message';
+				}
+			});
+
+			// Close modal function
+			function closeModal() {
+				const modal = document.getElementById('successModal');
+				modal.classList.remove('active');
+			}
+
+			// Close modal on background click
+			document.getElementById('successModal').addEventListener('click', function(e) {
+				if (e.target === this) {
+					closeModal();
+				}
+			});
+
+			// Close modal on Escape key
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Escape') {
+					closeModal();
 				}
 			});
 		</script>

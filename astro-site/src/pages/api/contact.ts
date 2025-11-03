@@ -64,8 +64,51 @@ export const POST: APIRoute = async ({ request }) => {
         );
       }
 
+      // Generate AI response
+      let aiResponse = '';
+      if (process.env.OPENAI_API_KEY) {
+        try {
+          const openaiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              model: 'gpt-4o-mini',
+              messages: [
+                {
+                  role: 'system',
+                  content: `You are a helpful AI assistant for Noosphere Technologies, a company building trust graphs and content authenticity solutions. 
+                  Generate a personalized, engaging response to someone who just submitted a contact form. 
+                  Be warm, professional, and specific to their inquiry. Keep it concise (2-3 sentences).
+                  Acknowledge their specific interest and let them know Andrew will respond soon.`
+                },
+                {
+                  role: 'user',
+                  content: `Someone named ${name} just submitted a contact form with subject: "${subject}" and message: "${message}"`
+                }
+              ],
+              temperature: 0.7,
+              max_tokens: 150
+            })
+          });
+
+          if (openaiResponse.ok) {
+            const data = await openaiResponse.json();
+            aiResponse = data.choices[0].message.content;
+          }
+        } catch (aiError) {
+          console.error('AI response generation failed:', aiError);
+        }
+      }
+
       return new Response(
-        JSON.stringify({ success: true, message: 'Message sent successfully' }),
+        JSON.stringify({ 
+          success: true, 
+          message: 'Message sent successfully',
+          aiResponse: aiResponse || `Thank you for reaching out, ${name}! We've received your message about "${subject}" and Andrew will get back to you within 24 hours. We're excited to discuss how Noosphere can help with your content authenticity needs.`
+        }),
         { status: 200, headers: { 'Content-Type': 'application/json' } }
       );
     } catch (emailError) {
