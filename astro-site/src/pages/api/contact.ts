@@ -1,5 +1,4 @@
 import type { APIRoute } from 'astro';
-import { sql } from '@vercel/postgres';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -23,16 +22,59 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Insert into database
-    await sql`
-      INSERT INTO contact_submissions (name, email, subject, message, created_at)
-      VALUES (${name}, ${email}, ${subject}, ${message}, NOW())
-    `;
+    // Send email notification via Resend
+    if (!process.env.RESEND_API_KEY) {
+      return new Response(
+        JSON.stringify({ error: 'Email service not configured' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
 
-    return new Response(
-      JSON.stringify({ success: true, message: 'Message sent successfully' }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
-    );
+    try {
+      const emailResponse = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            from: 'Contact Form <onboarding@resend.dev>',
+            to: 'andrew@noosphere.tech',
+            subject: `New Contact Form: ${subject}`,
+            html: `
+              <h2>New Contact Form Submission</h2>
+              <p><strong>Name:</strong> ${name}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Subject:</strong> ${subject}</p>
+              <p><strong>Message:</strong></p>
+              <p>${message.replace(/\n/g, '<br>')}</p>
+              <hr>
+              <p><small>Submitted at: ${new Date().toLocaleString()}</small></p>
+            `,
+            text: `New Contact Form Submission\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}\n\nSubmitted at: ${new Date().toLocaleString()}`
+          })
+        });
+
+      if (!emailResponse.ok) {
+        const error = await emailResponse.text();
+        console.error('Email send failed:', error);
+        return new Response(
+          JSON.stringify({ error: 'Failed to send email' }),
+          { status: 500, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({ success: true, message: 'Message sent successfully' }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+    } catch (emailError) {
+      console.error('Email send error:', emailError);
+      return new Response(
+        JSON.stringify({ error: 'Failed to send email' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
   } catch (error) {
     console.error('Error submitting contact form:', error);
     return new Response(
