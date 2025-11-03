@@ -1,5 +1,9 @@
 {
   "version": 2,
+  "buildCommand": "cd astro-site && npm run build",
+  "outputDirectory": "astro-site/dist",
+  "installCommand": "cd astro-site && npm install",
+  "framework": null,
   "headers": [
     {
       "source": "/.well-known/(.*)",
