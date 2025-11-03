@@ -39,8 +39,8 @@ export const POST: APIRoute = async ({ request }) => {
           },
           body: JSON.stringify({
             from: 'Contact Form <onboarding@resend.dev>',
-            to: 'andrew@voyant.io', // Using verified email address
-            reply_to: email, // So you can reply directly to the sender
+            to: 'andrew@noosphere.tech',
+            reply_to: email, // This should be the sender's email, not yours
             subject: `New Contact Form: ${subject}`,
             html: `
               <h2>New Contact Form Submission</h2>
