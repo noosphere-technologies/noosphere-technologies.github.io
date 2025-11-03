@@ -74,6 +74,7 @@ export const POST: APIRoute = async ({ request }) => {
 
       // Generate AI response
       let aiResponse = '';
+      console.log('OpenAI API Key present:', !!process.env.OPENAI_API_KEY);
       if (process.env.OPENAI_API_KEY) {
         try {
           const openaiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -118,6 +119,10 @@ export const POST: APIRoute = async ({ request }) => {
           if (openaiResponse.ok) {
             const data = await openaiResponse.json();
             aiResponse = data.choices[0].message.content;
+            console.log('AI response generated successfully');
+          } else {
+            const error = await openaiResponse.text();
+            console.error('OpenAI API error:', openaiResponse.status, error);
           }
         } catch (aiError) {
           console.error('AI response generation failed:', aiError);
