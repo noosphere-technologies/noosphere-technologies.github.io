@@ -87,14 +87,24 @@ export const POST: APIRoute = async ({ request }) => {
               messages: [
                 {
                   role: 'system',
-                  content: `You are a helpful AI assistant for Noosphere Technologies, a company building trust graphs and content authenticity solutions. 
-                  Generate a personalized, engaging response to someone who just submitted a contact form. 
-                  Be warm, professional, and specific to their inquiry. Keep it concise (2-3 sentences).
-                  Acknowledge their specific interest and let them know Andrew will respond soon.`
+                  content: `You are an AI assistant for Noosphere Technologies. We build decentralized trust graphs, content authenticity solutions, and help establish digital integrity for the AI age.
+                  
+                  Generate a personalized response based on:
+                  1. Their email domain (corporate = enterprise needs, .edu = research interest, gmail/personal = individual developer)
+                  2. Keywords in their message (AI agents, authenticity, trust, verification, misinformation, etc.)
+                  3. Their potential use case
+                  
+                  Be insightful and specific. Show you understand their context. Keep it to 2-3 sentences.
+                  End with mentioning Andrew will follow up with specific details.`
                 },
                 {
                   role: 'user',
-                  content: `Someone named ${name} just submitted a contact form with subject: "${subject}" and message: "${message}"`
+                  content: `Contact form submission:
+                  Name: ${name}
+                  Email: ${email}
+                  Email domain: ${email.split('@')[1]}
+                  Subject: ${subject}
+                  Message: ${message}`
                 }
               ],
               temperature: 0.7,
@@ -115,7 +125,7 @@ export const POST: APIRoute = async ({ request }) => {
         JSON.stringify({ 
           success: true, 
           message: 'Message sent successfully',
-          aiResponse: aiResponse || `Thank you for reaching out, ${name}! We've received your message about "${subject}" and Andrew will get back to you within 24 hours. We're excited to discuss how Noosphere can help with your content authenticity needs.`
+          aiResponse: aiResponse || `Thank you for reaching out, ${name}! We've received your inquiry about "${subject}". Based on your message, it sounds like you're interested in ${message.toLowerCase().includes('ai') ? 'AI-driven trust solutions' : message.toLowerCase().includes('authenticity') ? 'content authenticity verification' : 'decentralized trust infrastructure'}. Andrew will follow up within 24 hours to discuss how Noosphere can address your specific needs.`
         }),
         { status: 200, headers: { 'Content-Type': 'application/json' } }
       );
