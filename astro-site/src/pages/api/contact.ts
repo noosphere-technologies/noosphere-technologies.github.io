@@ -24,14 +24,11 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Send email notification via Resend
     if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY not found in environment variables');
       return new Response(
         JSON.stringify({ error: 'Email service not configured' }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
-    
-    console.log('RESEND_API_KEY found, length:', process.env.RESEND_API_KEY.length);
 
     try {
       const emailResponse = await fetch('https://api.resend.com/emails', {
@@ -42,7 +39,8 @@ export const POST: APIRoute = async ({ request }) => {
           },
           body: JSON.stringify({
             from: 'Contact Form <onboarding@resend.dev>',
-            to: 'andrew@noosphere.tech',
+            to: 'andrew@voyant.io', // Using verified email address
+            reply_to: email, // So you can reply directly to the sender
             subject: `New Contact Form: ${subject}`,
             html: `
               <h2>New Contact Form Submission</h2>
