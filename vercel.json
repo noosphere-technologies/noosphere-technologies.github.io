@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "framework": "astro",
-  "rootDirectory": "astro-site",
   "headers": [
     {
       "source": "/.well-known/(.*)",
