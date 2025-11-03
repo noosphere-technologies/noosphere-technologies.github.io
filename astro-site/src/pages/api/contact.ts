@@ -38,7 +38,7 @@ export const POST: APIRoute = async ({ request }) => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            from: 'Contact Form <onboarding@resend.dev>',
+            from: 'Noosphere Contact <noreply@noosphere.tech>',
             to: 'andrew@noosphere.tech',
             reply_to: email, // This should be the sender's email, not yours
             subject: `New Contact Form: ${subject}`,

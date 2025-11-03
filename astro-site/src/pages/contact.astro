@@ -592,8 +592,8 @@ import BaseHead from '../components/BaseHead.astro';
 				}
 			});
 
-			// Close modal function
-			function closeModal() {
+			// Close modal function - make it global for onclick handler
+			window.closeModal = function() {
 				const modal = document.getElementById('successModal');
 				modal.classList.remove('active');
 			}
