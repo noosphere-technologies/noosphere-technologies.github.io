@@ -1,9 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "cd astro-site && npm run build",
-  "outputDirectory": "astro-site/.vercel/output",
-  "installCommand": "cd astro-site && npm install",
-  "framework": null,
+  "framework": "astro",
+  "rootDirectory": "astro-site",
   "headers": [
     {
       "source": "/.well-known/(.*)",
