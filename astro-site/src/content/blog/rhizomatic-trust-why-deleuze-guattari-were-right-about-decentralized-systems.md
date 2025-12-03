@@ -1,7 +1,7 @@
 ---
 title: "Rhizomatic Trust: Why Deleuze and Guattari Were Right About Decentralized Systems"
 description: "Trust infrastructure has always been arborescent—hierarchical, brittle, and prone to capture. What if we built it like a rhizome instead? Deleuze and Guattari's 'A Thousand Plateaus' offers a blueprint for truly decentralized trust."
-pubDate: "Jan 01 2024"
+pubDate: "Mar 01 2024"
 author: "Andrew Brown"
 ---
 

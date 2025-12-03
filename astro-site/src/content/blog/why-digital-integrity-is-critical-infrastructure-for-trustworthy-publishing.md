@@ -1,7 +1,7 @@
 ---
 title: 'Why Digital Integrity is Critical Infrastructure for Trustworthy Publishing'
 description: 'How cryptographic proofs and verifiable trust are becoming essential infrastructure for publishers in the digital age'
-pubDate: 'Jul 10 2025'
+pubDate: 'Sep 10 2025'
 author: 'Andrew Brown'
 slug: 'why-digital-integrity-is-critical-infrastructure-for-trustworthy-publishing'
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Without a Decentralized Trust Graph, Content Authenticity is a Toy"
 description: "Centralized content verification doesn't work when everyone can run their own AI. The solution isn't better watermarks—it's building trust infrastructure that makes authenticity an emergent property of network effects."
-pubDate: "Nov 18 2025"
+pubDate: "Jan 18 2026"
 author: "Andrew Brown"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'Digital Integrity: What Is It?'
 description: 'Understanding digital integrity as the foundation of trust in the digital world through cryptographic proofs and verifiable processes'
-pubDate: 'Jun 1 2025'
+pubDate: 'Aug 01 2025'
 author: 'Andrew Brown'
 slug: 'digital-integrity-what-is-it'
 ---

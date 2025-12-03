@@ -1,7 +1,7 @@
 ---
 title: "Anthropic's Latest Releases: Innovation Meets Quota Confusion"
 description: "Anthropic just dropped Opus 4.1, and alongside it, the new Claude Code agents feature — and honestly, the whole thing feels like a case study in mixed signals...."
-pubDate: "Aug 12 2025"
+pubDate: "Oct 12 2025"
 author: "Jeff Hantin"
 ---
 

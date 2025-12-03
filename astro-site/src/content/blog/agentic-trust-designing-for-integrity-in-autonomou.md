@@ -1,7 +1,7 @@
 ---
 title: "Agentic Trust: Designing for Integrity in Autonomous Systems"
 description: "As artificial intelligence agents become more capable and more autonomous, a foundational question is emerging in both technical and ethical terms:..."
-pubDate: "Nov 28 2024"
+pubDate: "Nov 02 2025"
 author: "Andrew Brown"
 ---
 

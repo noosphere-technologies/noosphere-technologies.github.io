@@ -1,7 +1,7 @@
 ---
 title: "Thoughts on Digital Trust in the Age of AI"
 description: "While much of the focus on media today is about mainstream versus social platforms, digital journalism is quietly undergoing a transformation. Local journalism, in particular, is showing remarkable re..."
-pubDate: "Oct 15 2024"
+pubDate: "Dec 15 2024"
 author: "Andrew Brown"
 ---
 

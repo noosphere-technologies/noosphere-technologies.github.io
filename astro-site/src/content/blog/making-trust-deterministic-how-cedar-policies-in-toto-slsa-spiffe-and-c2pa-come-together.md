@@ -1,7 +1,7 @@
 ---
 title: 'Making Trust Deterministic: How Cedar Policies, in-toto, SLSA, SPIFFE, and C2PA Might Converge'
 description: 'Building a foundation for deterministic trust decisions with verifiable metadata standards and policy engines'
-pubDate: 'Aug 18 2025'
+pubDate: 'Oct 18 2025'
 author: 'Daniel Zellmer'
 slug: 'making-trust-deterministic-how-cedar-policies-in-toto-slsa-spiffe-and-c2pa-come-together'
 ---

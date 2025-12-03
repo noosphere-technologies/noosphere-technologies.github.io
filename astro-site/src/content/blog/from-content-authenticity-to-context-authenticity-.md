@@ -1,7 +1,7 @@
 ---
 title: "From Content Authenticity to Context Authenticity: Why Autonomous Systems Need Agentic Trust"
 description: "If humans can't tell what's real anymore, how can we expect autonomous agents to?..."
-pubDate: "Nov 25 2025"
+pubDate: "Jan 25 2026"
 author: "Andrew Brown"
 ---
 

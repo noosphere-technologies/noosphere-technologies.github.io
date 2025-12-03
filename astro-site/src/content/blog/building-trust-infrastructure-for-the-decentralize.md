@@ -1,7 +1,7 @@
 ---
 title: "Building Trust Infrastructure for the Decentralized Web"
 description: "As we continue to develop Noosphere's trust infrastructure, we've been thinking deeply about what it means to build truly decentralized systems. The web was originally designed to be decentralized, bu..."
-pubDate: "Jan 10 2025"
+pubDate: "Mar 10 2025"
 author: "Daniel Zellmer"
 ---
 

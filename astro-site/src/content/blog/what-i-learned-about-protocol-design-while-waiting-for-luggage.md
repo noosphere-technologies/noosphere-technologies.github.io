@@ -1,7 +1,7 @@
 ---
 title: 'What I Learned About Protocol Design While Waiting for Luggage in Vegas'
 description: 'How the Model Context Protocol is falling into the same complexity trap as SOAP, and why SSH is the simple solution we already have'
-pubDate: 'Feb 22 2025'
+pubDate: 'Apr 22 2025'
 author: 'Jeff Hantin'
 ---
 

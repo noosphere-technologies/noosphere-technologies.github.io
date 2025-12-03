@@ -1,7 +1,7 @@
 ---
 title: "Content Authenticity: Vitamin, Aspirin, or Something Else Entirely?"
 description: "Everyone agrees content authenticity matters, but unlike software supply chain security, it hasn't had its SolarWinds moment. Is it a vitamin, an aspirin, or perhaps a gold standard?"
-pubDate: "Aug 16 2025"
+pubDate: "Oct 16 2025"
 author: "Andrew Brown"
 ---
 
