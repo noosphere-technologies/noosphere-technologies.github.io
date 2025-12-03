@@ -33,12 +33,37 @@ const postAuthors: Record<string, string> = {
 const currentSlug = Astro.url.pathname.split('/').filter(Boolean).pop() || '';
 const author = postAuthors[currentSlug] || 'Unknown';
 
-// Format date
-function formatDate(date: Date) {
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 
-                   'July', 'August', 'September', 'October', 'November', 'December'];
-    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+// Format dates defensively so missing/invalid data never breaks rendering
+function formatDate(date?: Date | string | null) {
+	const months = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December',
+	];
+
+	if (!date) {
+		return null;
+	}
+
+	const parsedDate = date instanceof Date ? date : new Date(date);
+	if (Number.isNaN(parsedDate.valueOf())) {
+		return null;
+	}
+
+	return `${months[parsedDate.getMonth()]} ${parsedDate.getDate()}, ${parsedDate.getFullYear()}`;
 }
+
+const formattedPubDate = formatDate(pubDate);
+const formattedUpdatedDate = formatDate(updatedDate ?? null);
 ---
 
 <!doctype html>
@@ -81,12 +106,16 @@ function formatDate(date: Date) {
 						) : (
 							<span>By <strong>{author}</strong></span>
 						)}
-						<span>•</span>
-						<span>{formatDate(pubDate)}</span>
-						{updatedDate && (
+						{formattedPubDate && (
 							<>
 								<span>•</span>
-								<span>Updated {formatDate(updatedDate)}</span>
+								<span>{formattedPubDate}</span>
+							</>
+						)}
+						{formattedUpdatedDate && (
+							<>
+								<span>•</span>
+								<span>Updated {formattedUpdatedDate}</span>
 							</>
 						)}
 					</div>
