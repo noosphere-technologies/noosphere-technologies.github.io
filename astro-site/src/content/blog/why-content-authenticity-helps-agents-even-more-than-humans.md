@@ -1,7 +1,7 @@
 ---
 title: "Why Content Authenticity Helps Agents Even More Than Humans"
 description: "The internet is awash in misinformation. For humans, this creates confusion. For AI agents, it creates broken workflows. Content authenticity is the key to reliable agent execution."
-pubDate: "Feb 01 2026"
+pubDate: "Dec 01 2025"
 author: "Andrew Brown"
 ---
 

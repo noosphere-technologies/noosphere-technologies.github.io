@@ -1,7 +1,7 @@
 ---
 title: "Beyond SEO: How JSON‑LD Can Prove Authenticity, Preserve History, and Travel with Your Content"
 description: "From search visibility to verifiable trust, signed JSON‑LD turns your blog posts into portable, archival, and agent-ready content."
-pubDate: "Jul 18 2025"
+pubDate: "May 18 2025"
 author: "Daniel Zellmer"
 ---
 

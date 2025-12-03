@@ -1,7 +1,7 @@
 ---
 title: 'Hierarchy, Democracy, Anarchy? Choose Your Trust Model'
 description: 'Exploring three fundamental approaches to digital trust: PKI hierarchies, PGP anarchy, and democratic trust anchors in the Noosphere ecosystem'
-pubDate: 'Oct 29 2025'
+pubDate: 'Aug 29 2025'
 author: 'Andrew Brown'
 slug: 'hierarchy-democracy-anarchy-choose-your-trust-model'
 ---

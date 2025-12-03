@@ -1,7 +1,7 @@
 ---
 title: 'A Technology Solution for the Trust Crisis in Digital Media'
 description: 'Revisiting the intersection of AI-generated content, digital authenticity, and trust infrastructure in light of recent developments in AI and culture'
-pubDate: 'Oct 28 2025'
+pubDate: 'Aug 28 2025'
 author: 'Andrew Brown'
 slug: 'technology-solution-trust-crisis-digital-trust-revisited'
 ---

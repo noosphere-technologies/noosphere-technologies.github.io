@@ -1,7 +1,7 @@
 ---
 title: "Rethinking Agentic Trust: Why \"Delegation\" Might Be the Wrong Model"
 description: "In today's conversations about AI agents, the prevailing paradigm is delegation. But this framing is misleading. Agents are autonomous, and we need to design trust accordingly."
-pubDate: "Jun 05 2025"
+pubDate: "Apr 05 2025"
 author: "Andrew Brown"
 ---
 
