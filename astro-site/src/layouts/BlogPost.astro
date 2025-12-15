@@ -4,9 +4,9 @@ import BaseHead from '../components/BaseHead.astro';
 import { authors } from '../data/authors';
 import '../styles/blog-post.css';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & { slug?: string };
 
-const { title, description, pubDate, updatedDate } = Astro.props;
+const { title, description, pubDate, updatedDate, slug } = Astro.props;
 
 // Temporary author mapping until we fix the frontmatter issue
 const postAuthors: Record<string, string> = {
@@ -29,8 +29,8 @@ const postAuthors: Record<string, string> = {
 	'rhizomatic-trust-why-deleuze-guattari-were-right-about-decentralized-systems': 'Andrew Brown',
 };
 
-// Get the current page's slug from the URL
-const currentSlug = Astro.url.pathname.split('/').filter(Boolean).pop() || '';
+// Get the current page's slug from the URL or the passed prop
+const currentSlug = slug || Astro.url?.pathname.split('/').filter(Boolean).pop() || '';
 const author = postAuthors[currentSlug] || 'Unknown';
 
 // Format dates defensively so missing/invalid data never breaks rendering
