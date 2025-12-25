@@ -25,7 +25,7 @@ I've been working on content authenticity and digital integrity challenges for y
 
  
 
-## The real problem isn't data quality—it's data authenticity.
+## The real problem isn't data quality—it's context authenticity.
 
  
 
@@ -45,7 +45,7 @@ I've been exploring what I call *authentic context*—content and metadata that'
 
  
 
-**We need to implement digital integrity solutions now, before there's nothing left but AI slop.**
+**We need to implement context authenticity solutions now, before agents are reasoning over AI slop.**
 
  
 
