@@ -124,6 +124,7 @@ import BaseHead from '../components/BaseHead.astro';
 				height: 200%;
 				background: radial-gradient(circle at 50% 50%, rgba(120, 50, 255, 0.15) 0%, transparent 40%);
 				animation: pulse 20s ease-in-out infinite;
+				pointer-events: none;
 			}
 
 			@keyframes pulse {
@@ -192,29 +193,6 @@ import BaseHead from '../components/BaseHead.astro';
 				line-height: 1.6;
 			}
 
-			.hero-quote {
-				position: relative;
-				margin: 2rem 0 3rem;
-				padding: 1.75rem 2rem 1.75rem 2.5rem;
-				background: rgba(255, 255, 255, 0.05);
-				border: 1px solid rgba(255, 255, 255, 0.12);
-				border-radius: 16px;
-				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-				font-size: 1.1rem;
-				color: rgba(255, 255, 255, 0.9);
-				line-height: 1.7;
-				overflow: hidden;
-			}
-
-			.hero-quote::before {
-				content: '';
-				position: absolute;
-				left: 0;
-				top: 0;
-				bottom: 0;
-				width: 6px;
-				background: linear-gradient(180deg, #7850ff 0%, #ff5078 100%);
-			}
 
 			@keyframes shimmer {
 				0% { background-position: 0% center; }
@@ -673,12 +651,6 @@ import BaseHead from '../components/BaseHead.astro';
 					grid-template-columns: 1fr;
 				}
 				
-				.hero-quote {
-					font-size: 1rem;
-					padding: 1.5rem 1.75rem 1.5rem 2rem;
-					margin: 1.5rem 0 2.5rem;
-				}
-				
 				.solution-grid {
 					grid-template-columns: 1fr;
 					gap: 3rem;
@@ -737,10 +709,9 @@ import BaseHead from '../components/BaseHead.astro';
 				<div class="container">
 						<div class="hero-content">
 							<div class="hero-text">
-							<h1 class="hero-title">Plug into the authenticity economy.</h1>
+							<h1 class="hero-title">Context authenticity for agentic trust.</h1>
 							<p class="hero-subtitle">Context authenticity is the foundation of agentic trust.</p>
 							<p class="hero-tagline">Noosphere empowers any creative, publisher, coder, or agent to ship with verifiable provenance. Digital Integrity Platform: policy-based signing, trust-graph automation, agent-ready validation, and built-in C2PA claims, in-toto attestations, DIDs/VCs, and embedded licensing.</p>
-							<blockquote class="hero-quote">“Noosphere treats context the same way modern systems treat software and digital media — a graph of artifacts with a supply chain that must be verifiable from end-to-end in order to drive autonomous action.”</blockquote>
 							<div class="hero-buttons">
 								<a href="/contact" class="btn btn-primary">Talk to us</a>
 								<a href="https://docs.noosphere.tech" class="btn btn-secondary">View Docs</a>
