@@ -128,6 +128,51 @@ async function notifySlack(visitor: {
   }
 }
 
+// Send Slack notification for AI assistant usage
+async function notifySlackAssistant(data: {
+  ip_address: string;
+  page_path: string;
+  user_message: string;
+  persona?: string;
+}) {
+  if (!slackWebhookUrl) return;
+
+  try {
+    const blocks = [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*AI Assistant Used* :robot_face:`
+        }
+      },
+      {
+        type: 'section',
+        fields: [
+          { type: 'mrkdwn', text: `*IP:*\n\`${data.ip_address || 'unknown'}\`` },
+          { type: 'mrkdwn', text: `*Page:*\n${data.page_path || '/'}` },
+          { type: 'mrkdwn', text: `*Persona:*\n${data.persona || 'not detected'}` },
+        ]
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*Question:*\n> ${data.user_message.slice(0, 500)}`
+        }
+      }
+    ];
+
+    await fetch(slackWebhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ blocks })
+    });
+  } catch (e) {
+    console.error('Slack assistant notification failed:', e);
+  }
+}
+
 interface EventPayload {
   event_type: string;
   event_name: string;
@@ -321,6 +366,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }));
 
     await supabase.from('site_events').insert(eventsToInsert);
+
+    // Notify Slack for AI assistant usage
+    for (const event of payload.events) {
+      if (event.event_type === 'assistant_message' && event.assistant_message) {
+        await notifySlackAssistant({
+          ip_address: ip,
+          page_path: event.page_path || '/',
+          user_message: event.assistant_message,
+          persona: event.properties?.persona as string,
+        });
+      }
+    }
 
     // Update session and visitor counters
     const pageViews = payload.events.filter(e => e.event_type === 'page_view').length;
