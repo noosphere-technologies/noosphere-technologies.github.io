@@ -1,11 +1,15 @@
 /**
  * Voyant Site Telemetry - Lightweight tracking script
- * Add to pages: <script src="/tracking.js" data-org="devmcp"></script>
+ * Add to pages: <script src="/tracking.js" data-org="noosphere"></script>
  */
 (function() {
+  // Skip tracking for internal/API paths
+  const EXCLUDED_PATHS = ['/api/', '/telemetry', '/.well-known/'];
+  if (EXCLUDED_PATHS.some(p => location.pathname.includes(p))) return;
+
   const script = document.currentScript;
   const ORG_ID = script?.getAttribute('data-org') || 'unknown';
-  const API_URL = '/api/telemetry';
+  const API_URL = 'https://www.voyant.io/api/telemetry';
 
   let sessionId = sessionStorage.getItem('v_sid');
   let visitorId = sessionStorage.getItem('v_vid');
