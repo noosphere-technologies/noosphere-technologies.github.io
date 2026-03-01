@@ -373,37 +373,45 @@ Agent C receives context that claims to originate from the CRM. But what Agent C
 
 TLS authenticated the connection. It didn't authenticate the content.
 
-### We Solved This Twenty Years Ago
+### The Inter-Enterprise Problem
 
-This isn't a new problem. Enterprise service architectures faced exactly this challenge in the early 2000s.
+This isn't about internal services talking to each other. A2A is designed for agents that cross organizational boundaries.
 
-SOAP-based web services used HTTPS for transport security. But enterprises needed more—they needed messages that could traverse intermediaries (ESBs, message brokers, service meshes) while maintaining end-to-end integrity and confidentiality.
+Your sales agent talks to a customer's procurement agent. Your procurement agent talks to a vendor's fulfillment agent. Your compliance agent queries a partner's audit agent. These are **inter-enterprise** interactions—agents running in completely different trust contexts, owned by different organizations, governed by different policies.
 
-The solution was **WS-Security**: message-level security that traveled with the payload.
-
-Instead of relying on the transport, WS-Security signed and encrypted the SOAP envelope itself:
-
-```xml
-<soap:Envelope>
-  <soap:Header>
-    <wsse:Security>
-      <ds:Signature>
-        <!-- Digital signature over the body -->
-      </ds:Signature>
-      <wsse:BinarySecurityToken>
-        <!-- X.509 certificate -->
-      </wsse:BinarySecurityToken>
-    </wsse:Security>
-  </soap:Header>
-  <soap:Body>
-    <!-- Actual content, signed and optionally encrypted -->
-  </soap:Body>
-</soap:Envelope>
+```
+┌─────────────────────┐      ┌─────────────────────┐      ┌─────────────────────┐
+│    ACME CORP        │      │   CONTOSO INC       │      │   GLOBEX PARTNERS   │
+│  ┌─────────────┐    │      │  ┌─────────────┐    │      │  ┌─────────────┐    │
+│  │ Sales Agent │────┼─TLS──┼─▶│ Procurement │────┼─TLS──┼─▶│ Fulfillment │    │
+│  └─────────────┘    │      │  │    Agent    │    │      │  │    Agent    │    │
+│                     │      │  └─────────────┘    │      │  └─────────────┘    │
+│  Trust boundary A   │      │  Trust boundary B   │      │  Trust boundary C   │
+└─────────────────────┘      └─────────────────────┘      └─────────────────────┘
 ```
 
-The signature traveled with the message. Any recipient could verify that the body hadn't been modified since the original sender signed it—regardless of how many intermediaries the message passed through.
+Each organization controls its own agents. Each has its own security policies, its own infrastructure, its own incentives. When context flows from Acme's sales agent through Contoso's procurement agent to Globex's fulfillment agent, it crosses **three distinct trust boundaries**.
 
-Transport security protected hop-to-hop. Message security protected end-to-end.
+TLS authenticates the connections between them. But TLS doesn't help you answer:
+
+- Did this context actually originate from Acme, or did Contoso fabricate it?
+- Has Contoso modified the pricing data before forwarding to Globex?
+- Is Globex's agent authorized to receive this customer information?
+- If something goes wrong, which organization is liable?
+
+Within a single trust boundary, you control the agents. You can audit them, update them, trust them. Across trust boundaries, you're relying on organizations you don't control to behave correctly.
+
+Transport security assumes trusted endpoints. Inter-enterprise collaboration has no trusted endpoints—only counterparties with their own interests.
+
+### The Pattern: Content Carries Its Own Integrity
+
+The solution is to stop relying on the transport entirely. Instead, the content itself must carry cryptographic proof of its origin and integrity.
+
+This is an old pattern in security architecture. When messages cross trust boundaries, the only thing you can verify at the destination is what traveled with the message. The transport is irrelevant—you didn't control every hop. The endpoints are untrusted—you don't control them either.
+
+What you can control: what you sign before sending, and what you verify after receiving.
+
+The signature travels with the message. Any recipient—regardless of how many intermediaries, regardless of how many trust boundaries—can verify that the content hasn't been modified since the original sender signed it.
 
 ### How Agents Build Context
 
