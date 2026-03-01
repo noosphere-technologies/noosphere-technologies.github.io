@@ -156,6 +156,90 @@ Context integrity fills this gap. Wrap the `DataPart` in an attestation:
 
 Now the receiving agent can verify. The contextId groups the conversation; the attestation verifies the content.
 
+## Context Graphs: Beyond Individual Facts
+
+So far we've discussed verifying individual pieces of context. But agents don't consume isolated facts—they consume *graphs*. A customer context isn't just "prefers enterprise pricing." It's a web of interconnected knowledge:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://acme.com/customers/contoso",
+  "name": "Contoso Industries",
+  "industry": "Manufacturing",
+  "employees": 5000,
+  "contracts": [
+    {
+      "@type": "Contract",
+      "tier": "Enterprise",
+      "annualValue": 250000,
+      "renewalDate": "2026-09-01"
+    }
+  ],
+  "contacts": [
+    {
+      "@type": "Person",
+      "name": "Jane Smith",
+      "role": "VP Engineering",
+      "decisionMaker": true
+    }
+  ],
+  "preferences": {
+    "pricing": "enterprise",
+    "supportLevel": "premium",
+    "communicationChannel": "slack"
+  }
+}
+```
+
+This is a context graph. The agent doesn't just know one fact—it can traverse relationships. Who's the decision maker at Contoso? What's their contract tier? When does it renew?
+
+**Graph integrity is harder than node integrity.**
+
+When you attest a single fact, you sign a hash. When you attest a graph, you need to answer harder questions:
+
+- **Node-level integrity**: Is each node in the graph individually verified?
+- **Edge integrity**: Are the relationships between nodes authentic? Did someone add a fake contact to a real organization?
+- **Subgraph attestation**: Can I attest a portion of the graph without attesting the whole thing?
+- **Composition**: When I merge context from multiple sources into one graph, what happens to integrity?
+
+Consider an agent composing context from three sources: CRM data from Salesforce, contract details from DocuSign, and communication preferences from Slack. Each source has its own attestation. But the *composed* graph—the unified customer context—is a new artifact. Who attests that?
+
+**Merkle DAGs for graph integrity.**
+
+The solution borrows from content-addressed systems like IPFS and Git. Represent the graph as a Merkle DAG where each node's hash includes the hashes of its children:
+
+```
+Organization (hash: abc123)
+├── contracts[] (hash: def456)
+│   └── Contract (hash: 789xyz)
+├── contacts[] (hash: fed321)
+│   └── Person (hash: cba987)
+└── preferences (hash: 456fed)
+```
+
+Now graph integrity is compositional. If any node changes, its hash changes, which propagates up to the root. The root hash represents the entire graph state. Attest the root, and you've implicitly attested the entire structure.
+
+**Subgraph extraction with proofs.**
+
+Agents often need only part of a graph. An agent negotiating pricing doesn't need the full customer context—just contract tier and preferences. With Merkle proofs, you can extract a subgraph and prove it's part of the attested whole:
+
+```json
+{
+  "subgraph": {
+    "preferences": { "pricing": "enterprise" },
+    "contracts": [{ "tier": "Enterprise" }]
+  },
+  "proof": {
+    "root_hash": "abc123",
+    "merkle_path": ["def456", "fed321", "456fed"],
+    "attestation": { "signer": "did:web:acme.com", "signature": "..." }
+  }
+}
+```
+
+The receiving agent can verify: (1) the subgraph hashes to the claimed values, (2) the Merkle path connects to the root, (3) the root is attested by a trusted signer. The agent gets exactly the context it needs, with full integrity guarantees, without seeing the complete graph.
+
 ## The Canonicalization Problem
 
 JSON isn't stable. The same object can serialize differently:
