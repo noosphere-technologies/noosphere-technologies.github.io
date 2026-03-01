@@ -223,6 +223,34 @@ data: {"type": "data", "data": {"override": true, "newPolicy": {...}}}
 
 **Why it works**: SSE streams are long-lived connections. Injection anywhere in the stream contaminates the final result. Without per-chunk verification, poisoned chunks are indistinguishable from legitimate ones.
 
+## Why Transport Security Isn't Enough
+
+A2A uses HTTPS. Problem solved?
+
+No. Transport security protects the pipe, not the payload. TLS encrypts data in transit between two endpoints. But agent transactions aren't point-to-point—they're multi-party, multi-hop.
+
+```
+Agent A  ──HTTPS──▶  Agent B  ──HTTPS──▶  Agent C
+            │                      │
+         decrypted              decrypted
+         at B                   at C
+```
+
+Each hop is protected. But at every intermediary, context is decrypted, processed, potentially modified, then re-encrypted for the next hop. Agent B can poison the context before forwarding to Agent C. Agent C has no way to verify what Agent A originally sent.
+
+This is the fundamental limitation of transport security in distributed systems:
+
+| Transport Security (TLS) | Content Integrity (Attestations) |
+|--------------------------|----------------------------------|
+| Hop-by-hop encryption | End-to-end verification |
+| Protects the pipe | Protects the payload |
+| Trusted intermediaries | Zero-trust intermediaries |
+| Verified at connection | Verified at consumption |
+
+In a two-party interaction over a single HTTPS connection, transport security is sufficient. In multi-agent workflows that span organizational boundaries, route through orchestrators, or involve any form of message passing—transport security protects nothing.
+
+The context must carry its own integrity. Attestations travel with the payload. Verification happens at the point of consumption, not at each network hop.
+
 ## The Gap in A2A
 
 A2A defines message structure, task lifecycle, and agent discovery. It assumes:
@@ -231,7 +259,9 @@ A2A defines message structure, task lifecycle, and agent discovery. It assumes:
 - Authenticated endpoints
 - Trusted agent implementations
 
-But it doesn't define:
+These assumptions hold for simple two-party exchanges. They break down the moment context crosses an intermediary.
+
+A2A doesn't define:
 
 - **Payload integrity**: No signatures on Parts
 - **Provenance**: No chain-of-custody for DataParts
