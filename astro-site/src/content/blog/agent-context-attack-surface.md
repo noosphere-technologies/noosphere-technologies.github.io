@@ -5,6 +5,8 @@ pubDate: "Mar 2 2026"
 author: "Andrew Brown"
 ---
 
+![Agent Context Attack Surface](/images/blog-images/context-poisoning.jpg)
+
 Google's Agent-to-Agent (A2A) protocol defines how AI agents communicate. Tasks, messages, parts, artifacts—a structured way for agents to collaborate across organizational boundaries.
 
 What A2A doesn't define: **how agents verify the context they receive**.
