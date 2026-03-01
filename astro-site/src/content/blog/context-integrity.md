@@ -2,7 +2,7 @@
 title: "Context Integrity: The Missing Layer for Trusted AI Agents"
 description: "Content authenticity solved the problem of verifying images. Context integrity solves the problem of verifying the knowledge AI agents act on."
 pubDate: "Mar 1 2026"
-author: "Andrew Brown, Co-founder"
+author: "Andrew Brown"
 ---
 
 ![Context Integrity](/images/blog-images/context-integrity.jpg)
