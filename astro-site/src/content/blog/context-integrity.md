@@ -7,170 +7,33 @@ author: "Andrew Brown"
 
 ![Context Integrity](/images/blog-images/context-integrity-2.jpg)
 
-C2PA gives us cryptographic provenance for images and video. But AI agents don't just consume media—they consume *context*: JSON-LD graphs, API responses, tool outputs, facts passed between agents. None of that has integrity guarantees today.
+Content authenticity solved individual artifacts. C2PA lets you verify that a photo wasn't AI-generated, that a video hasn't been tampered with, that a document can be traced to its source. For discrete media files, the problem is solved.
 
-When Agent A tells Agent B that "the customer prefers enterprise pricing," Agent B has no way to verify: Where did that claim originate? Who authorized it? Has it been modified? Is the source even in my trust graph?
+But AI agents don't consume discrete files. They consume *context graphs*—interconnected webs of knowledge that span multiple sources, evolve over time, and get composed, transformed, and passed between systems.
 
-This is the context integrity problem. And it's not theoretical—it's the natural consequence of building autonomous systems that act on unverified knowledge.
+Content authenticity asks: "Is this image real?"
 
-## Three Levels of Context Verification
+Context integrity asks: "Is this knowledge graph trustworthy?"
 
-Context integrity isn't binary. It exists on a spectrum of assurance, and different use cases require different levels:
+The difference isn't just scale. It's structural. And it requires different techniques.
 
-**Level 1: Content Hashing**
+## From Artifacts to Graphs
 
-The minimum viable integrity check: hash the content, store the hash, verify it hasn't changed.
+C2PA works beautifully for a photograph. The image is a discrete artifact. You hash it, sign it, embed credentials. Done.
 
-```json
-{
-  "content": { "@type": "Policy", "maxDiscount": 0.15 },
-  "hash": "sha256:e3b0c44298fc1c149afbf4c8996fb924...",
-  "algorithm": "SHA-256"
-}
-```
-
-This catches tampering but says nothing about provenance. You know the content hasn't changed since the hash was computed—you don't know who computed it or whether to trust them.
-
-**Level 2: Manifest Claims**
-
-Add structured metadata about the content's origin and chain of custody:
-
-```json
-{
-  "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb924...",
-  "claim": {
-    "author": "did:web:acme.com",
-    "created": "2026-03-01T10:00:00Z",
-    "derived_from": ["sha256:abc123..."],
-    "assertions": [
-      { "type": "c2pa.source", "value": "crm.acme.com/policies/pricing" }
-    ]
-  }
-}
-```
-
-Now you have provenance. But claims are just assertions—anyone can write JSON. Without cryptographic binding, they're meaningless.
-
-**Level 3: Cryptographic Signatures**
-
-Sign the manifest with a verifiable identity:
-
-```json
-{
-  "manifest": { ... },
-  "signature": {
-    "algorithm": "Ed25519",
-    "signer": "did:web:acme.com",
-    "value": "base64:Qm9va3MgYXJlIGEgdW5pcXVl..."
-  }
-}
-```
-
-Now you have verifiable provenance. The signature binds the claims to an identity. The identity resolves to a DID document with public keys. The agent can verify the signature and check whether `did:web:acme.com` is in its trust graph.
-
-This is what we've built in [c2pa-artifact](https://github.com/noosphere-technologies/c2pa-artifact)—a service that applies C2PA's attestation model to any digital artifact, not just media files.
-
-## MCP: Verification as a Tool
-
-The Model Context Protocol gives agents access to tools. For context integrity, that means exposing verification as something agents can invoke autonomously:
-
-```
-┌─────────────────────────────────────────────┐
-│              AI Agent / LLM                 │
-├─────────────────────────────────────────────┤
-│            MCP Tool Interface               │
-│  ┌────────────┐ ┌────────────────────────┐  │
-│  │attest_hash │ │ verify_attestation     │  │
-│  │attest_artifact│ │ check_trust_graph   │  │
-│  └────────────┘ └────────────────────────┘  │
-├─────────────────────────────────────────────┤
-│    Context Sources (APIs, RAG, A2A)         │
-└─────────────────────────────────────────────┘
-```
-
-The c2pa-artifact MCP server exposes these tools:
-
-- **`attest_hash`** — Create a signed attestation for any content hash
-- **`attest_artifact`** — Hash and attest arbitrary content in one call
-- **`attest_provenance`** — Create attestations with derivation chains
-- **`verify_attestation`** — Verify a signed attestation against a trust root
-- **`list_attestations`** — Query attestations by hash, signer, or time range
-
-When an agent receives context from another system, it doesn't trust blindly. It calls `verify_attestation()`:
-
-```python
-result = verify_attestation(
-    attestation=incoming_context["attestation"],
-    trust_root="did:web:myorg.com"
-)
-
-if not result["valid"]:
-    # Reject the context
-    return {"error": "Context failed integrity check", "reason": result["reason"]}
-
-# Context verified - proceed
-```
-
-The agent gets a deterministic answer. Proceed or don't. No vibes. No heuristics.
-
-## A2A: Context in Agent-to-Agent Communication
-
-Google's Agent-to-Agent protocol introduced a structured approach to context in multi-agent systems. Two concepts matter for integrity:
-
-**contextId**: A session identifier that groups related messages. When Agent A and Agent B exchange messages within a contextId, they're operating on shared conversational context. But the protocol doesn't verify the integrity of that context—it just groups it.
-
-**Parts**: The payload structure for agent messages:
-
-```json
-{
-  "parts": [
-    { "type": "text", "text": "Customer prefers enterprise pricing" },
-    { "type": "data", "data": { "@type": "Policy", "maxDiscount": 0.15 } }
-  ]
-}
-```
-
-A2A supports `TextPart`, `FilePart`, and `DataPart`. The `DataPart` type is where structured context lives—JSON objects that agents pass to each other.
-
-Here's the gap: A2A defines the transport. It doesn't define integrity. A `DataPart` arrives, and the receiving agent has no cryptographic assurance about its origin.
-
-Context integrity fills this gap. Wrap the `DataPart` in an attestation:
-
-```json
-{
-  "parts": [
-    {
-      "type": "data",
-      "data": {
-        "content": { "@type": "Policy", "maxDiscount": 0.15 },
-        "attestation": {
-          "hash": "sha256:...",
-          "signer": "did:web:acme.com",
-          "signature": "base64:..."
-        }
-      }
-    }
-  ]
-}
-```
-
-Now the receiving agent can verify. The contextId groups the conversation; the attestation verifies the content.
-
-## Context Graphs: Beyond Individual Facts
-
-So far we've discussed verifying individual pieces of context. But agents don't consume isolated facts—they consume *graphs*. A customer context isn't just "prefers enterprise pricing." It's a web of interconnected knowledge:
+Now consider what an AI agent actually consumes when reasoning about a customer:
 
 ```json
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://acme.com/customers/contoso",
+  "@id": "https://crm.acme.com/customers/contoso",
   "name": "Contoso Industries",
   "industry": "Manufacturing",
-  "employees": 5000,
   "contracts": [
     {
       "@type": "Contract",
+      "@id": "https://docusign.com/contracts/abc123",
       "tier": "Enterprise",
       "annualValue": 250000,
       "renewalDate": "2026-09-01"
@@ -179,35 +42,148 @@ So far we've discussed verifying individual pieces of context. But agents don't 
   "contacts": [
     {
       "@type": "Person",
+      "@id": "https://linkedin.com/in/janesmith",
       "name": "Jane Smith",
       "role": "VP Engineering",
       "decisionMaker": true
     }
   ],
-  "preferences": {
-    "pricing": "enterprise",
-    "supportLevel": "premium",
-    "communicationChannel": "slack"
+  "recentSignals": [
+    {
+      "@type": "Signal",
+      "source": "slack",
+      "timestamp": "2026-02-28T14:30:00Z",
+      "content": "Asked about volume pricing"
+    }
+  ]
+}
+```
+
+This isn't a file. It's a *graph*—nodes connected by relationships, spanning multiple source systems (CRM, DocuSign, LinkedIn, Slack), with temporal elements (signals, timestamps, renewal dates).
+
+You can't just hash this and call it verified. The questions multiply:
+
+- The contract data came from DocuSign—is that node attested?
+- The contact came from LinkedIn—who verified that relationship?
+- The signal arrived yesterday—is it still valid?
+- The graph was composed from four sources—who attests the composition?
+
+Content authenticity handles the leaves. Context integrity handles the tree.
+
+## Context Poisoning: The Attack Vector
+
+Prompt injection gets the headlines. But context poisoning is the deeper threat.
+
+Prompt injection manipulates what the agent is *told to do*. Context poisoning manipulates what the agent *believes to be true*. An agent with poisoned context will faithfully execute correct instructions—and still produce catastrophic outcomes.
+
+**Attack vectors:**
+
+- **Source injection**: Compromise a data source the agent trusts. If the CRM says the customer's tier is "Enterprise" when it's actually "Startup," every pricing decision is wrong.
+
+- **Transit tampering**: Intercept context as it flows between systems. Modify the contract renewal date. Add a fake decision-maker. Remove a risk flag.
+
+- **Composition attacks**: The sources are clean, but the merge is malicious. A legitimate contract from DocuSign gets associated with the wrong customer. The graph looks valid; the relationships are fabricated.
+
+- **Temporal manipulation**: Replay stale context as current. The pricing policy changed last week, but the agent is acting on last month's version—which happens to be more favorable to the attacker.
+
+**Why attestation chains matter:**
+
+Without provenance, the agent can't distinguish legitimate context from poisoned context. Both look like valid JSON. Both claim to be authoritative.
+
+With attestation chains, every node and every transformation has cryptographic proof. The agent doesn't trust the data—it verifies the chain. Poisoned context fails verification because the attacker can't produce valid attestations from trusted builders.
+
+Context poisoning is the supply chain attack of the agent economy. The defenses are the same: attestations, provenance, policy-based verification.
+
+## Context Graphs Have a Temporal Dimension
+
+Static knowledge graphs are one thing. But agent context isn't static—it's a *stream*. New signals arrive. Facts become stale. Relationships change.
+
+A context graph is a knowledge graph plus time:
+
+```
+t=0:  Customer.tier = "Startup"
+t=1:  Customer.tier = "Growth"
+t=2:  Customer.tier = "Enterprise"
+```
+
+Which version does the agent trust? The answer depends on:
+
+- **Freshness requirements**: How old can context be before it's rejected?
+- **Supersession**: Has this fact been explicitly replaced by a newer one?
+- **Validity windows**: Was this context attested for a specific time range?
+
+Content authenticity doesn't model time. A signed image is either valid or not. Context integrity must handle versioning, expiration, and temporal validity—the same patterns you see in software supply chain security.
+
+## Supply Chain Attestation for Context
+
+Here's the insight: context flows through a pipeline, just like software artifacts. It gets produced, transformed, composed, and consumed. Each step is an opportunity for tampering or corruption.
+
+Software supply chain security solved this problem with attestations. In-toto and SLSA define how to:
+
+- Attest that a build step produced a specific output
+- Chain attestations across a multi-step pipeline
+- Verify that an artifact's provenance matches expected policy
+
+Context integrity applies the same patterns:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Context Pipeline                          │
+├──────────────┬──────────────┬──────────────┬────────────────┤
+│   Source     │   Transform   │   Compose    │   Consume     │
+│  (CRM API)   │  (Normalize)  │  (Merge)     │   (Agent)     │
+├──────────────┼──────────────┼──────────────┼────────────────┤
+│ attestation₁ │ attestation₂  │ attestation₃ │  verification │
+└──────────────┴──────────────┴──────────────┴────────────────┘
+```
+
+Each stage produces an attestation. The final consumer verifies the chain. If any link is missing or invalid, the context is rejected.
+
+**In-toto attestation for context extraction:**
+
+```json
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [{
+    "name": "customer-context",
+    "digest": { "sha256": "e3b0c44298fc1c149afbf4c8996fb924..." }
+  }],
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "predicate": {
+    "buildDefinition": {
+      "buildType": "https://noosphere.tech/context-extraction/v1",
+      "externalParameters": {
+        "source": "salesforce://accounts/contoso",
+        "query": "SELECT Id, Name, Industry, Contracts FROM Account"
+      }
+    },
+    "runDetails": {
+      "builder": { "id": "did:web:etl.acme.com" },
+      "metadata": {
+        "invocationId": "ctx-2026-03-01-001",
+        "startedOn": "2026-03-01T10:00:00Z",
+        "finishedOn": "2026-03-01T10:00:03Z"
+      }
+    }
   }
 }
 ```
 
-This is a context graph. The agent doesn't just know one fact—it can traverse relationships. Who's the decision maker at Contoso? What's their contract tier? When does it renew?
+This is a SLSA provenance attestation for context. It records: what was extracted, from where, by whom, when. The consuming agent can verify the entire chain—from source system to final graph.
 
-**Graph integrity is harder than node integrity.**
+## Graph Integrity: Nodes, Edges, Subgraphs
 
-When you attest a single fact, you sign a hash. When you attest a graph, you need to answer harder questions:
+Individual attestations aren't enough. Graphs have structure, and that structure must be verified.
 
-- **Node-level integrity**: Is each node in the graph individually verified?
-- **Edge integrity**: Are the relationships between nodes authentic? Did someone add a fake contact to a real organization?
-- **Subgraph attestation**: Can I attest a portion of the graph without attesting the whole thing?
-- **Composition**: When I merge context from multiple sources into one graph, what happens to integrity?
+**Node-level integrity**: Each node in the graph has its own attestation. The contract node is attested by DocuSign. The contact node is attested by the identity provider. The signal node is attested by Slack.
 
-Consider an agent composing context from three sources: CRM data from Salesforce, contract details from DocuSign, and communication preferences from Slack. Each source has its own attestation. But the *composed* graph—the unified customer context—is a new artifact. Who attests that?
+**Edge integrity**: The relationships between nodes must also be verified. Did someone add a fake contact to a real organization? Is this contract actually associated with this customer? Edges are claims that need attestation too.
 
-**Merkle DAGs for graph integrity.**
+**Composition integrity**: When you merge context from multiple sources, you create a new graph. The composition itself is a transformation step that requires attestation. Who performed the merge? What was the merge policy? Were there conflicts?
 
-The solution borrows from content-addressed systems like IPFS and Git. Represent the graph as a Merkle DAG where each node's hash includes the hashes of its children:
+**Merkle DAGs for graph integrity:**
+
+Represent the graph as a Merkle DAG where each node's hash includes its children:
 
 ```
 Organization (hash: abc123)
@@ -215,97 +191,145 @@ Organization (hash: abc123)
 │   └── Contract (hash: 789xyz)
 ├── contacts[] (hash: fed321)
 │   └── Person (hash: cba987)
-└── preferences (hash: 456fed)
+└── signals[] (hash: 456fed)
+    └── Signal (hash: sig001)
 ```
 
-Now graph integrity is compositional. If any node changes, its hash changes, which propagates up to the root. The root hash represents the entire graph state. Attest the root, and you've implicitly attested the entire structure.
+Now integrity is compositional. Change any node, and the root hash changes. Attest the root, and you've implicitly attested the entire structure.
 
-**Subgraph extraction with proofs.**
+**Subgraph extraction with proofs:**
 
-Agents often need only part of a graph. An agent negotiating pricing doesn't need the full customer context—just contract tier and preferences. With Merkle proofs, you can extract a subgraph and prove it's part of the attested whole:
+Agents often need only part of a graph. With Merkle proofs, you can extract a subgraph and prove it belongs to the attested whole:
 
 ```json
 {
   "subgraph": {
-    "preferences": { "pricing": "enterprise" },
-    "contracts": [{ "tier": "Enterprise" }]
+    "contracts": [{ "tier": "Enterprise", "renewalDate": "2026-09-01" }]
   },
   "proof": {
     "root_hash": "abc123",
-    "merkle_path": ["def456", "fed321", "456fed"],
-    "attestation": { "signer": "did:web:acme.com", "signature": "..." }
+    "merkle_path": ["def456", "789xyz"],
+    "root_attestation": {
+      "signer": "did:web:acme.com",
+      "signature": "..."
+    }
   }
 }
 ```
 
-The receiving agent can verify: (1) the subgraph hashes to the claimed values, (2) the Merkle path connects to the root, (3) the root is attested by a trusted signer. The agent gets exactly the context it needs, with full integrity guarantees, without seeing the complete graph.
+The receiving agent verifies: the subgraph hashes correctly, the Merkle path connects to the root, the root is attested by a trusted signer. Minimal context, full integrity.
 
-## The Canonicalization Problem
+## MCP: Verification as a Tool
 
-JSON isn't stable. The same object can serialize differently:
-
-```json
-{"a": 1, "b": 2}
-{"b": 2, "a": 1}
-```
-
-If you hash JSON naively, identical content produces different hashes. For context integrity, this breaks verification.
-
-The solution is canonicalization—transforming content to a deterministic form before hashing. For JSON-LD (the lingua franca of semantic context), that means RDFC-1.0:
+The Model Context Protocol gives agents access to tools. Context integrity means exposing attestation and verification as tools agents invoke autonomously:
 
 ```python
-from pyld import jsonld
+# Before acting on context, verify its provenance
+result = verify_context_attestation(
+    context=customer_graph,
+    trust_anchors=["did:web:acme.com", "did:web:salesforce.com"],
+    policy={
+        "max_age_hours": 24,
+        "require_slsa_level": 2,
+        "allowed_builders": ["did:web:etl.acme.com"]
+    }
+)
 
-# Canonicalize to N-Quads (deterministic format)
-canonical = jsonld.normalize(context, {"algorithm": "RDFC-1.0"})
+if not result["valid"]:
+    return {"error": "Context failed integrity check", "chain": result["failed_attestations"]}
 
-# Hash the canonical form
-hash = hashlib.sha256(canonical.encode()).hexdigest()
+# Context verified—proceed with action
 ```
 
-This is how c2pa-artifact handles JSON-LD context: canonicalize first, hash second, sign the hash. Identical semantic content always produces identical hashes, regardless of serialization differences.
+The agent gets a deterministic answer. The entire attestation chain is verified against policy. Proceed or don't.
 
-## Trust Graphs and Policy
+## A2A: Context Across Agent Boundaries
 
-Verification alone isn't enough. A perfectly valid signature from an unknown party is still untrusted. Agents need policies that govern:
+Google's A2A protocol defines how agents exchange messages. The `DataPart` type carries structured context between agents:
 
-- **Trust anchors**: Which DIDs are in my trust graph?
-- **Signature requirements**: Do I require Level 3 (signed) or accept Level 1 (hashed)?
-- **Freshness**: How old can an attestation be before I reject it?
-- **Derivation depth**: How many hops from the original source do I allow?
+```json
+{
+  "parts": [
+    {
+      "type": "data",
+      "data": { "@type": "CustomerContext", "tier": "Enterprise" }
+    }
+  ]
+}
+```
 
-These policies should be declarative and machine-readable—Cedar, OPA, or simple JSON schemas. The agent evaluates context against policy and gets a deterministic answer.
+A2A defines the transport. It doesn't define integrity. When Agent B receives a `DataPart` from Agent A, it has no cryptographic assurance about origin or chain of custody.
+
+Context integrity fills the gap. Wrap the data with its attestation chain:
+
+```json
+{
+  "parts": [{
+    "type": "data",
+    "data": {
+      "context": { "@type": "CustomerContext", "tier": "Enterprise" },
+      "attestation_chain": [
+        { "step": "extraction", "builder": "did:web:etl.acme.com", "signature": "..." },
+        { "step": "transform", "builder": "did:web:agent-a.acme.com", "signature": "..." }
+      ],
+      "root_hash": "abc123"
+    }
+  }]
+}
+```
+
+Agent B can verify the chain before acting. The contextId groups the conversation; the attestation chain verifies the content.
+
+## Trust Policy
+
+Verification without policy is incomplete. Agents need declarative rules:
 
 ```yaml
 trust_anchors:
   - did:web:acme.com
-  - did:web:trusted-vendor.com
+  - did:web:salesforce.com
+  - did:web:docusign.com
 
 context_policy:
-  require_signature: true
-  max_age_hours: 24
-  allowed_derivation_depth: 2
+  require_attestation_chain: true
+  min_slsa_level: 2
+  max_context_age_hours: 24
+
+  allowed_builders:
+    extraction: ["did:web:etl.acme.com"]
+    transform: ["did:web:*.acme.com"]
+
+  node_policies:
+    Contract:
+      required_attestor: "did:web:docusign.com"
+    Person:
+      required_attestor: "did:web:identity.acme.com"
 ```
 
-When context arrives, the agent checks: Is the signer in my trust graph? Does the attestation meet my policy requirements? Yes or no.
+Context arrives. The agent evaluates against policy. Yes or no.
 
-## Why This Matters Now
+## The Evolution
 
-The agent economy is coming. Google's A2A, Anthropic's MCP, OpenAI's Assistants API—the infrastructure for autonomous agents is being built. These agents will:
+Content authenticity solved verification for individual artifacts. Images, videos, documents—discrete files with embedded credentials.
 
-- Make purchasing decisions
-- Provision infrastructure
-- Negotiate with other agents
-- Act on behalf of organizations
+Context integrity evolves this for the agent era:
 
-When agents operate on unverified context, every action becomes a vector for manipulation. Feed an agent bad context, and it will faithfully execute bad decisions.
+| Content Authenticity | Context Integrity |
+|---------------------|-------------------|
+| Individual files | Knowledge graphs |
+| Static artifacts | Temporal streams |
+| Single attestation | Attestation chains |
+| Embedded credentials | Supply chain provenance |
+| Human verification | Autonomous agent verification |
 
-Content authenticity became critical infrastructure because synthetic media threatened trust in what we see. Context integrity becomes critical infrastructure because autonomous agents threaten trust in what systems *do*.
+C2PA gave us the foundation. Supply chain security (in-toto, SLSA) provides the patterns for pipelines and attestation chains. Context integrity brings them together for the knowledge graphs that agents actually consume.
 
-C2PA solved content authenticity for humans.
+The agent economy is coming. Google's A2A, Anthropic's MCP, OpenAI's Assistants API—the infrastructure for autonomous agents is being built now. When these agents act on unverified context, every action becomes a vector for manipulation.
 
-Context integrity solves context authenticity for agents.
+Content authenticity protects humans from synthetic media.
+
+Context integrity protects agents from synthetic knowledge.
 
 ---
 
-*We're building infrastructure for trusted AI agent ecosystems—context graphs with cryptographic provenance. The [c2pa-artifact](https://github.com/noosphere-technologies/c2pa-artifact) service is open source. If you're working on agent systems and thinking about trust, [let's talk](/contact).*
+*We're building infrastructure for trusted AI agent ecosystems—context graphs with supply chain attestations. If you're working on agent systems and thinking about trust, [let's talk](/contact).*
