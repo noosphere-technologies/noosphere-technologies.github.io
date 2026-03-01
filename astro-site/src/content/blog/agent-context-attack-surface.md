@@ -21,6 +21,10 @@ Consider an agent that negotiates pricing based on customer tier. If the agent b
 
 This makes context poisoning particularly insidious. The agent's behavior appears normal under inspection. Its decision-making process is valid. The corruption isn't in the logic; it's in the premises the logic operates on.
 
+The pattern isn't new. The [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) identifies related attack vectors: [LLM04: Data and Model Poisoning](https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/) covers training data poisoning, fine-tuning poisoning, and RAG poisoning; [LLM08: Vector and Embedding Weaknesses](https://genai.owasp.org/llmrisk/llm082025-vector-and-embedding-weaknesses/) addresses retrieval-augmented generation security. RAG poisoning—where malicious documents injected into a retrieval corpus manipulate model outputs—is one instance of the broader problem.
+
+But the multi-agent context exchange introduces attack surfaces these categories don't fully address. When agents exchange structured context across organizational boundaries via protocols like A2A, the attack surface extends beyond the retrieval corpus. It includes DataParts exchanged between agents, context graphs composed from multiple sources, and the trust relationships between enterprises. The same pattern—corrupt the data source downstream systems depend on—but applied to inter-agent communication rather than retrieval pipelines.
+
 ## Threat Model
 
 Before examining specific vulnerabilities, we need to establish who we're defending against and what they're trying to achieve.
