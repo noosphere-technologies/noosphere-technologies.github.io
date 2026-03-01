@@ -129,7 +129,9 @@ One might argue that Agent Cards—the discovery mechanism A2A uses to advertise
 
 But this inherits all the limitations of Web PKI, which was designed for a different problem: helping browsers verify they're talking to the right website.
 
-Web PKI's trust model is coarse. Over a hundred root CAs are trusted by default in most browsers and operating systems. Any of these CAs can issue a certificate for any domain. The compromise of any single CA—or coercion of any CA by a government—can undermine the entire system. This has happened repeatedly: DigiNotar, Symantec, and others.
+In 2014, Moxie Marlinspike and the SSL Observatory project documented just how broken this system was. They found CAs issuing certificates improperly, intermediate certificates being misused, and a trust model that concentrated enormous power in entities with little accountability. The system's fundamental flaw was architectural: any of the hundreds of trusted CAs could issue a certificate for any domain, creating a weakest-link problem where the security of the entire ecosystem depended on the least trustworthy CA.
+
+That was over a decade ago. Remarkably little has changed. Certificate Transparency has added some visibility, but the underlying trust model remains the same. Over a hundred root CAs are still trusted by default in most browsers and operating systems. Any of these CAs can still issue a certificate for any domain. The compromise of any single CA—or coercion of any CA by a government—can still undermine the entire system. DigiNotar, Symantec, and others have demonstrated this isn't theoretical.
 
 More fundamentally, domain-level trust doesn't map to agent authorization needs. You might trust acme.com in the sense that you're willing to visit their website. That doesn't mean you trust every service on that domain to make claims about contract terms or customer status. It doesn't mean you trust every employee with access to publish to that domain. It doesn't mean you trust claims from acme.com about contoso.com.
 
