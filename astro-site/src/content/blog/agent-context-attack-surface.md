@@ -57,7 +57,7 @@ A2A structures communication around messages containing Parts. These Parts are t
 
 DataPart is where business-critical context lives. When an agent needs factual information to make a decision—a customer's spending history, a contract's renewal date, whether someone is authorized to approve a discount—that information arrives as structured JSON in a DataPart. The agent parses this JSON, extracts the relevant values, and uses them as the factual basis for its reasoning.
 
-In practice, these DataParts often carry not just isolated facts but entire context graphs. A customer context isn't simply a tier designation; it's a web of interconnected information represented as JSON-LD. The organization connects to contracts, which have values and renewal dates. The organization connects to contacts, who have roles and decision-making authority. All of this arrives as a graph that agents can traverse to answer complex questions.
+The protocol allows DataParts to carry not just isolated facts but entire context graphs. A customer context isn't simply a tier designation; it's a web of interconnected information represented as JSON-LD. The organization connects to contracts, which have values and renewal dates. The organization connects to contacts, who have roles and decision-making authority. All of this arrives as a graph that agents can traverse to answer complex questions.
 
 When an agent receives this graph, it treats every claim within it as factual. The customer is Enterprise tier. The annual spend is half a million dollars. Jane Smith is the decision maker. The agent accepts these claims and reasons over them because that's what agents do—they operate on the context they're given.
 
