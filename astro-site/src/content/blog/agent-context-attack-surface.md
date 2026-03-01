@@ -116,6 +116,45 @@ There are three types of Parts:
 
 **DataPart is where context lives.** When an agent needs to know a customer's tier, their spending history, who the decision maker is, what discounts they qualify for—that information arrives as a DataPart. The agent parses the JSON, extracts the values, and uses them to make decisions.
 
+**DataParts can carry entire context graphs.** In practice, agents don't just exchange isolated facts—they exchange interconnected knowledge. A customer context isn't just a tier; it's a web of relationships:
+
+```json
+{
+  "type": "data",
+  "data": {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://crm.acme.com/customers/contoso",
+    "name": "Contoso Industries",
+    "tier": "Enterprise",
+    "contracts": [{
+      "@type": "Contract",
+      "@id": "https://docusign.com/contracts/abc123",
+      "annualValue": 250000,
+      "renewalDate": "2026-09-01"
+    }],
+    "contacts": [{
+      "@type": "Person",
+      "@id": "https://linkedin.com/in/janesmith",
+      "name": "Jane Smith",
+      "role": "VP Engineering",
+      "decisionMaker": true
+    }]
+  }
+}
+```
+
+This DataPart contains a context graph—nodes (Organization, Contract, Person) connected by relationships (contracts, contacts). The `@id` fields are references; agents can traverse from customer to contract to contact.
+
+When agents reason about complex decisions, they navigate these graphs. "What's the contract value for Contoso?" means following the edge from Organization to Contract and reading `annualValue`. "Who should I contact about renewal?" means following Organization → contacts → Person where `decisionMaker` is true.
+
+This makes the attack surface larger. It's not just individual values that can be poisoned—it's relationships. An attacker could:
+- Add a fake contact to a real organization
+- Link a legitimate contract to the wrong customer
+- Inject a node that doesn't exist in the source system
+
+The graph structure that makes context powerful also makes it vulnerable. More connections mean more injection points.
+
 This is the attack surface. Every DataPart is a set of claims: "this customer is Enterprise tier," "their annual spend is $500,000," "Jane Smith is the decision maker." The receiving agent treats these claims as facts. But nothing in the protocol verifies that they're true.
 
 A DataPart is just JSON. If the JSON says `"tier": "Enterprise"`, the agent believes the customer is Enterprise tier. If an attacker can modify that JSON—or inject their own—the agent's beliefs change. Its decisions change. The attack succeeds.
