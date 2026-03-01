@@ -11,7 +11,20 @@ Google's Agent-to-Agent (A2A) protocol defines how AI agents communicate. Tasks,
 
 What A2A doesn't define: **how agents verify the context they receive**.
 
-This is the attack surface. When Agent B receives a `DataPart` from Agent A, it has no cryptographic assurance about origin, integrity, or chain of custody. The protocol defines transport. It doesn't define trust.
+This is the attack surface.
+
+Think about how you'd handle a sensitive document in the physical world. If someone hands you a contract, you check: Is this the original? Has anyone altered it? Does the signature match? Can I trace it back to the person who claims to have sent it?
+
+Now think about what happens when Agent B receives data from Agent A:
+
+- **Who sent this?** The message says it's from Agent A, but is it really? Anyone who can reach the endpoint can claim to be anyone.
+- **Has it been modified?** The data looks right, but was it changed somewhere along the way? There's no seal to break, no tamper-evident envelope.
+- **Is this current?** The data might be valid, but is it from today or from last month? Nothing in the message proves when it was created.
+- **Can I trace it?** If something goes wrong, can I prove where this data came from and who touched it? There's no paper trail.
+
+In A2A today, the answer to all of these questions is: *you can't know*. The agent receives JSON over HTTPS. The HTTPS connection proves it came from a particular server. But it doesn't prove the *content* is authentic, unmodified, or authoritative.
+
+The protocol defines how to deliver messages. It doesn't define how to trust them.
 
 ---
 
