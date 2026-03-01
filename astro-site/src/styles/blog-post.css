@@ -328,6 +328,37 @@ body::after {
 	margin-right: -0.25rem;
 }
 
+/* CTA Button for blog posts */
+.article-content .cta-button {
+	display: inline-block;
+	padding: 1.25rem 3rem;
+	background: linear-gradient(135deg, #7850ff 0%, #5040ff 50%, #ff5078 100%);
+	background-size: 200% auto;
+	color: white !important;
+	text-decoration: none !important;
+	border: none !important;
+	border-radius: 50px;
+	font-family: 'Space Grotesk', sans-serif;
+	font-weight: 600;
+	font-size: 1.1rem;
+	letter-spacing: 0.02em;
+	transition: all 0.3s;
+	position: relative;
+	overflow: hidden;
+	margin-top: 1rem;
+}
+
+.article-content .cta-button:hover {
+	background-position: right center;
+	transform: translateY(-3px);
+	box-shadow: 0 12px 40px rgba(120, 80, 255, 0.5);
+	border: none !important;
+}
+
+.article-content .cta-button::after {
+	content: ' →';
+}
+
 @keyframes shimmer {
 	0% { background-position: 0% center; }
 	100% { background-position: 200% center; }

@@ -444,4 +444,6 @@ As A2A adoption grows, context poisoning becomes the primary attack vector. The 
 
 ---
 
-*We're building attestation infrastructure for A2A and MCP—supply chain security for agent context. If you're deploying agents across trust boundaries, [let's talk](/contact).*
+*We're building attestation infrastructure for A2A and MCP—supply chain security for agent context.*
+
+<a href="/contact" class="cta-button">Let's Talk</a>

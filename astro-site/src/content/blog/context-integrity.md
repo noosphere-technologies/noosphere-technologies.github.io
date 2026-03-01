@@ -332,4 +332,6 @@ Context integrity protects agents from synthetic knowledge.
 
 ---
 
-*We're building infrastructure for trusted AI agent ecosystems—context graphs with supply chain attestations. If you're working on agent systems and thinking about trust, [let's talk](/contact).*
+*We're building infrastructure for trusted AI agent ecosystems—context graphs with supply chain attestations.*
+
+<a href="/contact" class="cta-button">Let's Talk</a>
