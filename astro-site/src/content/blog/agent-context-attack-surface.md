@@ -76,32 +76,49 @@ In A2A systems, every message is an opportunity for poisoning.
 
 ## A2A's Context Model
 
-A2A messages carry context through **Parts**:
+To understand the attack surface, you need to understand how A2A carries information between agents.
 
+In A2A, agents communicate by sending **messages**. Each message contains one or more **Parts**—chunks of content that together form the context the receiving agent will act on.
+
+Think of Parts as the building blocks of agent knowledge. When a sales agent asks a CRM agent "what do you know about this customer?", the CRM agent responds with Parts containing that knowledge.
+
+There are three types of Parts:
+
+**TextPart** — Natural language. What you'd see in a chat message.
+```json
+{ "type": "text", "text": "Customer prefers enterprise pricing" }
+```
+
+**DataPart** — Structured data. The machine-readable facts agents actually reason over.
 ```json
 {
-  "role": "agent",
-  "parts": [
-    { "type": "text", "text": "Customer prefers enterprise pricing" },
-    {
-      "type": "data",
-      "data": {
-        "@type": "CustomerContext",
-        "tier": "Enterprise",
-        "annualSpend": 500000
-      }
-    }
-  ]
+  "type": "data",
+  "data": {
+    "@type": "CustomerContext",
+    "tier": "Enterprise",
+    "annualSpend": 500000,
+    "decisionMaker": "Jane Smith"
+  }
 }
 ```
 
-Three part types carry context:
+**FilePart** — Binary artifacts. Documents, images, files referenced by URI.
+```json
+{
+  "type": "file",
+  "file": {
+    "name": "contract.pdf",
+    "mimeType": "application/pdf",
+    "uri": "https://storage.example.com/contracts/123.pdf"
+  }
+}
+```
 
-- **TextPart**: Natural language claims
-- **DataPart**: Structured JSON objects
-- **FilePart**: Binary artifacts with MIME types
+**DataPart is where context lives.** When an agent needs to know a customer's tier, their spending history, who the decision maker is, what discounts they qualify for—that information arrives as a DataPart. The agent parses the JSON, extracts the values, and uses them to make decisions.
 
-The receiving agent parses these parts and acts on them. But nothing in the protocol verifies that the content is authentic, that it hasn't been modified, or that the sending agent had authority to make these claims.
+This is the attack surface. Every DataPart is a set of claims: "this customer is Enterprise tier," "their annual spend is $500,000," "Jane Smith is the decision maker." The receiving agent treats these claims as facts. But nothing in the protocol verifies that they're true.
+
+A DataPart is just JSON. If the JSON says `"tier": "Enterprise"`, the agent believes the customer is Enterprise tier. If an attacker can modify that JSON—or inject their own—the agent's beliefs change. Its decisions change. The attack succeeds.
 
 ## Attack 1: DataPart Injection
 
