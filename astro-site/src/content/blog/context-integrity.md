@@ -5,7 +5,7 @@ pubDate: "Mar 1 2026"
 author: "Andrew Brown"
 ---
 
-![Context Integrity](/images/blog-images/context-integrity.jpg)
+![Context Integrity](/images/blog-images/context-integrity-2.jpg)
 
 We've solved content authenticity. C2PA lets you verify that a photo wasn't AI-generated, that a video hasn't been tampered with, that media can be traced back to its source.
 
