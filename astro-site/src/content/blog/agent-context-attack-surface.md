@@ -59,9 +59,20 @@ DataPart is where business-critical context lives. When an agent needs factual i
 
 The protocol allows DataParts to carry not just isolated facts but entire context graphs. A customer context isn't simply a tier designation; it's a web of interconnected information represented as JSON-LD. The organization connects to contracts, which have values and renewal dates. The organization connects to contacts, who have roles and decision-making authority. All of this arrives as a graph that agents can traverse to answer complex questions.
 
-When an agent receives this graph, it treats every claim within it as factual. The customer is Enterprise tier. The annual spend is half a million dollars. Jane Smith is the decision maker. The agent accepts these claims and reasons over them because that's what agents do—they operate on the context they're given.
+This graph structure matters for security because agents don't just read values—they traverse relationships. "What's the contract value for Contoso?" requires following the edge from Organization to Contract. "Who should I contact about renewal?" requires traversing Organization → contacts → Person and filtering by role. The agent's reasoning depends not just on the data at each node, but on the structure connecting them.
 
-Nothing in the protocol verifies these claims. The JSON is syntactically valid. It arrived over a proper connection. The schema matches expectations. None of that proves the claims are true. None of that proves they weren't modified in transit. None of that proves they're current rather than replayed from an earlier, more favorable state.
+This expands the attack surface beyond simple value manipulation. An attacker who can only modify a single field can change a price or a tier. An attacker who can manipulate graph structure can:
+
+- Create false relationships between authentic entities (attach a real contract to the wrong customer)
+- Inject nodes that reference real entities (a fake contact claiming authority over a real account)
+- Sever legitimate relationships (remove the actual decision maker, leaving only attacker-controlled contacts)
+- Recontextualize authentic subgraphs in malicious frames (genuine contract terms embedded in fabricated organizational context)
+
+Each of these attacks can produce graphs where individual nodes verify correctly but the relationships between them are falsified. A signature on the Contract node doesn't prove it belongs to this Organization. A signature on the Person node doesn't prove they have authority over this Account. The graph structure itself must be attested, not just the nodes within it.
+
+When an agent receives such a graph, it treats every claim—every node and every edge—as factual. The agent accepts these claims and reasons over them because that's what agents do. They operate on the context they're given.
+
+Nothing in the protocol verifies these claims. The JSON is syntactically valid. It arrived over a proper connection. The schema matches expectations. None of that proves the claims are true. None of that proves the relationships are legitimate. None of that proves the graph wasn't modified in transit or replayed from an earlier, more favorable state.
 
 ## The Inter-Enterprise Reality
 
