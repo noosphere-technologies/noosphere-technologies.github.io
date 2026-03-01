@@ -13,7 +13,19 @@ What A2A doesn't define: **how agents verify the context they receive**.
 
 This is the attack surface. When Agent B receives a `DataPart` from Agent A, it has no cryptographic assurance about origin, integrity, or chain of custody. The protocol defines transport. It doesn't define trust.
 
-Prompt injection manipulates what agents are told to do. Context poisoning manipulates what agents believe to be true. In A2A systems, every message is an opportunity for poisoning.
+---
+
+**Prompt injection** manipulates what agents are *told to do*.
+
+**Context poisoning** manipulates what agents *believe to be true*.
+
+One is an instruction attack. The other is a reality attack.
+
+An agent with poisoned context will faithfully execute correct instructions—and still produce catastrophic outcomes. Its reasoning is sound. Its beliefs are false.
+
+---
+
+In A2A systems, every message is an opportunity for poisoning.
 
 ## A2A's Context Model
 
