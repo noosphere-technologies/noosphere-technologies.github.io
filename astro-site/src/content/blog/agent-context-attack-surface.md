@@ -22,7 +22,41 @@ Now think about what happens when Agent B receives data from Agent A:
 - **Is this current?** The data might be valid, but is it from today or from last month? Nothing in the message proves when it was created.
 - **Can I trace it?** If something goes wrong, can I prove where this data came from and who touched it? There's no paper trail.
 
-In A2A today, the answer to all of these questions is: *you can't know*. The agent receives JSON over HTTPS. The HTTPS connection proves it came from a particular server. But it doesn't prove the *content* is authentic, unmodified, or authoritative.
+In A2A today, the answer to all of these questions is: *you can't know*.
+
+Here's what actually happens. Agent A sends a message to Agent B using JSON-RPC over HTTPS:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "message/send",
+  "params": {
+    "message": {
+      "role": "agent",
+      "parts": [
+        {
+          "type": "data",
+          "data": {
+            "customerTier": "Enterprise",
+            "maxDiscount": 0.40
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+That's it. That's the entire payload. There's no signature field. No hash of the content. No timestamp proving when it was created. No chain of custody showing where this data originated.
+
+The HTTPS connection proves the message came from a particular server. But HTTPS protects the *transport*, not the *content*. Once the message arrives, there's nothing inside it that proves:
+
+- The data actually came from a system authorized to make this claim
+- The values haven't been modified since they were created
+- This is the current version, not a replay of old data
+- The sending agent had the authority to assert these facts
+
+The `DataPart` is just JSON. Valid JSON from a valid endpoint. The receiving agent parses it and acts on it—because what else can it do?
 
 The protocol defines how to deliver messages. It doesn't define how to trust them.
 
