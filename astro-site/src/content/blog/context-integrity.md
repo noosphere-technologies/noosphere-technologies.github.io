@@ -1,9 +1,11 @@
 ---
 title: "Context Integrity: The Missing Layer for Trusted AI Agents"
 description: "Content authenticity solved the problem of verifying images. Context integrity solves the problem of verifying the knowledge AI agents act on."
-pubDate: "Feb 25 2026"
-author: "Andrew Brown"
+pubDate: "Mar 1 2026"
+author: "Andrew Brown, Co-founder"
 ---
+
+![Context Integrity](/images/blog-images/context-integrity.jpg)
 
 We've solved content authenticity. C2PA lets you verify that a photo wasn't AI-generated, that a video hasn't been tampered with, that media can be traced back to its source.
 
