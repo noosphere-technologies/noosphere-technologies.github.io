@@ -330,29 +330,171 @@ data: {"type": "data", "data": {"override": true, "newPolicy": {...}}}
 
 A2A uses HTTPS. Problem solved?
 
-No. Transport security protects the pipe, not the payload. TLS encrypts data in transit between two endpoints. But agent transactions aren't point-to-point—they're multi-party, multi-hop.
+To understand why not, you need to understand what TLS actually does—and what it doesn't do.
+
+### What TLS Does
+
+TLS (Transport Layer Security) creates an encrypted tunnel between two endpoints. When Agent A connects to Agent B over HTTPS:
+
+1. They negotiate a shared secret via asymmetric cryptography
+2. All data flowing through the connection is encrypted with that secret
+3. The connection is authenticated—Agent A knows it's talking to the real Agent B (via certificate validation)
+4. Data integrity is protected—tampering with encrypted traffic is detectable
+
+This is excellent for protecting data in transit. An attacker sniffing the network sees only encrypted bytes. Man-in-the-middle attacks fail because the attacker can't forge Agent B's certificate.
+
+### What TLS Doesn't Do
+
+TLS protects the **transport**. It doesn't protect the **content**.
+
+The security properties only exist while data is in the pipe. The moment data arrives at an endpoint, TLS's job is done. The payload is decrypted and handed to the application layer. From that point on, TLS provides no guarantees whatsoever.
+
+This matters because agent systems aren't point-to-point. They're multi-party, multi-hop workflows:
 
 ```
-Agent A  ──HTTPS──▶  Agent B  ──HTTPS──▶  Agent C
-            │                      │
-         decrypted              decrypted
-         at B                   at C
+┌─────────┐      ┌─────────┐      ┌─────────┐      ┌─────────┐
+│ CRM     │─TLS─▶│ Context │─TLS─▶│ Sales   │─TLS─▶│ Pricing │
+│ Agent   │      │ Router  │      │ Agent   │      │ Agent   │
+└─────────┘      └─────────┘      └─────────┘      └─────────┘
+                      │                │
+                  decrypted        decrypted
+                  processed        processed
+                  re-encrypted     re-encrypted
 ```
 
-Each hop is protected. But at every intermediary, context is decrypted, processed, potentially modified, then re-encrypted for the next hop. Agent B can poison the context before forwarding to Agent C. Agent C has no way to verify what Agent A originally sent.
+Each hop has its own TLS connection. Each hop terminates that connection, decrypts the payload, processes it, and creates a new TLS connection to the next hop. At every intermediary, the content is fully exposed.
 
-This is the fundamental limitation of transport security in distributed systems:
+Agent C receives context that claims to originate from the CRM. But what Agent C actually verified is that the message came over a valid TLS connection from Agent B. It has no cryptographic assurance that:
 
-| Transport Security (TLS) | Content Integrity (Attestations) |
-|--------------------------|----------------------------------|
-| Hop-by-hop encryption | End-to-end verification |
-| Protects the pipe | Protects the payload |
-| Trusted intermediaries | Zero-trust intermediaries |
-| Verified at connection | Verified at consumption |
+- The CRM actually produced this context
+- Agent B didn't modify the content
+- The Context Router didn't inject additional data
+- Any intermediary in the chain is trustworthy
 
-In a two-party interaction over a single HTTPS connection, transport security is sufficient. In multi-agent workflows that span organizational boundaries, route through orchestrators, or involve any form of message passing—transport security protects nothing.
+TLS authenticated the connection. It didn't authenticate the content.
 
-The context must carry its own integrity. Attestations travel with the payload. Verification happens at the point of consumption, not at each network hop.
+### We Solved This Twenty Years Ago
+
+This isn't a new problem. Enterprise service architectures faced exactly this challenge in the early 2000s.
+
+SOAP-based web services used HTTPS for transport security. But enterprises needed more—they needed messages that could traverse intermediaries (ESBs, message brokers, service meshes) while maintaining end-to-end integrity and confidentiality.
+
+The solution was **WS-Security**: message-level security that traveled with the payload.
+
+Instead of relying on the transport, WS-Security signed and encrypted the SOAP envelope itself:
+
+```xml
+<soap:Envelope>
+  <soap:Header>
+    <wsse:Security>
+      <ds:Signature>
+        <!-- Digital signature over the body -->
+      </ds:Signature>
+      <wsse:BinarySecurityToken>
+        <!-- X.509 certificate -->
+      </wsse:BinarySecurityToken>
+    </wsse:Security>
+  </soap:Header>
+  <soap:Body>
+    <!-- Actual content, signed and optionally encrypted -->
+  </soap:Body>
+</soap:Envelope>
+```
+
+The signature traveled with the message. Any recipient could verify that the body hadn't been modified since the original sender signed it—regardless of how many intermediaries the message passed through.
+
+Transport security protected hop-to-hop. Message security protected end-to-end.
+
+### How Agents Build Context
+
+The problem is more complex for agents because context isn't just passed—it's **composed**.
+
+An agent building customer context might:
+
+1. Query the CRM for account data
+2. Query DocuSign for contract details
+3. Query the identity provider for contact verification
+4. Query the signals pipeline for recent activity
+5. **Merge** all of this into a unified context graph
+
+```
+┌─────────┐
+│   CRM   │──▶ account data ─────┐
+└─────────┘                      │
+┌─────────┐                      ▼
+│DocuSign │──▶ contract data ──▶ [Compose] ──▶ Customer Context Graph
+└─────────┘                      ▲
+┌─────────┐                      │
+│Identity │──▶ contact data ─────┘
+└─────────┘
+```
+
+Each source might provide properly attested data. But the **composition**—the act of merging these into a single graph—is itself a transformation that can introduce errors or malicious modifications.
+
+Without message-level security, the receiving agent can't distinguish:
+- Legitimate context from authoritative sources
+- Modified context from compromised intermediaries
+- Fabricated context from malicious actors
+- Properly composed context from poisoned compositions
+
+### Message-Level Security for JSON-LD
+
+The solution is the same as WS-Security, adapted for the agent era: **sign the JSON-LD payload directly**.
+
+Instead of trusting the transport, the context carries its own cryptographic integrity:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "CustomerContext",
+  "tier": "Enterprise",
+  "annualSpend": 500000,
+
+  "integrity": {
+    "contentHash": "sha256:e3b0c44298fc1c149afbf4c8996fb924...",
+    "signature": {
+      "algorithm": "Ed25519",
+      "signer": "did:web:crm.acme.com",
+      "value": "base64:Qm9va3MgYXJlIGEgdW5pcXVl...",
+      "timestamp": "2026-03-01T10:00:00Z"
+    },
+    "attestations": [{
+      "type": "https://slsa.dev/provenance/v1",
+      "builder": "did:web:etl.acme.com",
+      "materials": [
+        { "uri": "salesforce://accounts/contoso", "digest": "sha256:abc..." }
+      ]
+    }]
+  }
+}
+```
+
+Now the content carries its own proof:
+
+- **Hash**: The content hasn't changed since signing
+- **Signature**: A specific identity vouches for this content
+- **Timestamp**: The signature was created at a known time
+- **Attestations**: The provenance chain showing how this context was derived
+
+Any recipient—regardless of how many hops away—can verify:
+
+1. Hash the content, compare to `contentHash`
+2. Verify the signature using the signer's public key (resolved via DID)
+3. Check that the signer is in the trust graph
+4. Validate attestations against policy (SLSA level, allowed builders, freshness)
+
+The transport becomes irrelevant. Context integrity is verified at consumption, not at each hop.
+
+| Transport Security (TLS) | Message Security (Signed JSON-LD) |
+|--------------------------|-----------------------------------|
+| Hop-by-hop | End-to-end |
+| Authenticates connection | Authenticates content |
+| Protects data in transit | Protects data at rest and in transit |
+| Terminates at each endpoint | Survives any number of hops |
+| Trusts intermediaries | Zero-trust intermediaries |
+| Verified by TLS stack | Verified by application |
+
+This is what WS-Security did for SOAP. Signed JSON-LD does the same for agent context.
 
 ## The Gap in A2A
 
