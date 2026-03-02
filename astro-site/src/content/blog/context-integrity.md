@@ -206,7 +206,13 @@ The primitives exist. The standards exist. The patterns are proven.
 
 ---
 
-*Noosphere is developing Context Integrity infrastructure for A2A and MCP. If you're building agent systems that cross trust boundaries, [let's talk](https://www.noosphere.tech/contact).*
+## Build With Us
+
+We're developing Context Integrity infrastructure for A2A and MCP—message-level security for the knowledge layer agents reason over.
+
+If you're building agent systems that cross trust boundaries, we should talk.
+
+<a href="https://www.noosphere.tech/contact" style="display: inline-block; background-color: #2563eb; color: white; padding: 16px 32px; font-size: 18px; font-weight: 600; text-decoration: none; border-radius: 8px; margin: 24px 0;">Get in Touch →</a>
 
 ---
 
