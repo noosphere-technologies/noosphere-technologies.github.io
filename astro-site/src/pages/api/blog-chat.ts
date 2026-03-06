@@ -3,10 +3,13 @@ import Anthropic from '@anthropic-ai/sdk';
 
 // Log API key status on module load
 const apiKey = process.env.ANTHROPIC_API_KEY;
-console.log('[blog-chat] Module loaded');
-console.log('[blog-chat] API key status:', apiKey ? `Set (${apiKey.substring(0, 10)}...)` : 'NOT SET');
+console.log('[blog-chat] ========== MODULE LOAD ==========');
+console.log('[blog-chat] API key from env:', apiKey ? `Set (length: ${apiKey.length}, starts: ${apiKey.substring(0, 15)}...)` : 'NOT SET - THIS IS THE PROBLEM');
+console.log('[blog-chat] All env keys:', Object.keys(process.env).filter(k => k.includes('ANTHROPIC') || k.includes('API')).join(', ') || 'none found');
 
-const client = new Anthropic();
+// Explicitly pass API key to client
+const client = apiKey ? new Anthropic({ apiKey }) : null;
+console.log('[blog-chat] Client created:', client ? 'YES' : 'NO - client is null');
 
 // Simple in-memory rate limiter
 // For production, consider using Upstash Redis: https://upstash.com/docs/redis/sdks/ratelimit-ts
@@ -54,6 +57,18 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please wait a moment.' }), {
       status: 429,
       headers: { 'Content-Type': 'application/json', 'Retry-After': '60' },
+    });
+  }
+
+  // Check if client is configured
+  if (!client) {
+    console.error('[blog-chat] ERROR: Anthropic client not initialized - API key missing');
+    return new Response(JSON.stringify({
+      error: 'AI service not configured. Please set ANTHROPIC_API_KEY environment variable.',
+      debug: 'Client is null - API key was not found at module load time'
+    }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' },
     });
   }
 
@@ -143,17 +158,30 @@ Noosphere focuses on: digital trust infrastructure, content authenticity (C2PA),
     console.error('[blog-chat] ERROR:', error);
     console.error('[blog-chat] Error type:', error?.constructor?.name);
     console.error('[blog-chat] Error message:', error instanceof Error ? error.message : String(error));
+    console.error('[blog-chat] Full error:', JSON.stringify(error, Object.getOwnPropertyNames(error || {})));
 
     // Check for specific Anthropic errors
+    let apiStatus: number | undefined;
+    let apiError: unknown;
     if (error && typeof error === 'object') {
       const err = error as Record<string, unknown>;
-      if (err.status) console.error('[blog-chat] API status:', err.status);
-      if (err.error) console.error('[blog-chat] API error:', JSON.stringify(err.error));
+      apiStatus = err.status as number | undefined;
+      apiError = err.error;
+      if (apiStatus) console.error('[blog-chat] API status:', apiStatus);
+      if (apiError) console.error('[blog-chat] API error:', JSON.stringify(apiError));
     }
 
     const errorMessage = error instanceof Error ? error.message : 'Failed to process request';
-    return new Response(JSON.stringify({ error: errorMessage }), {
-      status: 500,
+
+    // Return detailed error for debugging
+    return new Response(JSON.stringify({
+      error: errorMessage,
+      type: error?.constructor?.name || 'Unknown',
+      status: apiStatus,
+      apiError: apiError,
+      hint: apiStatus === 401 ? 'Invalid API key' : apiStatus === 429 ? 'Rate limited by Anthropic' : undefined
+    }), {
+      status: apiStatus || 500,
       headers: { 'Content-Type': 'application/json' },
     });
   }
