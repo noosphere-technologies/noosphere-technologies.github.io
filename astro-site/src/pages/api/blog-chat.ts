@@ -1,6 +1,11 @@
 import type { APIRoute } from 'astro';
 import Anthropic from '@anthropic-ai/sdk';
 
+// Log API key status on module load
+const apiKey = process.env.ANTHROPIC_API_KEY;
+console.log('[blog-chat] Module loaded');
+console.log('[blog-chat] API key status:', apiKey ? `Set (${apiKey.substring(0, 10)}...)` : 'NOT SET');
+
 const client = new Anthropic();
 
 // Simple in-memory rate limiter
@@ -37,9 +42,15 @@ function isRateLimited(ip: string): boolean {
 }
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
+  console.log('[blog-chat] POST request received');
+  console.log('[blog-chat] Client address:', clientAddress);
+
   // Rate limiting
   const ip = clientAddress || request.headers.get('x-forwarded-for') || 'unknown';
+  console.log('[blog-chat] IP for rate limiting:', ip);
+
   if (isRateLimited(ip)) {
+    console.log('[blog-chat] Rate limited');
     return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please wait a moment.' }), {
       status: 429,
       headers: { 'Content-Type': 'application/json', 'Retry-After': '60' },
@@ -47,9 +58,14 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
   }
 
   try {
-    const { messages, context } = await request.json();
+    const body = await request.json();
+    const { messages, context } = body;
+    console.log('[blog-chat] Request body parsed');
+    console.log('[blog-chat] Messages count:', messages?.length || 0);
+    console.log('[blog-chat] Context length:', context?.length || 0);
 
     if (!messages || !Array.isArray(messages)) {
+      console.log('[blog-chat] Invalid messages format');
       return new Response(JSON.stringify({ error: 'Messages required' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
@@ -76,6 +92,9 @@ Guidelines:
 
 Noosphere focuses on: digital trust infrastructure, content authenticity (C2PA), trust graphs, agentic AI systems, decentralized trust, and context integrity.`;
 
+    console.log('[blog-chat] Calling Anthropic API...');
+    console.log('[blog-chat] Model: claude-sonnet-4-20250514');
+
     const stream = await client.messages.stream({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 1024,
@@ -86,21 +105,28 @@ Noosphere focuses on: digital trust infrastructure, content authenticity (C2PA),
       })),
     });
 
+    console.log('[blog-chat] Stream created successfully');
+
     const encoder = new TextEncoder();
     const readable = new ReadableStream({
       async start(controller) {
         try {
+          console.log('[blog-chat] Starting stream consumption');
+          let chunkCount = 0;
           for await (const event of stream) {
             if (event.type === 'content_block_delta') {
               const delta = event.delta;
               if ('text' in delta) {
+                chunkCount++;
                 controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text: delta.text })}\n\n`));
               }
             }
           }
+          console.log('[blog-chat] Stream complete, chunks:', chunkCount);
           controller.enqueue(encoder.encode('data: [DONE]\n\n'));
           controller.close();
         } catch (error) {
+          console.error('[blog-chat] Stream error:', error);
           controller.error(error);
         }
       },
@@ -114,8 +140,19 @@ Noosphere focuses on: digital trust infrastructure, content authenticity (C2PA),
       },
     });
   } catch (error) {
-    console.error('Blog chat error:', error);
-    return new Response(JSON.stringify({ error: 'Failed to process request' }), {
+    console.error('[blog-chat] ERROR:', error);
+    console.error('[blog-chat] Error type:', error?.constructor?.name);
+    console.error('[blog-chat] Error message:', error instanceof Error ? error.message : String(error));
+
+    // Check for specific Anthropic errors
+    if (error && typeof error === 'object') {
+      const err = error as Record<string, unknown>;
+      if (err.status) console.error('[blog-chat] API status:', err.status);
+      if (err.error) console.error('[blog-chat] API error:', JSON.stringify(err.error));
+    }
+
+    const errorMessage = error instanceof Error ? error.message : 'Failed to process request';
+    return new Response(JSON.stringify({ error: errorMessage }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
