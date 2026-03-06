@@ -54,7 +54,12 @@ export default function GlobalAssistant() {
         return;
       }
 
-      if (!response.ok) throw new Error('Failed to get response');
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        const errorMsg = errorData.error || `Request failed (${response.status})`;
+        const hint = errorData.hint || '';
+        throw new Error(hint ? `${errorMsg} - ${hint}` : errorMsg);
+      }
 
       const reader = response.body?.getReader();
       if (!reader) throw new Error('No reader available');
@@ -91,9 +96,13 @@ export default function GlobalAssistant() {
       }
     } catch (error) {
       console.error('Chat error:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       setMessages([
         ...newMessages,
-        { role: 'assistant', content: 'Sorry, I encountered an error. Please try again.' },
+        {
+          role: 'assistant',
+          content: `I'm having trouble connecting right now. Error: ${errorMessage}\n\nPlease try again in a moment.`
+        },
       ]);
     } finally {
       setIsLoading(false);
