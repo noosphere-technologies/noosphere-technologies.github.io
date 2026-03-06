@@ -135,7 +135,7 @@ export default function BlogAssistant({ postContent, postTitle }: BlogAssistantP
         }}
       >
         <img
-          src="/images/andrew-brown.jpg"
+          src="/images/people/andrew.jpg"
           alt="Andrew Brown"
           style={{
             width: '40px',
