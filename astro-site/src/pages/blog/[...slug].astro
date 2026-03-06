@@ -1,6 +1,8 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -22,8 +24,17 @@ if (!post) {
 
 const { Content } = await render(post);
 
-// Get raw content for the AI assistant
-const rawContent = post.body || '';
+// Get raw content for the AI assistant by reading the file directly
+let rawContent = '';
+try {
+	const filePath = path.join(process.cwd(), 'src/content/blog', `${slug}.md`);
+	const fileContent = fs.readFileSync(filePath, 'utf-8');
+	// Remove frontmatter (everything between --- and ---)
+	rawContent = fileContent.replace(/^---[\s\S]*?---\n*/, '');
+} catch (e) {
+	console.error('Could not read blog content:', e);
+	rawContent = post.body || '';
+}
 ---
 
 <BlogPost {...post.data} slug={post.id} rawContent={rawContent}>
