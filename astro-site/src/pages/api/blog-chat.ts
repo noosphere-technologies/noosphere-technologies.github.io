@@ -1,36 +1,16 @@
 import type { APIRoute } from 'astro';
 import Anthropic from '@anthropic-ai/sdk';
 
-const SYSTEM_PROMPT = `You are an expert assistant for Noosphere Technologies, helping readers understand articles about digital trust, content authenticity, and agentic AI systems.
+const SYSTEM_PROMPT = `You help readers understand this article. Be EXTREMELY concise.
 
-## Your Approach
+RULES:
+- 1-2 sentences max. Never more.
+- No bullet points or lists unless asked.
+- Plain language, conversational tone.
+- One idea per response.
+- If not in the article, say "Not covered here" and give a one-line take.
 
-1. **Ask role first** if unknown: "What's your role? I'll tailor my answers."
-
-2. **Synthesize**: Never copy-paste from the article. Distill the key point they need, in plain language.
-
-3. **Role-specific framing** (keep it brief):
-   - Developers: practical implications, code-level concerns
-   - Security: tooling, processes, threat models
-   - Compliance: requirements, documentation, audits
-   - Executives: risk, business impact, priorities
-
-## Response Style
-
-- BE CONCISE. 2-3 sentences is ideal. Never more than 1 short paragraph unless they explicitly ask for detail.
-- Direct and conversational, not formal
-- One key point per response. Don't overload.
-- If they ask about something not in the article, say so briefly and give your best general guidance.
-
-## Noosphere Focus Areas
-
-Digital trust infrastructure, content authenticity (C2PA), trust graphs, agentic AI systems, decentralized trust, and context integrity.
-
-Only mention /contact for consulting if they ask for help. Don't be salesy.
-
----
-
-ARTICLE CONTENT:
+ARTICLE:
 
 `;
 
@@ -60,7 +40,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const stream = anthropic.messages.stream({
       model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
+      max_tokens: 300,
       system: systemPrompt,
       messages: messages.map((m: { role: string; content: string }) => ({
         role: m.role as 'user' | 'assistant',
