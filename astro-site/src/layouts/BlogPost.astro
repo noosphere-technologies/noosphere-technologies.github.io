@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import BlogAssistant from '../components/BlogAssistant';
 import ClarifyInjector from '../components/ClarifyInjector';
+import GlobalAssistant from '../components/GlobalAssistant';
 import { authors } from '../data/authors';
 import '../styles/blog-post.css';
 
@@ -155,5 +156,8 @@ const formattedUpdatedDate = formatDate(updatedDate ?? null);
 
 		<!-- Inject Clarify buttons into headings -->
 		<ClarifyInjector client:load />
+
+		<!-- Global floating assistant -->
+		<GlobalAssistant client:load />
 	</body>
 </html>
