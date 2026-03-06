@@ -1,5 +1,9 @@
 {
   "version": 2,
+  "framework": "astro",
+  "buildCommand": "cd astro-site && npm install && npm run build",
+  "outputDirectory": "astro-site/.vercel/output",
+  "installCommand": "cd astro-site && npm install",
   "headers": [
     {
       "source": "/.well-known/(.*)",
@@ -17,16 +21,8 @@
           "value": "*"
         },
         {
-          "key": "Access-Control-Max-Age",
-          "value": "86400"
-        },
-        {
           "key": "Content-Type",
           "value": "application/json; charset=utf-8"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
         }
       ]
     }
