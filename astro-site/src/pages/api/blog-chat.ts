@@ -108,10 +108,10 @@ Guidelines:
 Noosphere focuses on: digital trust infrastructure, content authenticity (C2PA), trust graphs, agentic AI systems, decentralized trust, and context integrity.`;
 
     console.log('[blog-chat] Calling Anthropic API...');
-    console.log('[blog-chat] Model: claude-3-5-sonnet-latest');
+    console.log('[blog-chat] Model: claude-3-5-sonnet-20241022');
 
     const stream = await client.messages.stream({
-      model: 'claude-3-5-sonnet-latest',
+      model: 'claude-3-5-sonnet-20241022',
       max_tokens: 1024,
       system: systemPrompt,
       messages: messages.map((m: { role: string; content: string }) => ({
