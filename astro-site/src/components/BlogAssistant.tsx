@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Send, Sparkles, User } from 'lucide-react';
 
 interface Message {
@@ -12,11 +12,13 @@ interface BlogAssistantProps {
 }
 
 export default function BlogAssistant({ postContent, postTitle }: BlogAssistantProps) {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    { role: 'assistant', content: "What's your role? I'll tailor my answers." }
+  ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const isLoadingRef = useRef(false);
 
   const scrollToBottom = () => {
     if (messagesContainerRef.current) {
@@ -28,97 +30,83 @@ export default function BlogAssistant({ postContent, postTitle }: BlogAssistantP
     scrollToBottom();
   }, [messages]);
 
-  // Listen for clarify events from the content
-  useEffect(() => {
-    const handleClarify = (e: CustomEvent<{ topic: string }>) => {
-      const topic = e.detail.topic;
-      handleSubmit(undefined, `Clarify: ${topic}`);
-    };
+  const sendMessage = useCallback(async (userMessage: string, currentMessages: Message[]) => {
+    if (isLoadingRef.current) return;
+    isLoadingRef.current = true;
 
-    window.addEventListener('clarify-topic', handleClarify as EventListener);
-    return () => window.removeEventListener('clarify-topic', handleClarify as EventListener);
-  }, []);
-
-  const handleSubmit = async (e?: React.FormEvent, overrideMessage?: string) => {
-    e?.preventDefault();
-    const messageToSend = overrideMessage || input.trim();
-    if (!messageToSend || isLoading) return;
-
-    const userMessage: Message = { role: 'user', content: messageToSend };
-    const newMessages = [...messages, userMessage];
-    setMessages(newMessages);
-    if (!overrideMessage) setInput('');
+    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
 
     try {
+      const allMessages = [...currentMessages, { role: 'user' as const, content: userMessage }];
+      const messagesToSend = allMessages.slice(1); // Skip initial assistant message
+
       const response = await fetch('/api/blog-chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          messages: newMessages,
-          context: `Title: ${postTitle}\n\nContent:\n${postContent}`,
+          messages: messagesToSend,
+          context: `Title: ${postTitle}\n\n${postContent}`,
         }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        const errorMsg = errorData.error || `Request failed (${response.status})`;
-        const hint = errorData.hint || '';
-        throw new Error(hint ? `${errorMsg} - ${hint}` : errorMsg);
-      }
+      if (!response.ok) throw new Error('Failed to get response');
 
       const reader = response.body?.getReader();
       if (!reader) throw new Error('No reader available');
 
-      const assistantMessage: Message = { role: 'assistant', content: '' };
-      setMessages([...newMessages, assistantMessage]);
-
-      const decoder = new TextDecoder();
-      let buffer = '';
+      let assistantMessage = '';
+      setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
 
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split('\n');
-        buffer = lines.pop() || '';
+        const text = new TextDecoder().decode(value);
+        assistantMessage += text;
 
-        for (const line of lines) {
-          if (line.startsWith('data: ')) {
-            const data = line.slice(6);
-            if (data === '[DONE]') continue;
-            try {
-              const parsed = JSON.parse(data);
-              if (parsed.text) {
-                assistantMessage.content += parsed.text;
-                setMessages([...newMessages, { ...assistantMessage }]);
-              }
-            } catch {
-              // Skip invalid JSON
-            }
-          }
-        }
+        setMessages(prev => {
+          const newMessages = [...prev];
+          newMessages[newMessages.length - 1] = { role: 'assistant', content: assistantMessage };
+          return newMessages;
+        });
       }
     } catch (error) {
       console.error('Chat error:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      setMessages([
-        ...newMessages,
-        {
-          role: 'assistant',
-          content: `I'm having trouble connecting right now. Error: ${errorMessage}\n\nPlease try again in a moment.`
-        },
+      setMessages(prev => [
+        ...prev,
+        { role: 'assistant', content: 'Sorry, I encountered an error. Please try again.' }
       ]);
     } finally {
       setIsLoading(false);
+      isLoadingRef.current = false;
     }
+  }, [postContent, postTitle]);
+
+  // Listen for clarify events from the content
+  useEffect(() => {
+    const handleClarify = (e: CustomEvent<{ topic: string }>) => {
+      sendMessage(`Clarify: ${e.detail.topic}`, messages);
+    };
+
+    window.addEventListener('clarify-topic', handleClarify as EventListener);
+    return () => window.removeEventListener('clarify-topic', handleClarify as EventListener);
+  }, [messages, sendMessage]);
+
+  const handleSubmit = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!input.trim() || isLoading) return;
+
+    const userMessage = input.trim();
+    setInput('');
+    sendMessage(userMessage, messages);
   };
 
-  const suggestedQuestions = [
-    'Summarize the key points',
-    'What are the implications?',
-    'How does this relate to AI agents?',
+  const suggestedRoles = [
+    "I'm a developer",
+    "I'm in security",
+    "I'm in compliance",
+    "I'm an executive",
   ];
 
   return (
@@ -143,23 +131,22 @@ export default function BlogAssistant({ postContent, postTitle }: BlogAssistantP
           gap: '10px',
         }}
       >
-        <img
-          src="/images/people/andrew.jpg"
-          alt="Andrew Brown"
+        <div
           style={{
             width: '40px',
             height: '40px',
-            borderRadius: '50%',
-            objectFit: 'cover',
-            border: '2px solid rgba(120, 80, 255, 0.3)',
+            borderRadius: '12px',
+            background: 'linear-gradient(135deg, rgba(120, 80, 255, 0.3), rgba(168, 178, 255, 0.3))',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
-          onError={(e) => {
-            e.currentTarget.style.display = 'none';
-          }}
-        />
+        >
+          <Sparkles size={20} color="#a8b2ff" />
+        </div>
         <div>
-          <div style={{ fontWeight: 600, color: '#fff', fontSize: '14px' }}>Andrew Brown</div>
-          <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>Founder, Noosphere</div>
+          <div style={{ fontWeight: 600, color: '#fff', fontSize: '14px' }}>Article Assistant</div>
+          <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>Ask about this article</div>
         </div>
       </div>
 
@@ -175,85 +162,76 @@ export default function BlogAssistant({ postContent, postTitle }: BlogAssistantP
           gap: '12px',
         }}
       >
-        {messages.length === 0 ? (
-          <div style={{ padding: '20px 0' }}>
-            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px', marginBottom: '16px' }}>
-              Ask me anything about this article. I can explain concepts, summarize sections, or connect ideas.
+        {messages.map((msg, i) => (
+          <div
+            key={i}
+            style={{
+              display: 'flex',
+              gap: '10px',
+              alignItems: 'flex-start',
+            }}
+          >
+            <div
+              style={{
+                width: '24px',
+                height: '24px',
+                borderRadius: '6px',
+                background:
+                  msg.role === 'assistant'
+                    ? 'linear-gradient(135deg, rgba(120, 80, 255, 0.3), rgba(168, 178, 255, 0.3))'
+                    : 'rgba(255, 255, 255, 0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              {msg.role === 'assistant' ? (
+                <Sparkles size={12} color="#a8b2ff" />
+              ) : (
+                <User size={12} color="rgba(255,255,255,0.7)" />
+              )}
+            </div>
+            <div
+              style={{
+                fontSize: '14px',
+                lineHeight: '1.6',
+                color: msg.role === 'assistant' ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.7)',
+                whiteSpace: 'pre-wrap',
+              }}
+            >
+              {msg.content || (isLoading && i === messages.length - 1 ? '...' : '')}
+            </div>
+          </div>
+        ))}
+
+        {/* Suggested roles - show only at start */}
+        {messages.length === 1 && (
+          <div style={{ paddingTop: '8px' }}>
+            <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '8px' }}>
+              Select your role:
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {suggestedQuestions.map((q, i) => (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+              {suggestedRoles.map((role) => (
                 <button
-                  key={i}
-                  onClick={() => handleSubmit(undefined, q)}
+                  key={role}
+                  onClick={() => sendMessage(role, messages)}
                   style={{
                     background: 'rgba(120, 80, 255, 0.1)',
                     border: '1px solid rgba(120, 80, 255, 0.2)',
                     borderRadius: '8px',
-                    padding: '10px 14px',
+                    padding: '8px 12px',
                     color: '#a8b2ff',
                     fontSize: '13px',
                     cursor: 'pointer',
-                    textAlign: 'left',
-                    transition: 'all 0.2s',
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.background = 'rgba(120, 80, 255, 0.2)';
-                    e.currentTarget.style.borderColor = 'rgba(120, 80, 255, 0.4)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.background = 'rgba(120, 80, 255, 0.1)';
-                    e.currentTarget.style.borderColor = 'rgba(120, 80, 255, 0.2)';
                   }}
                 >
-                  {q}
+                  {role}
                 </button>
               ))}
             </div>
           </div>
-        ) : (
-          messages.map((msg, i) => (
-            <div
-              key={i}
-              style={{
-                display: 'flex',
-                gap: '10px',
-                alignItems: 'flex-start',
-              }}
-            >
-              <div
-                style={{
-                  width: '24px',
-                  height: '24px',
-                  borderRadius: '6px',
-                  background:
-                    msg.role === 'assistant'
-                      ? 'linear-gradient(135deg, rgba(120, 80, 255, 0.3), rgba(168, 178, 255, 0.3))'
-                      : 'rgba(255, 255, 255, 0.1)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                }}
-              >
-                {msg.role === 'assistant' ? (
-                  <Sparkles size={12} color="#a8b2ff" />
-                ) : (
-                  <User size={12} color="rgba(255,255,255,0.7)" />
-                )}
-              </div>
-              <div
-                style={{
-                  fontSize: '14px',
-                  lineHeight: '1.6',
-                  color: msg.role === 'assistant' ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.7)',
-                }}
-              >
-                {msg.content || (isLoading && i === messages.length - 1 ? '...' : '')}
-              </div>
-            </div>
-          ))
         )}
-        <div ref={messagesEndRef} />
       </div>
 
       {/* Input */}
