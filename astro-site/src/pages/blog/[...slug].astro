@@ -21,8 +21,11 @@ if (!post) {
 }
 
 const { Content } = await render(post);
+
+// Get raw content for the AI assistant
+const rawContent = post.body || '';
 ---
 
-<BlogPost {...post.data} slug={post.id}>
+<BlogPost {...post.data} slug={post.id} rawContent={rawContent}>
 	<Content />
 </BlogPost>

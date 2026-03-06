@@ -1,12 +1,14 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
+import FloatingAssistant from '../components/FloatingAssistant';
+import ClarifyInjector from '../components/ClarifyInjector';
 import { authors } from '../data/authors';
 import '../styles/blog-post.css';
 
-type Props = CollectionEntry<'blog'>['data'] & { slug?: string };
+type Props = CollectionEntry<'blog'>['data'] & { slug?: string; rawContent?: string };
 
-const { title, description, pubDate, updatedDate, slug } = Astro.props;
+const { title, description, pubDate, updatedDate, slug, rawContent = '' } = Astro.props;
 
 // Temporary author mapping until we fix the frontmatter issue
 const postAuthors: Record<string, string> = {
@@ -95,8 +97,8 @@ const formattedUpdatedDate = formatDate(updatedDate ?? null);
 					<div class="article-meta">
 						{author && authors[author] ? (
 							<div class="article-author">
-								<img 
-									src={authors[author].image} 
+								<img
+									src={authors[author].image}
 									alt={author}
 									class="article-author-image"
 								/>
@@ -123,7 +125,6 @@ const formattedUpdatedDate = formatDate(updatedDate ?? null);
 					</div>
 				</header>
 
-
 				<div class="article-content">
 					<slot />
 				</div>
@@ -133,5 +134,11 @@ const formattedUpdatedDate = formatDate(updatedDate ?? null);
 				</footer>
 			</article>
 		</div>
+
+		<!-- Floating AI Assistant -->
+		<FloatingAssistant client:load postContent={rawContent} postTitle={title} />
+
+		<!-- Inject Clarify buttons into headings -->
+		<ClarifyInjector client:load />
 	</body>
 </html>
