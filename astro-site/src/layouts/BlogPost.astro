@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
-import FloatingAssistant from '../components/FloatingAssistant';
+import BlogAssistant from '../components/BlogAssistant';
 import ClarifyInjector from '../components/ClarifyInjector';
 import { authors } from '../data/authors';
 import '../styles/blog-post.css';
@@ -91,52 +91,67 @@ const formattedUpdatedDate = formatDate(updatedDate ?? null);
 				</div>
 			</nav>
 
-			<article class="article-container">
-				<header class="article-header">
-					<h1 class="article-title">{title}</h1>
-					<div class="article-meta">
-						{author && authors[author] ? (
-							<div class="article-author">
-								<img
-									src={authors[author].image}
-									alt={author}
-									class="article-author-image"
-								/>
-								<div class="article-author-info">
-									<div class="article-author-name">{author}</div>
-									<div class="article-author-title">{authors[author].title}</div>
-								</div>
-							</div>
-						) : (
-							<span>By <strong>{author}</strong></span>
-						)}
-						{formattedPubDate && (
-							<>
-								<span>•</span>
-								<span>{formattedPubDate}</span>
-							</>
-						)}
-						{formattedUpdatedDate && (
-							<>
-								<span>•</span>
-								<span>Updated {formattedUpdatedDate}</span>
-							</>
-						)}
+			<!-- Two-column layout with assistant sidebar -->
+			<div class="blog-layout">
+				<!-- Left sidebar - Article Assistant -->
+				<aside class="assistant-sidebar">
+					<div class="assistant-container">
+						<BlogAssistant client:load postContent={rawContent} postTitle={title} />
 					</div>
-				</header>
+				</aside>
 
-				<div class="article-content">
-					<slot />
-				</div>
+				<!-- Main content -->
+				<main class="main-content">
+					<article class="article-container">
+						<header class="article-header">
+							<h1 class="article-title">{title}</h1>
+							<div class="article-meta">
+								{author && authors[author] ? (
+									<div class="article-author">
+										<img
+											src={authors[author].image}
+											alt={author}
+											class="article-author-image"
+										/>
+										<div class="article-author-info">
+											<div class="article-author-name">{author}</div>
+											<div class="article-author-title">{authors[author].title}</div>
+										</div>
+									</div>
+								) : (
+									<span>By <strong>{author}</strong></span>
+								)}
+								{formattedPubDate && (
+									<>
+										<span>•</span>
+										<span>{formattedPubDate}</span>
+									</>
+								)}
+								{formattedUpdatedDate && (
+									<>
+										<span>•</span>
+										<span>Updated {formattedUpdatedDate}</span>
+									</>
+								)}
+							</div>
+						</header>
 
-				<footer class="article-footer">
-					<a href="/blog" class="back-to-blog">Back to Blog</a>
-				</footer>
-			</article>
+						<div class="article-content">
+							<slot />
+						</div>
+
+						<footer class="article-footer">
+							<a href="/blog" class="back-to-blog">Back to Blog</a>
+						</footer>
+					</article>
+
+					<!-- Mobile Assistant (shown below content on small screens) -->
+					<div class="mobile-assistant">
+						<BlogAssistant client:load postContent={rawContent} postTitle={title} />
+					</div>
+				</main>
+			</div>
 		</div>
-
-		<!-- Floating AI Assistant -->
-		<FloatingAssistant client:load postContent={rawContent} postTitle={title} />
 
 		<!-- Inject Clarify buttons into headings -->
 		<ClarifyInjector client:load />

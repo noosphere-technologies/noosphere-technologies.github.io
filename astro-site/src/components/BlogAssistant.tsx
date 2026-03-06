@@ -134,22 +134,23 @@ export default function BlogAssistant({ postContent, postTitle }: BlogAssistantP
           gap: '10px',
         }}
       >
-        <div
+        <img
+          src="/images/andrew-brown.jpg"
+          alt="Andrew Brown"
           style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '8px',
-            background: 'linear-gradient(135deg, rgba(120, 80, 255, 0.2), rgba(168, 178, 255, 0.2))',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            width: '40px',
+            height: '40px',
+            borderRadius: '50%',
+            objectFit: 'cover',
+            border: '2px solid rgba(120, 80, 255, 0.3)',
           }}
-        >
-          <Sparkles size={16} color="#a8b2ff" />
-        </div>
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+          }}
+        />
         <div>
-          <div style={{ fontWeight: 600, color: '#fff', fontSize: '14px' }}>Article Assistant</div>
-          <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>Ask about this article</div>
+          <div style={{ fontWeight: 600, color: '#fff', fontSize: '14px' }}>Andrew Brown</div>
+          <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>Founder, Noosphere</div>
         </div>
       </div>
 
