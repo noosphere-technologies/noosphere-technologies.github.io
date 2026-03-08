@@ -5,24 +5,19 @@ import BaseHead from '../components/BaseHead.astro';
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title="Noosphere - Context Graphs with Cryptographic Provenance" description="The infrastructure layer for trusted AI agent ecosystems. Content authenticity for humans. Context authenticity for agents. Versioned JSON-LD, C2PA signing, in-toto attestations, and runtime policy enforcement." />
-		<script> (function(ss,ex){ window.ldfdr=window.ldfdr||function(){(ldfdr._q=ldfdr._q||[]).push([].slice.call(arguments));}; (function(d,s){ fs=d.getElementsByTagName(s)[0]; function ce(src){ var cs=d.createElement(s); cs.src=src; cs.async=1; fs.parentNode.insertBefore(cs,fs); }; ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js'); })(document,'script'); })('YEgkB8ll0M28ep3Z'); </script>
-		
-		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+		<BaseHead title="Noosphere — Trust Infrastructure for the Agent Economy" description="Decentralized trust overlay for AI agents. C2PA content credentials, DIDs, verifiable credentials, and policy enforcement. The PKI that PKI should have been." />
 		<style>
-			* {
-				box-sizing: border-box;
-			}
-
+			/* === Page Layout === */
 			body {
-				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-				background: #000000;
-				color: #ffffff;
 				margin: 0;
+				padding: 0;
+				background: #000;
+				color: #fff;
+				font-family: 'Inter', -apple-system, sans-serif;
 				line-height: 1.6;
 			}
 
-			/* Background texture */
+			/* Grid overlay for retro feel */
 			body::before {
 				content: '';
 				position: fixed;
@@ -30,933 +25,474 @@ import BaseHead from '../components/BaseHead.astro';
 				left: 0;
 				right: 0;
 				bottom: 0;
-				background-image: 
-					radial-gradient(circle at 20% 50%, rgba(120, 50, 255, 0.08) 0%, transparent 50%),
-					radial-gradient(circle at 80% 80%, rgba(50, 120, 255, 0.08) 0%, transparent 50%);
+				background-image:
+					linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+					linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+				background-size: 40px 40px;
 				pointer-events: none;
 				z-index: 1;
 			}
 
-			/* Noise texture */
-			body::after {
-				content: '';
-				position: fixed;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
-				pointer-events: none;
-				z-index: 2;
-			}
-
-			.page-wrapper {
+			.page {
 				position: relative;
 				z-index: 10;
-				min-height: 100vh;
-				width: 100%;
 			}
 
-			/* Navigation */
-			.main-nav {
-				background: rgba(0, 0, 0, 0.5);
-				backdrop-filter: blur(20px);
-				border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-				padding: 24px 0;
-				position: sticky;
-				top: 0;
-				z-index: 100;
-			}
-
-			.container {
-				width: 100%;
-				max-width: none;
-				margin: 0;
-				padding: 0 4rem;
-			}
-
-			.nav-wrapper {
+			/* === Navigation === */
+			.nav {
+				border-bottom: 1px solid #222;
+				padding: 1.5rem 2rem;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
 			}
 
 			.nav-brand {
-				font-size: 1.75rem;
-				font-weight: 700;
-				color: #ffffff;
+				display: flex;
+				align-items: center;
+				gap: 1rem;
 				text-decoration: none;
-				font-family: 'Space Grotesk', sans-serif;
+				color: #fff;
+			}
+
+			.nav-logo {
+				height: 36px;
+				width: auto;
+			}
+
+			.nav-name {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 1rem;
+				font-weight: 400;
 				letter-spacing: -0.02em;
 			}
 
 			.nav-links {
 				display: flex;
-				gap: 3rem;
-				align-items: center;
+				gap: 2rem;
 			}
 
 			.nav-links a {
-				color: rgba(255, 255, 255, 0.7);
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 0.875rem;
+				color: #888;
 				text-decoration: none;
-				font-weight: 500;
-				transition: color 0.3s;
-				font-size: 0.95rem;
+				transition: color 0.15s;
 			}
 
 			.nav-links a:hover {
-				color: #ffffff;
+				color: #fff;
 			}
 
-			/* Hero Section */
-			.hero-section {
-				padding: 120px 0 60px;
-				position: relative;
-				overflow: hidden;
-			}
-
-			.hero-section::before {
-				content: '';
-				position: absolute;
-				top: -50%;
-				left: -50%;
-				width: 200%;
-				height: 200%;
-				background: radial-gradient(circle at 50% 50%, rgba(120, 50, 255, 0.15) 0%, transparent 40%);
-				animation: pulse 20s ease-in-out infinite;
-				pointer-events: none;
-			}
-
-			@keyframes pulse {
-				0%, 100% { transform: scale(1); opacity: 0.5; }
-				50% { transform: scale(1.1); opacity: 0.8; }
-			}
-
-			.hero-content {
+			/* === Hero === */
+			.hero {
 				display: grid;
 				grid-template-columns: 1fr 1fr;
 				gap: 4rem;
-				align-items: center;
+				padding: 6rem 2rem;
 				max-width: 1400px;
 				margin: 0 auto;
+				align-items: center;
 			}
 
-			.hero-text {
-				text-align: left;
+			.hero-content h1 {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 2.5rem;
+				font-weight: 400;
+				line-height: 1.2;
+				margin: 0 0 1.5rem 0;
+				letter-spacing: -0.03em;
 			}
 
-			.hero-image {
+			.hero-content p {
+				font-size: 1.125rem;
+				color: #999;
+				margin: 0 0 2rem 0;
+				max-width: 500px;
+			}
+
+			.hero-cta {
+				display: inline-block;
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 0.875rem;
+				padding: 1rem 2rem;
+				border: 1px solid #444;
+				color: #fff;
+				text-decoration: none;
+				transition: all 0.15s;
+			}
+
+			.hero-cta:hover {
+				background: #fff;
+				color: #000;
+				border-color: #fff;
+			}
+
+			.hero-visual {
 				display: flex;
 				justify-content: center;
 				align-items: center;
 			}
 
-			.hero-image img {
-				width: 100%;
-				max-width: 600px;
+			.hero-visual img {
+				max-width: 100%;
 				height: auto;
-			}
-
-			.hero-title {
-				font-size: 3.5rem;
-				font-weight: 700;
-				margin: 0 0 1rem 0;
-				font-family: 'Space Grotesk', sans-serif;
-				letter-spacing: -0.03em;
-				background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-				background-clip: text;
-				position: relative;
-				z-index: 10;
-				line-height: 1.1;
-			}
-
-			.hero-subtitle {
-				font-size: 1.5rem;
-				color: rgba(255, 255, 255, 0.9);
-				margin: 0 0 1.5rem 0;
-				font-weight: 500;
-				line-height: 1.4;
-			}
-
-			.hero-tagline {
-				font-size: 1.1rem;
-				color: rgba(255, 255, 255, 0.7);
-				margin: 0 0 3rem 0;
-				font-family: 'JetBrains Mono', 'Courier New', monospace;
-				font-weight: 300;
-				letter-spacing: 0.02em;
-				line-height: 1.6;
-			}
-
-
-			@keyframes shimmer {
-				0% { background-position: 0% center; }
-				100% { background-position: 200% center; }
-			}
-
-			.hero-buttons {
-				display: flex;
-				gap: 1.5rem;
-				justify-content: flex-start;
-				position: relative;
-				z-index: 10;
-			}
-
-			/* Buttons */
-			.btn {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.5rem;
-				padding: 1rem 2.5rem;
-				text-decoration: none;
-				border-radius: 50px;
-				font-family: 'JetBrains Mono', 'Courier New', monospace;
-				font-weight: 400;
-				font-size: 0.875rem;
-				text-transform: uppercase;
-				letter-spacing: 0.1em;
-				transition: all 0.3s;
-				position: relative;
-				overflow: hidden;
-			}
-
-			.btn-primary {
-				background: linear-gradient(135deg, #7850ff 0%, #5040ff 50%, #ff5078 100%);
-				background-size: 200% auto;
-				color: white;
-			}
-
-			.btn-primary::before {
-				content: '';
-				position: absolute;
-				top: 0;
-				left: -100%;
-				width: 100%;
-				height: 100%;
-				background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-				transition: left 0.5s;
-			}
-
-			.btn-primary:hover {
-				background-position: right center;
-				transform: translateY(-2px);
-				box-shadow: 0 8px 30px rgba(120, 80, 255, 0.4);
-			}
-
-			.btn-primary:hover::before {
-				left: 100%;
-			}
-
-			.btn-secondary {
-				background: transparent;
-				color: rgba(255, 255, 255, 0.9);
-				border: 1px solid rgba(255, 255, 255, 0.3);
-			}
-
-			.btn-secondary:hover {
-				background: rgba(255, 255, 255, 0.1);
-				border-color: rgba(255, 255, 255, 0.5);
-				transform: translateY(-2px);
-			}
-
-			.main-content {
-				width: 100%;
-			}
-
-			/* Problem Section */
-			.problem-section {
-				padding: 100px 0;
-				background: linear-gradient(180deg, rgba(120, 50, 255, 0.03) 0%, transparent 100%);
-				border-top: 1px solid rgba(255, 255, 255, 0.05);
-			}
-
-			.section-header {
-				text-align: center;
-				margin-bottom: 4rem;
-			}
-
-			.section-title {
-				font-size: 2.5rem;
-				font-weight: 600;
-				margin: 0 0 1rem 0;
-				font-family: 'Space Grotesk', sans-serif;
-				letter-spacing: -0.02em;
-				color: rgba(255, 255, 255, 0.9);
-			}
-
-			.section-subtitle {
-				font-size: 1.2rem;
-				color: rgba(255, 255, 255, 0.6);
-				max-width: 800px;
-				margin: 0 auto;
-			}
-
-			.problem-grid {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				gap: 3rem;
-				max-width: 1200px;
-				margin: 0 auto;
-			}
-
-			.problem-card {
-				background: rgba(255, 255, 255, 0.03);
-				border: 1px solid rgba(255, 255, 255, 0.1);
-				border-radius: 16px;
-				padding: 2rem;
-				transition: all 0.3s;
-			}
-
-			.problem-card:hover {
-				background: rgba(255, 255, 255, 0.05);
-				border-color: rgba(120, 80, 255, 0.3);
-				transform: translateY(-4px);
-			}
-
-			.problem-icon {
-				font-size: 2rem;
-				margin-bottom: 1rem;
+				filter: grayscale(100%) contrast(1.2);
 				opacity: 0.8;
 			}
 
-			.problem-title {
-				font-size: 1.25rem;
-				font-weight: 600;
-				margin: 0 0 1rem 0;
-				color: rgba(255, 255, 255, 0.9);
+			/* === Problem Section === */
+			.section {
+				padding: 6rem 2rem;
+				border-top: 1px solid #222;
 			}
 
-			.problem-text {
-				font-size: 0.95rem;
-				color: rgba(255, 255, 255, 0.6);
-				line-height: 1.6;
-			}
-
-			/* Solution Section */
-			.solution-section {
-				padding: 100px 0;
-			}
-
-			.solution-grid {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 6rem;
-				align-items: center;
+			.section-inner {
 				max-width: 1200px;
 				margin: 0 auto;
 			}
 
-			.solution-visual {
+			.section-header {
+				margin-bottom: 4rem;
+			}
+
+			.section-label {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 0.75rem;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				color: #666;
+				margin-bottom: 1rem;
+			}
+
+			.section-title {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 1.75rem;
+				font-weight: 400;
+				margin: 0;
+				max-width: 700px;
+			}
+
+			/* === Cards Grid === */
+			.cards {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1px;
+				background: #333;
+			}
+
+			.card {
+				background: #000;
+				padding: 2rem;
+			}
+
+			.card-icon {
+				font-size: 1.5rem;
+				margin-bottom: 1rem;
+			}
+
+			.card-title {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 1rem;
+				margin: 0 0 0.5rem 0;
+			}
+
+			.card-text {
+				font-size: 0.875rem;
+				color: #888;
+				margin: 0;
+			}
+
+			/* === Solution Section === */
+			.solution-grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 4rem;
+				align-items: start;
+			}
+
+			.solution-steps {
 				display: flex;
 				flex-direction: column;
 				gap: 2rem;
 			}
 
-			.solution-step {
-				display: flex;
-				align-items: flex-start;
-				gap: 1.5rem;
-				padding: 1.5rem;
-				background: rgba(255, 255, 255, 0.02);
-				border: 1px solid rgba(255, 255, 255, 0.05);
-				border-radius: 12px;
-				transition: all 0.3s;
-			}
-
-			.solution-step:hover {
-				background: rgba(120, 80, 255, 0.05);
-				border-color: rgba(120, 80, 255, 0.2);
+			.step {
+				display: grid;
+				grid-template-columns: 3rem 1fr;
+				gap: 1rem;
+				align-items: start;
 			}
 
 			.step-number {
-				min-width: 40px;
-				height: 40px;
-				background: linear-gradient(135deg, #7850ff 0%, #5040ff 100%);
-				border-radius: 50%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-weight: 600;
-				font-size: 1.1rem;
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 0.875rem;
+				color: #666;
+				padding-top: 0.25rem;
 			}
 
-			.step-content h4 {
+			.step-content h3 {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 1rem;
 				margin: 0 0 0.5rem 0;
-				font-size: 1.1rem;
-				color: rgba(255, 255, 255, 0.9);
 			}
 
 			.step-content p {
-				margin: 0;
-				font-size: 0.9rem;
-				color: rgba(255, 255, 255, 0.6);
-			}
-
-			.solution-text h3 {
-				font-size: 2rem;
-				font-weight: 600;
-				margin: 0 0 2rem 0;
-				font-family: 'Space Grotesk', sans-serif;
-				color: rgba(255, 255, 255, 0.9);
-			}
-
-			.solution-text p {
-				font-size: 1.1rem;
-				color: rgba(255, 255, 255, 0.7);
-				line-height: 1.8;
-				margin-bottom: 1.5rem;
-			}
-
-			/* Use Cases Section */
-			.usecases-section {
-				padding: 100px 0;
-				background: rgba(50, 120, 255, 0.02);
-				border-top: 1px solid rgba(255, 255, 255, 0.05);
-				border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-			}
-
-			.usecases-grid {
-				display: grid;
-				grid-template-columns: repeat(2, 1fr);
-				gap: 3rem;
-				max-width: 1200px;
-				margin: 0 auto;
-			}
-
-			.usecase-card {
-				background: rgba(0, 0, 0, 0.3);
-				border: 1px solid rgba(255, 255, 255, 0.1);
-				border-radius: 16px;
-				padding: 2.5rem;
-				position: relative;
-				overflow: hidden;
-			}
-
-			.usecase-card::before {
-				content: '';
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				height: 4px;
-				background: linear-gradient(90deg, #7850ff 0%, #5040ff 50%, #ff5078 100%);
-			}
-
-			.usecase-icon {
-				width: 48px;
-				height: 48px;
-				background: rgba(120, 80, 255, 0.1);
-				border: 1px solid rgba(120, 80, 255, 0.3);
-				border-radius: 12px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-size: 1.5rem;
-				margin-bottom: 1.5rem;
-			}
-
-			.usecase-title {
-				font-size: 1.4rem;
-				font-weight: 600;
-				margin: 0 0 1rem 0;
-				color: rgba(255, 255, 255, 0.9);
-			}
-
-			.usecase-description {
-				font-size: 1rem;
-				color: rgba(255, 255, 255, 0.6);
-				line-height: 1.6;
-				margin-bottom: 1.5rem;
-			}
-
-			.usecase-examples {
-				list-style: none;
-				padding: 0;
+				font-size: 0.875rem;
+				color: #888;
 				margin: 0;
 			}
 
-			.usecase-examples li {
-				padding: 0.5rem 0;
-				padding-left: 1.5rem;
-				position: relative;
-				color: rgba(255, 255, 255, 0.7);
-				font-size: 0.95rem;
-			}
-
-			.usecase-examples li::before {
-				content: '→';
-				position: absolute;
-				left: 0;
-				color: rgba(120, 80, 255, 0.6);
-			}
-
-			/* Tech Stack Section */
-			.tech-section {
-				padding: 80px 0;
-			}
-
-			.tech-grid {
+			/* === Stack Section === */
+			.stack-grid {
 				display: grid;
 				grid-template-columns: repeat(4, 1fr);
-				gap: 2rem;
-				max-width: 1000px;
-				margin: 3rem auto 0;
+				gap: 1px;
+				background: #333;
 			}
 
-			.tech-item {
+			.stack-item {
+				background: #000;
+				padding: 2rem;
 				text-align: center;
-				padding: 1.5rem;
-				background: rgba(255, 255, 255, 0.02);
-				border: 1px solid rgba(255, 255, 255, 0.05);
-				border-radius: 12px;
-				transition: all 0.3s;
 			}
 
-			.tech-item:hover {
-				background: rgba(255, 255, 255, 0.04);
-				transform: translateY(-2px);
-				border-color: rgba(120, 80, 255, 0.2);
-			}
-
-			.tech-name {
+			.stack-name {
 				font-family: 'JetBrains Mono', monospace;
-				font-size: 0.9rem;
-				color: rgba(255, 255, 255, 0.8);
-				margin: 0.5rem 0 0;
-			}
-
-			.tech-type {
-				font-size: 0.8rem;
-				color: rgba(255, 255, 255, 0.4);
-				margin-top: 0.25rem;
-			}
-
-			/* Partners Section */
-			.partners-section {
-				padding: 80px 0;
-				text-align: center;
-			}
-
-			.partners-title {
-				font-size: 2.5rem;
-				font-weight: 600;
-				margin: 0 0 3rem 0;
-				font-family: 'Space Grotesk', sans-serif;
-				letter-spacing: -0.02em;
-				color: rgba(255, 255, 255, 0.9);
-			}
-
-			.partners-grid {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				gap: 4rem;
-				flex-wrap: wrap;
-			}
-
-			.partner-logo {
-				opacity: 0.7;
-				transition: opacity 0.3s;
-			}
-
-			.partner-logo:hover {
-				opacity: 1;
-			}
-
-			.partner-logo img {
-				height: 60px;
-				width: auto;
-			}
-
-			/* CTA Section */
-			.cta-section {
-				padding: 100px 0;
-				text-align: center;
-				background: rgba(120, 50, 255, 0.05);
-				border-top: 1px solid rgba(255, 255, 255, 0.1);
-				border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-			}
-
-			.cta-section h2 {
-				font-size: 3rem;
-				font-weight: 700;
-				margin: 0 0 1rem 0;
-				font-family: 'Space Grotesk', sans-serif;
-				letter-spacing: -0.02em;
-				color: #ffffff;
-			}
-
-			.cta-section p {
-				font-size: 1.25rem;
-				color: rgba(255, 255, 255, 0.7);
-				margin: 0 0 3rem 0;
-			}
-
-			.cta-buttons {
-				display: flex;
-				gap: 1.5rem;
-				justify-content: center;
-			}
-
-			/* Footer */
-			.main-footer {
-				padding: 40px 0;
-				text-align: center;
-				border-top: 1px solid rgba(255, 255, 255, 0.1);
-			}
-
-			.main-footer p {
-				color: rgba(255, 255, 255, 0.5);
 				font-size: 0.875rem;
+				margin: 0 0 0.25rem 0;
 			}
 
-			/* Responsive */
-			@media (max-width: 768px) {
-				.container {
-					padding: 0 20px;
-				}
-				
-				.hero-content {
-					grid-template-columns: 1fr;
-					gap: 2rem;
-				}
-				
-				.hero-text {
-					text-align: center;
-				}
-				
-				.hero-title {
-					font-size: 2.5rem;
-				}
-				
-				.hero-subtitle {
-					font-size: 1.25rem;
-				}
-				
-				.hero-section {
-					padding: 80px 0 60px;
-				}
-				
-				.nav-links {
-					gap: 1.5rem;
-				}
-				
-				.problem-grid,
-				.usecases-grid {
-					grid-template-columns: 1fr;
-				}
-				
-				.solution-grid {
+			.stack-desc {
+				font-size: 0.75rem;
+				color: #666;
+				margin: 0;
+			}
+
+			/* === Footer === */
+			.footer {
+				border-top: 1px solid #222;
+				padding: 3rem 2rem;
+				text-align: center;
+			}
+
+			.footer-text {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 0.75rem;
+				color: #666;
+				margin: 0;
+			}
+
+			.footer-links {
+				display: flex;
+				justify-content: center;
+				gap: 2rem;
+				margin-top: 1rem;
+			}
+
+			.footer-links a {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 0.75rem;
+				color: #666;
+				text-decoration: none;
+			}
+
+			.footer-links a:hover {
+				color: #fff;
+			}
+
+			/* === Responsive === */
+			@media (max-width: 1024px) {
+				.hero {
 					grid-template-columns: 1fr;
 					gap: 3rem;
 				}
-				
-				.tech-grid {
+
+				.hero-visual {
+					order: -1;
+				}
+
+				.cards {
+					grid-template-columns: 1fr;
+				}
+
+				.solution-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.stack-grid {
 					grid-template-columns: repeat(2, 1fr);
 				}
-				
-				.partners-grid {
-					gap: 2rem;
+			}
+
+			@media (max-width: 640px) {
+				.hero-content h1 {
+					font-size: 1.75rem;
 				}
-				
-				.partner-logo img {
-					height: 50px;
-				}
-				
-				.hero-buttons {
-					justify-content: center;
-				}
-				
-				.hero-buttons,
-				.cta-buttons {
+
+				.nav {
 					flex-direction: column;
-					align-items: center;
+					gap: 1rem;
 				}
-				
-				.btn {
-					width: 100%;
-					max-width: 300px;
-					justify-content: center;
-				}
-				
-				.hero-image {
-					order: -1;
+
+				.stack-grid {
+					grid-template-columns: 1fr;
 				}
 			}
 		</style>
 	</head>
 	<body>
-		<div class="page-wrapper">
-			<nav class="main-nav">
-				<div class="container">
-					<div class="nav-wrapper">
-						<a href="/" class="nav-brand">Noosphere Technologies</a>
-						<div class="nav-links">
-							<a href="/">Home</a>
-							<a href="/blog">Blog</a>
-							<a href="/contact">Contact</a>
-						</div>
-					</div>
+		<div class="page">
+			<!-- Navigation -->
+			<nav class="nav">
+				<a href="/" class="nav-brand">
+					<img src="/images/logos/black-logo-cropped.png" alt="N" class="nav-logo" />
+					<span class="nav-name">Noosphere</span>
+				</a>
+				<div class="nav-links">
+					<a href="/blog">Blog</a>
+					<a href="/contact">Contact</a>
+					<a href="https://github.com/noosphere-technologies" target="_blank">GitHub</a>
 				</div>
 			</nav>
 
-			<header class="hero-section">
-				<div class="container">
-						<div class="hero-content">
-							<div class="hero-text">
-							<h1 class="hero-title">Context graphs with cryptographic provenance.</h1>
-							<p class="hero-subtitle">The infrastructure layer for trusted AI agent ecosystems. Content authenticity for humans. Context authenticity for agents.</p>
-							<div class="hero-buttons">
-								<a href="/contact" class="btn btn-primary">Get in touch</a>
-							</div>
+			<!-- Hero -->
+			<section class="hero">
+				<div class="hero-content">
+					<h1>Trust infrastructure for the agent economy</h1>
+					<p>AI agents operate on unverified context. We provide the cryptographic provenance layer—C2PA credentials, DIDs, verifiable capabilities, and runtime policy enforcement.</p>
+					<a href="/contact" class="hero-cta">Get in touch →</a>
+				</div>
+				<div class="hero-visual">
+					<img src="/images/davinci-sphere-2.png" alt="Trust network visualization" />
+				</div>
+			</section>
+
+			<!-- Problem -->
+			<section class="section">
+				<div class="section-inner">
+					<div class="section-header">
+						<p class="section-label">The Problem</p>
+						<h2 class="section-title">When Agent A tells Agent B something, how does Agent B know where it came from, who authored it, or if it's been tampered with?</h2>
+					</div>
+					<div class="cards">
+						<div class="card">
+							<div class="card-icon">◇</div>
+							<h3 class="card-title">Inferred context</h3>
+							<p class="card-text">Agents guess where data comes from based on retrieval paths, not cryptographic proof.</p>
 						</div>
-						<div class="hero-image">
-							<img src="/images/logos/black-logo-cropped.png" alt="Noosphere" />
+						<div class="card">
+							<div class="card-icon">△</div>
+							<h3 class="card-title">Implicit trust</h3>
+							<p class="card-text">No mechanism to verify capabilities or authorization across organizational boundaries.</p>
+						</div>
+						<div class="card">
+							<div class="card-icon">○</div>
+							<h3 class="card-title">No runtime enforcement</h3>
+							<p class="card-text">Policies exist in docs, not in cryptographically-enforced attestations.</p>
 						</div>
 					</div>
 				</div>
-			</header>
+			</section>
 
-			<main class="main-content">
-				<!-- Problem Section -->
-				<section class="problem-section">
-					<div class="container">
-						<div class="section-header">
-							<h2 class="section-title">AI agents operate on unverified context.</h2>
-							<p class="section-subtitle">When Agent A tells Agent B something, how does Agent B know where it came from, who authored it, or if it's been tampered with? Today, agents trust blindly. That's fine for demos. It's catastrophic for enterprise.</p>
-						</div>
-						<div class="problem-grid">
-							<div class="problem-card">
-								<div class="problem-icon">🔍</div>
-								<h3 class="problem-title">Inferred context</h3>
-								<p class="problem-text">RAG, embeddings, and context graphs optimize recall but do not establish authority, provenance, or permission.</p>
-							</div>
-							<div class="problem-card">
-								<div class="problem-icon">⚡</div>
-								<h3 class="problem-title">Implicit trust</h3>
-								<p class="problem-text">Today’s stacks treat context as accumulated, vendor-owned, and implicitly trusted. That becomes a systemic risk when agents act.</p>
-							</div>
-							<div class="problem-card">
-								<div class="problem-icon">🌐</div>
-								<h3 class="problem-title">No runtime enforcement</h3>
-								<p class="problem-text">Once agents operate on meaning, context must be verified and policy-bound at runtime, not audited after the fact.</p>
-							</div>
-						</div>
+			<!-- Solution -->
+			<section class="section">
+				<div class="section-inner">
+					<div class="section-header">
+						<p class="section-label">Our Approach</p>
+						<h2 class="section-title">The provenance layer for AI agent context</h2>
 					</div>
-				</section>
-
-				<!-- Solution Section -->
-				<section class="solution-section">
-					<div class="container">
-						<div class="section-header">
-							<h2 class="section-title">The provenance layer for AI agent context.</h2>
-							<p class="section-subtitle">C2PA solved content authenticity for images. We're solving context authenticity for agents—proving the knowledge they use is legitimate, versioned, and traceable.</p>
-						</div>
-						<div class="solution-grid">
-							<div class="solution-visual">
-								<div class="solution-step">
-									<div class="step-number">1</div>
-									<div class="step-content">
-										<h4>Sign under policy</h4>
-										<p>Every artifact ships with enforceable context: in-toto attestations, C2PA claims, DSSE envelopes, embedded licensing, and required metadata.</p>
-									</div>
-								</div>
-								<div class="solution-step">
-									<div class="step-number">2</div>
-									<div class="step-content">
-										<h4>Automate the trust graph</h4>
-										<p>DIDs, verifiable credentials, and DTO mirroring keep context anchored in a live, resilient trust fabric.</p>
-									</div>
-								</div>
-								<div class="solution-step">
-									<div class="step-number">3</div>
-									<div class="step-content">
-										<h4>Validate at runtime</h4>
-										<p>LLM proxy enforcement, LangGraph/A2A integration, and policy gates ensure agents only receive authorized context.</p>
-									</div>
+					<div class="solution-grid">
+						<div class="solution-steps">
+							<div class="step">
+								<span class="step-number">01</span>
+								<div class="step-content">
+									<h3>Sign under policy</h3>
+									<p>Content and context get C2PA credentials with Cedar policy attestations. Every artifact carries proof of origin, authorization, and constraints.</p>
 								</div>
 							</div>
-							<div class="solution-text">
-								<h3>The PKI for the agent economy</h3>
-								<p>When an AI agent receives context, it can cryptographically verify the entire lineage—who created it, what it was derived from, and that it hasn't been modified.</p>
-								<p>We combine versioned JSON-LD context graphs, C2PA signing, in-toto attestations, and runtime policy enforcement into a single infrastructure layer for trusted agent ecosystems.</p>
-								<p>No more blind trust. Every piece of context your agents consume has provenance you can verify.</p>
+							<div class="step">
+								<span class="step-number">02</span>
+								<div class="step-content">
+									<h3>Build the trust graph</h3>
+									<p>trust.txt declarations create a crawlable web of organizational trust relationships. No central authority—trust emerges from the network.</p>
+								</div>
 							</div>
+							<div class="step">
+								<span class="step-number">03</span>
+								<div class="step-content">
+									<h3>Validate at runtime</h3>
+									<p>Before acting on context, agents verify credentials, check trust paths, and evaluate policies. Deterministic, auditable decisions.</p>
+								</div>
+							</div>
+						</div>
+						<div class="solution-visual">
+							<img src="/images/noosphere-trans.png" alt="Noosphere trust graph" style="max-width: 100%; filter: grayscale(50%);" />
 						</div>
 					</div>
-				</section>
+				</div>
+			</section>
 
-				<!-- Capabilities Section -->
-				<section class="usecases-section">
-					<div class="container">
-						<div class="section-header">
-							<h2 class="section-title">What makes Noosphere different</h2>
-							<p class="section-subtitle">We are the source of authentic context that other systems depend on.</p>
+			<!-- Stack -->
+			<section class="section">
+				<div class="section-inner">
+					<div class="section-header">
+						<p class="section-label">Standards-Based</p>
+						<h2 class="section-title">Built on proven specifications, not proprietary protocols</h2>
+					</div>
+					<div class="stack-grid">
+						<div class="stack-item">
+							<p class="stack-name">C2PA</p>
+							<p class="stack-desc">Content credentials</p>
 						</div>
-						<div class="usecases-grid">
-							<div class="usecase-card">
-								<div class="usecase-icon">🛰️</div>
-								<h3 class="usecase-title">Not a knowledge graph</h3>
-								<p class="usecase-description">We do not infer meaning. We authenticate the context those graphs rely on.</p>
-								<ul class="usecase-examples">
-									<li>Authored context, not inferred</li>
-									<li>Cryptographic proof, not implicit trust</li>
-									<li>Runtime enforcement, not post-hoc audits</li>
-								</ul>
-							</div>
-							<div class="usecase-card">
-								<div class="usecase-icon">🤖</div>
-								<h3 class="usecase-title">Not a memory system</h3>
-								<p class="usecase-description">We do not accumulate context. We govern what can be trusted and used.</p>
-								<ul class="usecase-examples">
-									<li>Policy-bound, not ambient</li>
-									<li>Authorized access, not assumed</li>
-									<li>Auditable decisions, not opaque chains</li>
-								</ul>
-							</div>
-							<div class="usecase-card">
-								<div class="usecase-icon">🔑</div>
-								<h3 class="usecase-title">Not a RAG platform</h3>
-								<p class="usecase-description">We do not improve recall. We ensure context is authoritative and allowed.</p>
-								<ul class="usecase-examples">
-									<li>Standards-based, not platform-locked</li>
-									<li>Normative context, not descriptive summaries</li>
-									<li>Enforced at runtime, not audited later</li>
-								</ul>
-							</div>
-							<div class="usecase-card">
-								<div class="usecase-icon">🪪</div>
-								<h3 class="usecase-title">Not a system of record</h3>
-								<p class="usecase-description">We do not describe what is. We govern what can be believed and acted on.</p>
-								<ul class="usecase-examples">
-									<li>Policy-defined permissions</li>
-									<li>Live trust anchors</li>
-									<li>Context constraints for agents</li>
-								</ul>
-							</div>
-							<div class="usecase-card">
-								<div class="usecase-icon">📜</div>
-								<h3 class="usecase-title">The agent economy is coming</h3>
-								<p class="usecase-description">Google A2A, Anthropic MCP, OpenAI Assistants—agents are becoming first-class citizens. But there's zero infrastructure for agent trust.</p>
-								<ul class="usecase-examples">
-									<li>C2PA solved images. We're solving context.</li>
-									<li>SSL for connections. Provenance for knowledge.</li>
-									<li>The PKI for AI agent ecosystems.</li>
-								</ul>
-							</div>
-							<div class="usecase-card">
-								<div class="usecase-icon">🛡️</div>
-								<h3 class="usecase-title">Who this is for</h3>
-								<p class="usecase-description">Teams building and governing autonomous workflows.</p>
-								<ul class="usecase-examples">
-									<li>Platform and infrastructure teams</li>
-									<li>Security and trust leaders</li>
-									<li>AI product teams shipping agents</li>
-								</ul>
-							</div>
-							<div class="usecase-card">
-								<div class="usecase-icon">🧭</div>
-								<h3 class="usecase-title">Policy-enforced context</h3>
-								<p class="usecase-description">Before agents reason, context must be authored, verifiable, and enforced.</p>
-								<ul class="usecase-examples">
-									<li>Authored, not inferred</li>
-									<li>Verifiable, not assumed</li>
-									<li>Enforced at runtime, not later</li>
-								</ul>
-							</div>
-							<div class="usecase-card">
-								<div class="usecase-icon">🌐</div>
-								<h3 class="usecase-title">Integrity pipeline, end-to-end</h3>
-								<p class="usecase-description">From creation to runtime, context remains authentic and enforceable.</p>
-								<ul class="usecase-examples">
-									<li>Cryptographic provenance</li>
-									<li>Live trust graphs and DTO</li>
-									<li>Runtime policy enforcement</li>
-								</ul>
-							</div>
+						<div class="stack-item">
+							<p class="stack-name">DIDs</p>
+							<p class="stack-desc">Decentralized identity</p>
+						</div>
+						<div class="stack-item">
+							<p class="stack-name">VCs</p>
+							<p class="stack-desc">Verifiable credentials</p>
+						</div>
+						<div class="stack-item">
+							<p class="stack-name">Cedar</p>
+							<p class="stack-desc">Policy language</p>
+						</div>
+						<div class="stack-item">
+							<p class="stack-name">in-toto</p>
+							<p class="stack-desc">Supply chain attestations</p>
+						</div>
+						<div class="stack-item">
+							<p class="stack-name">SLSA</p>
+							<p class="stack-desc">Build provenance</p>
+						</div>
+						<div class="stack-item">
+							<p class="stack-name">SPIFFE</p>
+							<p class="stack-desc">Workload identity</p>
+						</div>
+						<div class="stack-item">
+							<p class="stack-name">DSSE</p>
+							<p class="stack-desc">Signature envelopes</p>
 						</div>
 					</div>
-				</section>
+				</div>
+			</section>
 
-				<!-- Tech Stack Section -->
-				<section class="tech-section">
-					<div class="container">
-						<div class="section-header">
-							<h2 class="section-title">Built on open standards</h2>
-							<p class="section-subtitle">No proprietary lock-in. No opaque trust assumptions. Just verifiable context that survives every feed, API, and agent.</p>
-						</div>
-						<div class="tech-grid">
-							<div class="tech-item">
-								<div class="tech-name">C2PA</div>
-								<div class="tech-type">Content Authenticity</div>
-							</div>
-							<div class="tech-item">
-								<div class="tech-name">SPIFFE</div>
-								<div class="tech-type">Workload Identity</div>
-							</div>
-							<div class="tech-item">
-								<div class="tech-name">in-toto</div>
-								<div class="tech-type">Supply Chain</div>
-							</div>
-							<div class="tech-item">
-								<div class="tech-name">SLSA</div>
-								<div class="tech-type">Build Security</div>
-							</div>
-							<div class="tech-item">
-								<div class="tech-name">DIDs</div>
-								<div class="tech-type">Decentralized ID</div>
-							</div>
-							<div class="tech-item">
-								<div class="tech-name">Cedar</div>
-								<div class="tech-type">Policy Engine</div>
-							</div>
-							<div class="tech-item">
-								<div class="tech-name">DSSE</div>
-								<div class="tech-type">Envelope Format</div>
-							</div>
-							<div class="tech-item">
-								<div class="tech-name">VCs</div>
-								<div class="tech-type">Credentials</div>
-							</div>
-						</div>
-					</div>
-				</section>
+			<!-- CTA -->
+			<section class="section" style="text-align: center;">
+				<div class="section-inner">
+					<h2 class="section-title" style="max-width: 600px; margin: 0 auto 2rem;">The PKI that PKI should have been. Built for agents, not browsers.</h2>
+					<a href="/contact" class="hero-cta">Start a conversation →</a>
+				</div>
+			</section>
 
-				<!-- Partners Section -->
-				<section class="partners-section" id="partners">
-					<div class="container">
-						<h2 class="partners-title">Working with Industry Leaders</h2>
-						<div class="partners-grid">
-							<div class="partner-logo">
-								<img src="/images/logos/c2pa-logo.png" alt="C2PA" />
-							</div>
-							<div class="partner-logo">
-								<img src="/images/logos/dif.png" alt="DIF" />
-							</div>
-							<div class="partner-logo">
-								<img src="/images/logos/jti-logo.png" alt="JTI" />
-							</div>
-						</div>
-					</div>
-				</section>
-
-				<!-- CTA Section -->
-				<section class="cta-section" id="contact">
-					<div class="container">
-						<h2>Build on verified context.</h2>
-						<p>Stop letting your agents trust blindly. Give them cryptographic proof of where their context comes from.</p>
-						<div class="cta-buttons">
-							<a href="/contact" class="btn btn-primary">Talk to us</a>
-						</div>
-					</div>
-				</section>
-			</main>
-
-			<footer class="main-footer">
-				<div class="container">
-					<p>&copy; 2026 Noosphere Technologies. The infrastructure layer for trusted AI agent ecosystems.</p>
+			<!-- Footer -->
+			<footer class="footer">
+				<p class="footer-text">© 2026 Noosphere Technologies, Inc.</p>
+				<div class="footer-links">
+					<a href="/blog">Blog</a>
+					<a href="/contact">Contact</a>
+					<a href="https://github.com/noosphere-technologies">GitHub</a>
+					<a href="https://twitter.com/noospheretech">Twitter</a>
 				</div>
 			</footer>
 		</div>
