@@ -14,7 +14,7 @@ import BaseHead from '../components/BaseHead.astro';
 				background: #0a0a0a;
 				color: #fff;
 				font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', monospace;
-				line-height: 1.5;
+				line-height: 1.6;
 				font-weight: 500;
 			}
 
@@ -25,7 +25,7 @@ import BaseHead from '../components/BaseHead.astro';
 			/* === Navigation === */
 			.nav {
 				background: #000;
-				border-bottom: 1px solid #1a1a1a;
+				border-bottom: 2px solid #00ff88;
 				padding: 1.25rem 3rem;
 				display: flex;
 				justify-content: space-between;
@@ -41,12 +41,12 @@ import BaseHead from '../components/BaseHead.astro';
 			}
 
 			.nav-logo {
-				height: 44px;
+				height: 48px;
 				width: auto;
 			}
 
 			.nav-name {
-				font-size: 1.25rem;
+				font-size: 1.35rem;
 				font-weight: 600;
 				letter-spacing: -0.02em;
 			}
@@ -57,15 +57,15 @@ import BaseHead from '../components/BaseHead.astro';
 			}
 
 			.nav-links a {
-				font-size: 1rem;
+				font-size: 1.1rem;
 				font-weight: 500;
-				color: #999;
+				color: #888;
 				text-decoration: none;
 				transition: color 0.15s;
 			}
 
 			.nav-links a:hover {
-				color: #fff;
+				color: #00ff88;
 			}
 
 			/* === Hero === */
@@ -80,27 +80,31 @@ import BaseHead from '../components/BaseHead.astro';
 			}
 
 			.hero-content h1 {
-				font-size: 4rem;
+				font-size: 4.5rem;
 				font-weight: 700;
 				line-height: 1.05;
 				margin: 0 0 1.5rem 0;
 				letter-spacing: -0.03em;
 			}
 
+			.hero-content h1 span {
+				color: #00ff88;
+			}
+
 			.hero-content p {
-				font-size: 1.4rem;
+				font-size: 1.6rem;
 				font-weight: 400;
-				color: #bbb;
+				color: #ccc;
 				margin: 0 0 2.5rem 0;
-				max-width: 580px;
+				max-width: 600px;
 				line-height: 1.5;
 			}
 
 			.hero-cta {
 				display: inline-block;
-				font-size: 1.1rem;
-				padding: 1.1rem 2.5rem;
-				background: #fff;
+				font-size: 1.2rem;
+				padding: 1.2rem 3rem;
+				background: #00ff88;
 				color: #000;
 				text-decoration: none;
 				transition: all 0.15s;
@@ -108,7 +112,7 @@ import BaseHead from '../components/BaseHead.astro';
 			}
 
 			.hero-cta:hover {
-				background: #ccc;
+				background: #00cc6a;
 			}
 
 			.hero-visual {
@@ -126,7 +130,7 @@ import BaseHead from '../components/BaseHead.astro';
 			/* === Problem Section === */
 			.section {
 				padding: 5rem 3rem;
-				border-top: 1px solid #1a1a1a;
+				border-top: 2px solid #222;
 			}
 
 			.section-dark {
@@ -143,16 +147,16 @@ import BaseHead from '../components/BaseHead.astro';
 			}
 
 			.section-label {
-				font-size: 1rem;
+				font-size: 1.1rem;
 				font-weight: 600;
 				text-transform: uppercase;
 				letter-spacing: 0.15em;
-				color: #666;
+				color: #00ff88;
 				margin-bottom: 0.75rem;
 			}
 
 			.section-title {
-				font-size: 2.25rem;
+				font-size: 2.5rem;
 				font-weight: 600;
 				margin: 0;
 				max-width: 900px;
@@ -163,8 +167,8 @@ import BaseHead from '../components/BaseHead.astro';
 			.cards {
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
-				gap: 2px;
-				background: #222;
+				gap: 3px;
+				background: #00ff88;
 			}
 
 			.card {
@@ -173,21 +177,21 @@ import BaseHead from '../components/BaseHead.astro';
 			}
 
 			.card-icon {
-				font-size: 2.5rem;
+				font-size: 3rem;
 				margin-bottom: 1.25rem;
-				opacity: 0.7;
+				color: #00ff88;
 			}
 
 			.card-title {
-				font-size: 1.5rem;
+				font-size: 1.6rem;
 				font-weight: 600;
 				margin: 0 0 0.75rem 0;
 			}
 
 			.card-text {
-				font-size: 1.1rem;
+				font-size: 1.25rem;
 				font-weight: 400;
-				color: #999;
+				color: #aaa;
 				margin: 0;
 				line-height: 1.5;
 			}
@@ -208,28 +212,28 @@ import BaseHead from '../components/BaseHead.astro';
 
 			.step {
 				display: grid;
-				grid-template-columns: 4rem 1fr;
+				grid-template-columns: 5rem 1fr;
 				gap: 1.5rem;
 				align-items: start;
 			}
 
 			.step-number {
-				font-size: 3rem;
+				font-size: 3.5rem;
 				font-weight: 700;
-				color: #333;
+				color: #00ff88;
 				line-height: 1;
 			}
 
 			.step-content h3 {
-				font-size: 1.5rem;
+				font-size: 1.6rem;
 				font-weight: 600;
 				margin: 0 0 0.5rem 0;
 			}
 
 			.step-content p {
-				font-size: 1.1rem;
+				font-size: 1.25rem;
 				font-weight: 400;
-				color: #999;
+				color: #aaa;
 				margin: 0;
 				line-height: 1.5;
 			}
@@ -245,26 +249,26 @@ import BaseHead from '../components/BaseHead.astro';
 			.stack-grid {
 				display: grid;
 				grid-template-columns: repeat(4, 1fr);
-				gap: 2px;
-				background: #222;
+				gap: 3px;
+				background: #00ff88;
 			}
 
 			.stack-item {
 				background: #0a0a0a;
-				padding: 2rem;
+				padding: 2.5rem;
 				text-align: center;
 			}
 
 			.stack-name {
-				font-size: 1.5rem;
+				font-size: 1.6rem;
 				font-weight: 600;
 				margin: 0 0 0.25rem 0;
 			}
 
 			.stack-desc {
-				font-size: 1rem;
+				font-size: 1.1rem;
 				font-weight: 400;
-				color: #777;
+				color: #888;
 				margin: 0;
 			}
 
@@ -273,13 +277,14 @@ import BaseHead from '../components/BaseHead.astro';
 				background: #000;
 				padding: 6rem 3rem;
 				text-align: center;
+				border-top: 2px solid #00ff88;
 			}
 
 			.cta-title {
-				font-size: 2.75rem;
+				font-size: 3rem;
 				font-weight: 700;
 				margin: 0 0 2rem 0;
-				max-width: 750px;
+				max-width: 800px;
 				margin-left: auto;
 				margin-right: auto;
 				line-height: 1.2;
@@ -288,7 +293,7 @@ import BaseHead from '../components/BaseHead.astro';
 			/* === Footer === */
 			.footer {
 				background: #000;
-				border-top: 1px solid #1a1a1a;
+				border-top: 1px solid #222;
 				padding: 2rem 3rem;
 				display: flex;
 				justify-content: space-between;
@@ -315,7 +320,7 @@ import BaseHead from '../components/BaseHead.astro';
 			}
 
 			.footer-links a:hover {
-				color: #fff;
+				color: #00ff88;
 			}
 
 			/* === Responsive === */
@@ -328,7 +333,11 @@ import BaseHead from '../components/BaseHead.astro';
 				}
 
 				.hero-content h1 {
-					font-size: 3rem;
+					font-size: 3.5rem;
+				}
+
+				.hero-content p {
+					font-size: 1.4rem;
 				}
 
 				.hero-visual {
@@ -368,15 +377,19 @@ import BaseHead from '../components/BaseHead.astro';
 
 			@media (max-width: 640px) {
 				.hero-content h1 {
-					font-size: 2.5rem;
+					font-size: 2.75rem;
 				}
 
 				.hero-content p {
-					font-size: 1.2rem;
+					font-size: 1.3rem;
 				}
 
 				.section-title {
-					font-size: 1.75rem;
+					font-size: 2rem;
+				}
+
+				.card-text, .step-content p {
+					font-size: 1.15rem;
 				}
 
 				.nav {
@@ -389,7 +402,7 @@ import BaseHead from '../components/BaseHead.astro';
 				}
 
 				.cta-title {
-					font-size: 2rem;
+					font-size: 2.25rem;
 				}
 			}
 		</style>
@@ -412,7 +425,7 @@ import BaseHead from '../components/BaseHead.astro';
 			<!-- Hero -->
 			<section class="hero">
 				<div class="hero-content">
-					<h1>Trust infrastructure for the agent economy</h1>
+					<h1>Trust infrastructure for the <span>agent economy</span></h1>
 					<p>AI agents operate on unverified context. We provide the cryptographic provenance layer—C2PA credentials, DIDs, verifiable capabilities, and runtime policy enforcement.</p>
 					<a href="/contact" class="hero-cta">Get in touch →</a>
 				</div>
