@@ -252,14 +252,26 @@ function getPostImage(post: any, index: number) {
 			}
 			.blog-content {
 				padding: 40px 4rem 120px;
-				width: 100%;
+				max-width: 1600px;
+				margin: 0 auto;
 			}
 			.blog-grid {
 				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-				gap: 2.5rem;
-				margin-top: 4rem;
-				width: 100%;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 2rem;
+			}
+			@media (max-width: 1200px) {
+				.blog-grid {
+					grid-template-columns: repeat(2, 1fr);
+				}
+			}
+			@media (max-width: 768px) {
+				.blog-grid {
+					grid-template-columns: 1fr;
+				}
+				.blog-content {
+					padding: 40px 1.5rem 80px;
+				}
 			}
 			.blog-card {
 				background: rgba(255, 255, 255, 0.03);
@@ -431,18 +443,10 @@ function getPostImage(post: any, index: number) {
 					padding: 0 20px;
 				}
 				.blog-header {
-					padding: 80px 0 60px;
+					padding: 60px 0 40px;
 				}
 				.blog-header h1 {
 					font-size: 2.5rem;
-				}
-				.blog-header p {
-					font-size: 1.125rem;
-				}
-				.blog-grid {
-					grid-template-columns: 1fr;
-					gap: 2rem;
-					padding: 0 1rem;
 				}
 				.nav-links {
 					gap: 1.5rem;
