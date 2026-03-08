@@ -84,19 +84,20 @@ function getPostImage(post: any, index: number) {
 <html lang="en">
 	<head>
 		<BaseHead title="Noosphere Blog" description="Perspectives on digital integrity, content authenticity, and trust technology." />
+		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 		<style>
 			* {
 				box-sizing: border-box;
 			}
 			body {
 				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-				background: #000;
-				color: #fff;
+				background: #000000;
+				color: #ffffff;
 				margin: 0;
 				line-height: 1.6;
+				overflow-x: hidden;
 			}
-
-			/* Grid overlay for retro feel */
+			/* Background texture */
 			body::before {
 				content: '';
 				position: fixed;
@@ -104,149 +105,234 @@ function getPostImage(post: any, index: number) {
 				left: 0;
 				right: 0;
 				bottom: 0;
-				background-image:
-					linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-					linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-				background-size: 40px 40px;
+				background-image: 
+					radial-gradient(circle at 20% 50%, rgba(120, 50, 255, 0.1) 0%, transparent 50%),
+					radial-gradient(circle at 80% 80%, rgba(50, 120, 255, 0.1) 0%, transparent 50%),
+					radial-gradient(circle at 40% 20%, rgba(255, 50, 120, 0.05) 0%, transparent 50%);
 				pointer-events: none;
 				z-index: 1;
 			}
-
+			/* Noise texture */
+			body::after {
+				content: '';
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+				pointer-events: none;
+				z-index: 2;
+			}
 			.page-wrapper {
 				position: relative;
 				z-index: 10;
 				min-height: 100vh;
 			}
-
-			/* Navigation */
-			.nav {
-				border-bottom: 1px solid #222;
-				padding: 1.5rem 2rem;
+			.blog-nav {
+				background: rgba(0, 0, 0, 0.5);
+				backdrop-filter: blur(20px);
+				border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+				padding: 24px 0;
+				position: sticky;
+				top: 0;
+				z-index: 100;
+			}
+			.container {
+				width: 100%;
+				max-width: 100%;
+				margin: 0 auto;
+				padding: 0 4rem;
+			}
+			.nav-wrapper {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
 			}
-
 			.nav-brand {
-				display: flex;
-				align-items: center;
-				gap: 1rem;
+				font-size: 1.75rem;
+				font-weight: 700;
+				color: #ffffff;
 				text-decoration: none;
-				color: #fff;
-			}
-
-			.nav-logo {
-				height: 36px;
-				width: auto;
-			}
-
-			.nav-name {
-				font-family: 'JetBrains Mono', monospace;
-				font-size: 1rem;
-				font-weight: 400;
+				font-family: 'Space Grotesk', sans-serif;
 				letter-spacing: -0.02em;
 			}
-
 			.nav-links {
 				display: flex;
-				gap: 2rem;
+				gap: 3rem;
+				align-items: center;
 			}
-
 			.nav-links a {
-				font-family: 'JetBrains Mono', monospace;
-				font-size: 0.875rem;
-				color: #888;
+				color: rgba(255, 255, 255, 0.7);
 				text-decoration: none;
-				transition: color 0.15s;
+				font-weight: 500;
+				transition: color 0.3s;
+				font-size: 0.95rem;
 			}
-
 			.nav-links a:hover {
-				color: #fff;
+				color: #ffffff;
 			}
-
-			/* Header */
 			.blog-header {
-				padding: 4rem 2rem;
-				border-bottom: 1px solid #222;
+				padding: 40px 0 30px;
 				text-align: center;
+				position: relative;
+				z-index: 10;
+				overflow: hidden;
 			}
-
+			/* Modern geometric background pattern */
+			.blog-header::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-image: 
+					linear-gradient(30deg, transparent 40%, rgba(120, 50, 255, 0.03) 40%, rgba(120, 50, 255, 0.03) 60%, transparent 60%),
+					linear-gradient(60deg, transparent 40%, rgba(50, 120, 255, 0.03) 40%, rgba(50, 120, 255, 0.03) 60%, transparent 60%),
+					linear-gradient(90deg, transparent 40%, rgba(255, 50, 120, 0.02) 40%, rgba(255, 50, 120, 0.02) 60%, transparent 60%);
+				background-size: 50px 50px, 80px 80px, 120px 120px;
+				animation: drift 20s ease-in-out infinite;
+				z-index: -2;
+			}
+			/* Floating orbs */
+			.blog-header::after {
+				content: '';
+				position: absolute;
+				top: -50%;
+				left: -50%;
+				width: 200%;
+				height: 200%;
+				background: radial-gradient(circle at 20% 50%, rgba(120, 50, 255, 0.08) 0%, transparent 30%),
+							radial-gradient(circle at 80% 80%, rgba(50, 120, 255, 0.08) 0%, transparent 30%),
+							radial-gradient(circle at 60% 20%, rgba(255, 50, 120, 0.05) 0%, transparent 25%);
+				animation: float 15s ease-in-out infinite;
+				z-index: -1;
+			}
+			@keyframes drift {
+				0%, 100% { transform: translate(0, 0); }
+				50% { transform: translate(-20px, -10px); }
+			}
+			@keyframes float {
+				0%, 100% { transform: translate(0, 0) scale(1); }
+				33% { transform: translate(-50px, -30px) scale(1.1); }
+				66% { transform: translate(50px, -20px) scale(0.9); }
+			}
 			.blog-header h1 {
-				font-family: 'JetBrains Mono', monospace;
-				font-size: 2rem;
-				font-weight: 400;
-				margin: 0 0 1rem 0;
-				letter-spacing: -0.02em;
+				font-size: 3rem;
+				font-weight: 700;
+				margin: 0 0 0.75rem 0;
+				color: #ffffff;
+				font-family: 'Space Grotesk', sans-serif;
+				letter-spacing: -0.03em;
 			}
-
 			.blog-tagline {
-				font-family: 'JetBrains Mono', monospace;
-				font-size: 0.875rem;
-				color: #666;
+				font-size: 1.125rem;
+				color: rgba(255, 255, 255, 0.7);
 				margin: 0;
+				font-family: 'JetBrains Mono', 'Courier New', monospace;
+				font-weight: 300;
+				letter-spacing: 0.05em;
 				text-transform: uppercase;
-				letter-spacing: 0.1em;
+				background: linear-gradient(90deg, 
+					rgba(255, 255, 255, 0.8) 0%, 
+					rgba(120, 80, 255, 0.8) 25%, 
+					rgba(80, 120, 255, 0.8) 50%,
+					rgba(255, 80, 120, 0.8) 75%,
+					rgba(255, 255, 255, 0.8) 100%);
+				background-size: 200% auto;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				background-clip: text;
+				animation: shimmer 8s linear infinite;
 			}
-
-			/* Blog Grid */
+			@keyframes shimmer {
+				0% { background-position: 0% center; }
+				100% { background-position: 200% center; }
+			}
 			.blog-content {
-				padding: 0;
+				padding: 40px 4rem 120px;
+				width: 100%;
 			}
-
 			.blog-grid {
 				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-				gap: 1px;
-				background: #222;
+				grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+				gap: 2.5rem;
+				margin-top: 4rem;
+				width: 100%;
 			}
-
 			.blog-card {
-				background: #000;
+				background: rgba(255, 255, 255, 0.03);
+				backdrop-filter: blur(10px);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: 20px;
+				overflow: hidden;
+				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 				display: flex;
 				flex-direction: column;
+				position: relative;
 			}
-
+			.blog-card::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+				opacity: 0;
+				transition: opacity 0.4s;
+				pointer-events: none;
+			}
+			.blog-card:hover {
+				transform: translateY(-8px);
+				border-color: rgba(255, 255, 255, 0.2);
+				box-shadow: 
+					0 20px 40px rgba(0, 0, 0, 0.3),
+					0 0 60px rgba(120, 50, 255, 0.1);
+			}
+			.blog-card:hover::before {
+				opacity: 1;
+			}
 			.blog-card-image {
 				width: 100%;
-				height: 220px;
+				height: 280px;
+				position: relative;
 				overflow: hidden;
-				border-bottom: 1px solid #222;
 			}
-
 			.blog-card-image img {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
-				filter: grayscale(100%) contrast(1.1);
-				opacity: 0.7;
-				transition: all 0.3s;
+				object-position: center;
 			}
-
-			.blog-card:hover .blog-card-image img {
-				filter: grayscale(50%) contrast(1.1);
-				opacity: 0.9;
+			.blog-card-image::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
 			}
-
 			.blog-card-content {
-				padding: 2rem;
+				padding: 2.5rem;
 				flex: 1;
 				display: flex;
 				flex-direction: column;
 			}
-
 			.blog-card-title {
-				font-family: 'JetBrains Mono', monospace;
-				font-size: 1.125rem;
-				font-weight: 400;
-				margin: 0 0 0.75rem 0;
-				line-height: 1.4;
-				color: #fff;
+				font-size: 1.5rem;
+				font-weight: 600;
+				margin: 0 0 1rem 0;
+				line-height: 1.3;
+				color: #ffffff;
+				font-family: 'Space Grotesk', sans-serif;
 			}
-
 			.blog-card-summary {
-				color: #888;
-				font-size: 0.875rem;
-				margin: 0 0 1.5rem 0;
+				color: rgba(255, 255, 255, 0.6);
+				font-size: 1rem;
+				margin: 0 0 2rem 0;
 				flex: 1;
 				display: -webkit-box;
 				-webkit-line-clamp: 2;
@@ -254,208 +340,179 @@ function getPostImage(post: any, index: number) {
 				overflow: hidden;
 				line-height: 1.6;
 			}
-
 			.blog-card-footer {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				padding-top: 1rem;
-				border-top: 1px solid #222;
+				padding-top: 1.5rem;
+				border-top: 1px solid rgba(255, 255, 255, 0.1);
 			}
-
 			.blog-card-meta {
-				font-size: 0.75rem;
-				color: #666;
+				font-size: 0.875rem;
+				color: rgba(255, 255, 255, 0.5);
 				display: flex;
 				align-items: center;
 				gap: 0.75rem;
 			}
-
 			.author-image {
-				width: 32px;
-				height: 32px;
+				width: 40px;
+				height: 40px;
 				border-radius: 50%;
 				object-fit: cover;
-				filter: grayscale(100%);
-				border: 1px solid #333;
+				border: 2px solid rgba(255, 255, 255, 0.1);
 			}
-
 			.author-info {
 				display: flex;
 				flex-direction: column;
 			}
-
 			.blog-card-author {
-				font-family: 'JetBrains Mono', monospace;
-				font-weight: 400;
-				color: #999;
-				font-size: 0.75rem;
+				font-weight: 500;
+				color: rgba(255, 255, 255, 0.9);
+				font-size: 0.875rem;
 			}
-
 			.author-title {
-				font-size: 0.625rem;
-				color: #666;
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
+				font-size: 0.75rem;
+				color: rgba(255, 255, 255, 0.5);
 			}
-
 			.blog-date {
-				font-size: 0.625rem;
-				color: #555;
-				font-family: 'JetBrains Mono', monospace;
+				font-size: 0.75rem;
+				color: rgba(255, 255, 255, 0.4);
+				font-family: 'JetBrains Mono', 'Courier New', monospace;
+				font-weight: 300;
 				letter-spacing: 0.02em;
 			}
-
 			.blog-card-link {
-				font-family: 'JetBrains Mono', monospace;
-				font-size: 0.75rem;
-				padding: 0.5rem 1rem;
-				border: 1px solid #444;
-				color: #fff;
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 0.75rem 1.75rem;
+				background: linear-gradient(135deg, #7850ff 0%, #5040ff 50%, #ff5078 100%);
+				background-size: 200% auto;
+				color: white;
 				text-decoration: none;
-				transition: all 0.15s;
+				border-radius: 50px;
+				font-family: 'JetBrains Mono', 'Courier New', monospace;
+				font-weight: 400;
+				font-size: 0.875rem;
 				text-transform: uppercase;
-				letter-spacing: 0.05em;
+				letter-spacing: 0.1em;
+				transition: all 0.3s;
+				position: relative;
+				overflow: hidden;
 			}
-
+			.blog-card-link::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+				transition: left 0.5s;
+			}
 			.blog-card-link:hover {
-				background: #fff;
-				color: #000;
-				border-color: #fff;
+				background-position: right center;
+				transform: translateY(-2px);
+				box-shadow: 0 8px 25px rgba(120, 80, 255, 0.4);
 			}
-
-			/* Footer */
-			.footer {
-				border-top: 1px solid #222;
-				padding: 3rem 2rem;
-				text-align: center;
+			.blog-card-link:hover::before {
+				left: 100%;
 			}
-
-			.footer-text {
-				font-family: 'JetBrains Mono', monospace;
-				font-size: 0.75rem;
-				color: #666;
-				margin: 0;
+			.blog-card-link::after {
+				content: '→';
+				transition: transform 0.3s;
+				margin-left: -0.25rem;
 			}
-
-			.footer-links {
-				display: flex;
-				justify-content: center;
-				gap: 2rem;
-				margin-top: 1rem;
+			.blog-card-link:hover::after {
+				transform: translateX(4px);
 			}
-
-			.footer-links a {
-				font-family: 'JetBrains Mono', monospace;
-				font-size: 0.75rem;
-				color: #666;
-				text-decoration: none;
-			}
-
-			.footer-links a:hover {
-				color: #fff;
-			}
-
 			@media (max-width: 768px) {
-				.nav {
-					flex-direction: column;
-					gap: 1rem;
-					padding: 1rem;
+				.container {
+					padding: 0 20px;
 				}
-
 				.blog-header {
-					padding: 3rem 1rem;
+					padding: 80px 0 60px;
 				}
-
 				.blog-header h1 {
-					font-size: 1.5rem;
+					font-size: 2.5rem;
 				}
-
+				.blog-header p {
+					font-size: 1.125rem;
+				}
 				.blog-grid {
 					grid-template-columns: 1fr;
+					gap: 2rem;
+					padding: 0 1rem;
 				}
-
-				.blog-card-content {
-					padding: 1.5rem;
+				.nav-links {
+					gap: 1.5rem;
 				}
 			}
 		</style>
 	</head>
 	<body>
 		<div class="page-wrapper">
-			<!-- Navigation -->
-			<nav class="nav">
-				<a href="/" class="nav-brand">
-					<img src="/images/logos/black-logo-cropped.png" alt="N" class="nav-logo" />
-					<span class="nav-name">Noosphere</span>
-				</a>
-				<div class="nav-links">
-					<a href="/">Home</a>
-					<a href="/blog">Blog</a>
-					<a href="/contact">Contact</a>
-					<a href="https://github.com/noosphere-technologies" target="_blank">GitHub</a>
+			<nav class="blog-nav">
+				<div class="container">
+					<div class="nav-wrapper">
+						<a href="/" class="nav-brand">Noosphere Technologies</a>
+						<div class="nav-links">
+							<a href="/">Home</a>
+							<a href="/blog">Blog</a>
+							<a href="/contact">Contact</a>
+						</div>
+					</div>
 				</div>
 			</nav>
 
-			<!-- Header -->
 			<header class="blog-header">
-				<h1>Blog</h1>
-				<p class="blog-tagline">Digital Integrity / Content Authenticity / Decentralized Trust</p>
+				<div class="container">
+					<h1>Noosphere Blog</h1>
+					<p class="blog-tagline">digital integrity | content authenticity | decentralized trust</p>
+				</div>
 			</header>
 
-			<!-- Blog Grid -->
 			<main class="blog-content">
 				<div class="blog-grid">
-					{
-						posts.map((post) => {
-							const formattedDate = formatDate(post.data.pubDate);
-							return (
-								<article class="blog-card">
-									<div class="blog-card-image">
-										<img src={postImages[post.id] || defaultImage} alt={post.data.title} />
-									</div>
-									<div class="blog-card-content">
-										<h2 class="blog-card-title">{post.data.title}</h2>
-										<p class="blog-card-summary">{post.data.description}</p>
-										<div class="blog-card-footer">
-											<div class="blog-card-meta">
-												{postAuthors[post.id] && authors[postAuthors[post.id]] && (
-													<img
-														src={authors[postAuthors[post.id]].image}
-														alt={postAuthors[post.id]}
-														class="author-image"
-													/>
-												)}
-												<div class="author-info">
-													<span class="blog-card-author">{postAuthors[post.id] || 'Unknown'}</span>
-													{postAuthors[post.id] && authors[postAuthors[post.id]] && (
-														<span class="author-title">{authors[postAuthors[post.id]].title}</span>
-													)}
-													{formattedDate && (
-														<span class="blog-date">{formattedDate}</span>
-													)}
-												</div>
-											</div>
-											<a href={`/blog/${post.id}/`} class="blog-card-link">Read</a>
+						{
+							posts.map((post) => {
+								const formattedDate = formatDate(post.data.pubDate);
+								return (
+									<article class="blog-card">
+										<div class="blog-card-image">
+											<img src={postImages[post.id] || '/images/sphere.png'} alt={post.data.title} />
 										</div>
-									</div>
-								</article>
-							);
-						})
-					}
-				</div>
+										<div class="blog-card-content">
+											<h2 class="blog-card-title">{post.data.title}</h2>
+											<p class="blog-card-summary">{post.data.description}</p>
+											<div class="blog-card-footer">
+												<div class="blog-card-meta">
+													{postAuthors[post.id] && authors[postAuthors[post.id]] && (
+														<img 
+															src={authors[postAuthors[post.id]].image} 
+															alt={postAuthors[post.id]}
+															class="author-image"
+														/>
+													)}
+													<div class="author-info">
+														<span class="blog-card-author">{postAuthors[post.id] || 'Unknown'}</span>
+														{postAuthors[post.id] && authors[postAuthors[post.id]] && (
+															<span class="author-title">{authors[postAuthors[post.id]].title}</span>
+														)}
+														{formattedDate && (
+															<span class="blog-date">{formattedDate}</span>
+														)}
+													</div>
+												</div>
+												<a href={`/blog/${post.id}/`} class="blog-card-link">Read</a>
+											</div>
+										</div>
+									</article>
+								);
+							})
+						}
+					</div>
 			</main>
-
-			<!-- Footer -->
-			<footer class="footer">
-				<p class="footer-text">&copy; 2026 Noosphere Technologies, Inc.</p>
-				<div class="footer-links">
-					<a href="/blog">Blog</a>
-					<a href="/contact">Contact</a>
-					<a href="https://github.com/noosphere-technologies">GitHub</a>
-					<a href="https://twitter.com/noospheretech">Twitter</a>
-				</div>
-			</footer>
 		</div>
 	</body>
 </html>
