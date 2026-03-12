@@ -39,7 +39,7 @@ export const POST: APIRoute = async ({ request }) => {
     const systemPrompt = SYSTEM_PROMPT + (context || "No article content provided.");
 
     const stream = anthropic.messages.stream({
-      model: "claude-sonnet-4-20250514",
+      model: "claude-3-5-sonnet-20241022",
       max_tokens: 300,
       system: systemPrompt,
       messages: messages.map((m: { role: string; content: string }) => ({

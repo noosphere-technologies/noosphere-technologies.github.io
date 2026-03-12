@@ -15,9 +15,9 @@ function ClarifyButton({ topic }: { topic: string }) {
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: '4px',
-        padding: '3px 10px',
-        fontSize: '11px',
+        gap: '6px',
+        padding: '6px 16px',
+        fontSize: '13px',
         fontWeight: 500,
         color: '#a8b2ff',
         background: 'rgba(120, 80, 255, 0.15)',
@@ -41,7 +41,7 @@ function ClarifyButton({ topic }: { topic: string }) {
         e.currentTarget.style.color = '#a8b2ff';
       }}
     >
-      <HelpCircle size={12} />
+      <HelpCircle size={16} />
       <span>Clarify</span>
     </button>
   );
