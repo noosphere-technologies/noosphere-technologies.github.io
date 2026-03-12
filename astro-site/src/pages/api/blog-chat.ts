@@ -38,10 +38,11 @@ export const POST: APIRoute = async ({ request }) => {
 
     const systemPrompt = SYSTEM_PROMPT + (context || "No article content provided.");
 
-    const stream = anthropic.messages.stream({
-      model: "claude-3-5-sonnet-20241022",
+    const response = await anthropic.messages.create({
+      model: "claude-sonnet-4-20250514",
       max_tokens: 300,
       system: systemPrompt,
+      stream: true,
       messages: messages.map((m: { role: string; content: string }) => ({
         role: m.role as 'user' | 'assistant',
         content: m.content,
@@ -52,7 +53,7 @@ export const POST: APIRoute = async ({ request }) => {
     const readable = new ReadableStream({
       async start(controller) {
         try {
-          for await (const event of stream) {
+          for await (const event of response) {
             if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
               controller.enqueue(encoder.encode(event.delta.text));
             }
