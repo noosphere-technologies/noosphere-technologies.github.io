@@ -38,7 +38,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const systemPrompt = SYSTEM_PROMPT + (context || "No article content provided.");
 
-    const response = await anthropic.messages.create({
+    const stream = anthropic.messages.stream({
       model: "claude-3-5-sonnet-latest",
       max_tokens: 300,
       system: systemPrompt,
@@ -48,11 +48,27 @@ export const POST: APIRoute = async ({ request }) => {
       })),
     });
 
-    const text = response.content[0].type === 'text' ? response.content[0].text : '';
+    const encoder = new TextEncoder();
+    const readable = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const event of stream) {
+            if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
+              controller.enqueue(encoder.encode(event.delta.text));
+            }
+          }
+          controller.close();
+        } catch (streamError) {
+          console.error("Stream error:", streamError);
+          controller.error(streamError);
+        }
+      },
+    });
 
-    return new Response(text, {
+    return new Response(readable, {
       headers: {
         "Content-Type": "text/plain; charset=utf-8",
+        "Transfer-Encoding": "chunked",
       },
     });
   } catch (error) {
