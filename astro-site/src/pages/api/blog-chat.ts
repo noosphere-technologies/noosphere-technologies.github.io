@@ -51,12 +51,17 @@ export const POST: APIRoute = async ({ request }) => {
     const encoder = new TextEncoder();
     const readable = new ReadableStream({
       async start(controller) {
-        for await (const event of stream) {
-          if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
-            controller.enqueue(encoder.encode(event.delta.text));
+        try {
+          for await (const event of stream) {
+            if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
+              controller.enqueue(encoder.encode(event.delta.text));
+            }
           }
+          controller.close();
+        } catch (streamError) {
+          console.error("Stream error:", streamError);
+          controller.error(streamError);
         }
-        controller.close();
       },
     });
 
