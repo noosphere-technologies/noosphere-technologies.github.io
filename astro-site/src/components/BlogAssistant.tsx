@@ -71,6 +71,16 @@ export default function BlogAssistant({ postContent, postTitle }: BlogAssistantP
           return newMessages;
         });
       }
+
+      // Track assistant interaction for telemetry
+      if (typeof window !== 'undefined' && (window as any).voyantTrack) {
+        (window as any).voyantTrack('assistant_message', 'blog_chat', {
+          event_category: 'engagement',
+          assistant_message: userMessage.slice(0, 200),
+          assistant_response: assistantMessage.slice(0, 200),
+          properties: { article_title: postTitle }
+        });
+      }
     } catch (error) {
       console.error('Chat error:', error);
       setMessages(prev => [

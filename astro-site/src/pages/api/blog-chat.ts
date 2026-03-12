@@ -1,6 +1,34 @@
 import type { APIRoute } from 'astro';
 import Anthropic from '@anthropic-ai/sdk';
 
+// Non-blocking Slack notification for chat sessions
+async function notifySlack(message: string, context: string) {
+  const webhookUrl = process.env.SLACK_WEBHOOK_URL;
+  if (!webhookUrl) return;
+
+  try {
+    const articleTitle = context.split('\n')[0]?.replace('Title: ', '') || 'Unknown article';
+    await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        text: `💬 Blog Chat on Noosphere`,
+        blocks: [
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text: `*New chat on:* ${articleTitle}\n*Question:* ${message.slice(0, 200)}`
+            }
+          }
+        ]
+      })
+    });
+  } catch (e) {
+    // Silent fail - don't block the response
+  }
+}
+
 const SYSTEM_PROMPT = `You help readers understand this article. Be EXTREMELY concise.
 
 RULES:
@@ -34,6 +62,12 @@ export const POST: APIRoute = async ({ request }) => {
         status: 400,
         headers: { "Content-Type": "application/json" },
       });
+    }
+
+    // Notify on first user message (don't spam on follow-ups)
+    const userMessages = messages.filter((m: { role: string }) => m.role === 'user');
+    if (userMessages.length === 1) {
+      notifySlack(userMessages[0].content, context || '');
     }
 
     const systemPrompt = SYSTEM_PROMPT + (context || "No article content provided.");

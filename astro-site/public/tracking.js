@@ -132,4 +132,9 @@
 
   // Initial flush
   setTimeout(flush, 1000);
+
+  // Expose for components to track assistant interactions
+  window.voyantTrack = function(type, name, data = {}) {
+    track(type, name, data);
+  };
 })();
